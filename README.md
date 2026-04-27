@@ -2,6 +2,16 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+Create a local environment file for the contact form:
+
+```bash
+RESEND_API_KEY=your_resend_api_key
+CONTACT_TO_EMAIL=you@example.com
+RESEND_FROM_EMAIL="Portfolio Contact <hello@yourdomain.com>"
+```
+
+`RESEND_FROM_EMAIL` must use a sender/domain allowed by your Resend account.
+
 First, run the development server:
 
 ```bash

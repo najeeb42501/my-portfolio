@@ -61,7 +61,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-[#0a0a0a] text-zinc-100">{children}</body>
+      <body className="min-h-full theme-page">{children}</body>
     </html>
   );
 }

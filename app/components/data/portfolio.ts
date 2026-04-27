@@ -44,13 +44,13 @@ export const skillBars = [
 
 export const projects = [
   {
-    title: "Atlas Deploy",
+    title: "Sofstica Website",
     description:
       "Release intelligence dashboard with deployment health, canary insight, and incident context in one fast surface.",
-    image: "/project-atlas.svg",
+    image: "/sosftica.png",
     stack: ["Next.js", "TypeScript", "Postgres"],
     github: "https://github.com/",
-    demo: "https://example.com/",
+    demo: "https://sofstica.com/",
   },
   {
     title: "Pulse Studio",

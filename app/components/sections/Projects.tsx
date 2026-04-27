@@ -9,68 +9,81 @@ export default function Projects() {
   const targetRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start start", "end end"],
+    offset: ["start 12%", "end end"],
   });
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-62%"]);
+  const x = useTransform(scrollYProgress, [0, 0.16, 1], ["0%", "0%", "-63%"]);
 
   return (
-    <section id="projects" ref={targetRef} className="relative h-[360vh]">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden px-5 sm:px-8">
+    <section id="projects" ref={targetRef} className="relative h-[410vh]">
+      <div className="sticky top-14 flex h-[calc(100svh-3.5rem)] items-center overflow-hidden px-5 py-8 sm:px-8">
         <div className="mx-auto w-full max-w-7xl">
-          <div className="mb-10 max-w-3xl">
-            <p className="mb-3 text-sm font-medium uppercase text-cyan-300">
-              Projects
+          <div className="mb-7 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-3xl">
+              <p className="mb-3 text-sm font-medium uppercase theme-accent">
+                Projects
+              </p>
+              <h2 className="text-balance text-3xl font-semibold theme-heading md:text-5xl">
+                Selected builds with clear product thinking.
+              </h2>
+            </div>
+            <p className="max-w-sm text-sm leading-6 theme-muted">
+              Scroll to move through the work.
             </p>
-            <h2 className="text-balance text-3xl font-semibold text-white md:text-5xl">
-              Featured work, sliding with your scroll.
-            </h2>
           </div>
+
           <motion.div
             style={{ x }}
-            className="flex w-max gap-5 will-change-transform"
+            className="flex w-max gap-6 will-change-transform"
             aria-label="Featured project carousel"
           >
             {projects.map((project, index) => (
               <motion.article
                 key={project.title}
-                className="group flex h-[31rem] w-[82vw] max-w-[36rem] shrink-0 snap-center flex-col overflow-hidden rounded border border-white/10 bg-zinc-950 shadow-2xl shadow-black/35"
-                initial={{ opacity: 0.6, rotateY: 10, scale: 0.96 }}
-                whileInView={{ opacity: 1, rotateY: 0, scale: 1 }}
+                className="group grid h-[min(32rem,calc(100svh-13rem))] min-h-[29rem] w-[84vw] max-w-[58rem] shrink-0 overflow-hidden rounded border shadow-2xl theme-surface md:grid-cols-[0.95fr_1.05fr]"
+                initial={{ opacity: 0.72, y: 18, scale: 0.98 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ amount: 0.45 }}
                 transition={{ duration: 0.55 }}
-                style={{ transformPerspective: 900 }}
               >
-                <div className="relative h-56 overflow-hidden border-b border-white/10">
+                <div className="relative min-h-56 overflow-hidden border-b theme-border md:h-full md:border-b-0 md:border-r">
                   <Image
                     src={project.image}
                     alt={`${project.title} interface preview`}
                     fill
-                    sizes="(max-width: 768px) 82vw, 576px"
+                    sizes="(max-width: 768px) 84vw, 464px"
                     className="object-cover transition duration-700 group-hover:scale-105"
                     priority={index === 0}
                   />
+                  <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.32),transparent_46%)] opacity-70" />
+                  <span className="absolute left-4 top-4 rounded-full border px-3 py-1 font-mono text-xs backdrop-blur theme-accent-soft">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                 </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="text-2xl font-semibold text-white">
+
+                <div className="flex min-w-0 flex-col p-6 sm:p-7">
+                  <div className="mb-5 h-px w-16 bg-[var(--site-accent)]" />
+                  <h3 className="text-3xl font-semibold tracking-tight theme-heading">
                     {project.title}
                   </h3>
-                  <p className="mt-3 flex-1 leading-7 text-zinc-400">
+                  <p className="mt-4 flex-1 text-base leading-8 theme-muted">
                     {project.description}
                   </p>
-                  <div className="mt-5 flex flex-wrap gap-2">
+
+                  <div className="mt-6 flex flex-wrap gap-2">
                     {project.stack.map((tech) => (
                       <span
                         key={tech}
-                        className="rounded border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-zinc-300"
+                        className="rounded-full border px-3 py-1 text-xs font-medium theme-panel theme-text"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
-                  <div className="mt-6 flex gap-3">
+
+                  <div className="mt-8 flex flex-wrap gap-3">
                     <a
                       href={project.github}
-                      className="rounded bg-white px-4 py-2 text-sm font-semibold text-black transition hover:bg-cyan-200"
+                      className="rounded px-4 py-2 text-sm font-semibold transition theme-accent-bg hover:-translate-y-0.5"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -78,7 +91,7 @@ export default function Projects() {
                     </a>
                     <a
                       href={project.demo}
-                      className="rounded border border-white/15 px-4 py-2 text-sm font-semibold text-white transition hover:border-cyan-300 hover:text-cyan-200"
+                      className="rounded border px-4 py-2 text-sm font-semibold transition theme-panel theme-heading hover:-translate-y-0.5 hover:border-[var(--site-accent)] hover:text-[var(--site-accent)]"
                       target="_blank"
                       rel="noreferrer"
                     >

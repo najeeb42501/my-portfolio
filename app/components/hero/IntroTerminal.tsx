@@ -53,22 +53,22 @@ export default function IntroTerminal() {
   const active = tabs.find((tab) => tab.id === activeTab) ?? tabs[0];
 
   return (
-    <div className="border-t border-white/10 bg-black/45 font-mono text-xs text-zinc-400 sm:text-sm">
-      <div className="flex items-center  border-b border-white/10 px-3 py-2 sm:px-5">
-        <div className="flex min-w-0 items-center gap-2 text-zinc-500">
+    <div className="border-t font-mono text-xs theme-border theme-panel sm:text-sm">
+      <div className="flex items-center border-b px-3 py-2 theme-border sm:px-5">
+        <div className="flex min-w-0 items-center gap-2 theme-muted">
           <span className="size-2 rounded-full bg-emerald-300 shadow-[0_0_12px_rgba(110,231,183,0.7)]" />
           <span>terminal</span>
         </div>
-        <div className="flex overflow-hidden rounded border border-white/10 bg-white/[0.03]">
+        <div className="flex overflow-hidden rounded border theme-panel">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               type="button"
               onClick={() => setActiveTab(tab.id)}
-              className={`px-3 py-1.5 text-[0.68rem] font-semibold transition sm:text-xs ${
+                className={`px-3 py-1.5 text-[0.68rem] font-semibold transition sm:text-xs ${
                 active.id === tab.id
-                  ? "bg-cyan-300 text-black"
-                  : "text-zinc-400 hover:bg-white/10 hover:text-white"
+                  ? "theme-accent-bg"
+                  : "theme-muted hover:bg-[var(--site-accent-soft)] hover:text-[var(--site-heading)]"
               }`}
             >
               {tab.label}
@@ -79,13 +79,13 @@ export default function IntroTerminal() {
 
       <div className="grid gap-2 px-4 py-4 sm:px-6">
         <p>
-          <span className="text-cyan-300">njb@portfolio</span>
-          <span className="text-zinc-600">:</span>
-          <span className="text-violet-300">~</span>
-          <span className="text-zinc-500">$ </span>
-          <span className="text-zinc-200">{active.command}</span>
+          <span className="theme-accent">njb@portfolio</span>
+          <span className="theme-subtle">:</span>
+          <span className="theme-code-keyword">~</span>
+          <span className="theme-muted">$ </span>
+          <span className="theme-heading">{active.command}</span>
         </p>
-        <div className="grid gap-1 pl-4 text-emerald-200/85">
+        <div className="grid gap-1 pl-4 theme-code-string">
           {active.lines.map((line) => (
             <p key={line}>{line}</p>
           ))}

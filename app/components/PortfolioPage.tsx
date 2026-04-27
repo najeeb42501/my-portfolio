@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "./Header";
 import { sectionIds } from "./data/portfolio";
 import SectionLoader from "./shared/SectionLoader";
@@ -29,6 +29,40 @@ const Contact = dynamic(() => import("./sections/Contact"), {
 
 export default function PortfolioPage() {
   const [activeSection, setActiveSection] = useState("");
+  const [theme, setTheme] = useState<"dark" | "light">("light");
+  const canPersistTheme = useRef(false);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      const saved = window.localStorage.getItem("theme");
+      const nextTheme =
+        saved === "light" || saved === "dark"
+          ? saved
+          : window.matchMedia("(prefers-color-scheme: light)").matches
+            ? "light"
+            : "dark";
+
+      setTheme(nextTheme);
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    if (canPersistTheme.current) {
+      window.localStorage.setItem("theme", theme);
+      return;
+    }
+
+    canPersistTheme.current = true;
+  }, [theme]);
+
+  function toggleTheme() {
+    setTheme((current) => {
+      return current === "dark" ? "light" : "dark";
+    });
+  }
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -53,8 +87,12 @@ export default function PortfolioPage() {
   }, []);
 
   return (
-    <div className="min-h-screen overflow-x-clip bg-[#0a0a0a] text-zinc-100">
-      <Header activeSection={activeSection} />
+    <div className="min-h-screen overflow-x-clip theme-page">
+      <Header
+        activeSection={activeSection}
+        theme={theme}
+        onToggleTheme={toggleTheme}
+      />
       <main>
         <Hero />
         <About />
@@ -63,7 +101,7 @@ export default function PortfolioPage() {
         <Skills />
         <Contact />
       </main>
-      <footer className="border-t border-white/10 px-5 py-8 text-center text-sm text-zinc-500 sm:px-8">
+      <footer className="border-t px-5 py-8 text-center text-sm theme-border theme-subtle sm:px-8">
         <p>NJB. Built with Next.js, Tailwind CSS, and Framer Motion.</p>
       </footer>
     </div>
