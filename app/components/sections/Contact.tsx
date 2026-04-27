@@ -69,48 +69,75 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative overflow-hidden px-5 py-24 sm:px-8">
+    <section
+      id="contact"
+      className="relative overflow-hidden px-5 py-24 sm:px-8"
+    >
       <div className="absolute inset-x-0 top-28 h-px bg-[linear-gradient(to_right,transparent,var(--site-accent),transparent)] opacity-20" />
       <div className="mx-auto max-w-7xl">
-        <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
-          <Reveal>
-            <p className="font-mono text-sm uppercase tracking-[0.28em] theme-accent">
-              Contact
-            </p>
-            <h2 className="mt-5 text-balance text-4xl font-semibold leading-tight theme-heading sm:text-6xl">
-              Let&apos;s turn a sharp idea into a serious product.
-            </h2>
-            <p className="mt-6 max-w-xl text-lg leading-8 theme-muted">
-              Send the shape of the problem, the goal, and where the product
-              needs momentum. I&apos;ll reply with a clear next step.
-            </p>
-          </Reveal>
+        <Reveal className="mx-auto max-w-5xl text-center">
+          <p className="font-mono text-sm uppercase tracking-[0.28em] theme-accent">
+            Contact
+          </p>
+          <h2 className="mt-5 text-balance text-2xl font-semibold leading-tight theme-heading sm:text-3xl lg:text-4xl">
+            Let&apos;s turn a sharp idea into a serious product.
+          </h2>
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 theme-muted">
+            Send the shape of the problem, the goal, and where the product needs
+            momentum. I&apos;ll reply with a clear next step.
+          </p>
+        </Reveal>
 
-          <Reveal delay={0.1}>
-            <div className="relative border-l pl-6 theme-border">
-              <motion.span
-                className="absolute -left-[0.28rem] top-1 size-2 rounded-full bg-[var(--site-accent)] shadow-[0_0_24px_var(--site-glow)]"
-                animate={{ y: [0, 122, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <p className="text-sm uppercase tracking-[0.22em] theme-subtle">
-                Available for
-              </p>
-              <div className="mt-5 grid gap-4">
-                {contactNotes.map((note, index) => (
-                  <motion.p
-                    key={note}
-                    className="flex items-center gap-3 text-base theme-text"
-                    initial={{ opacity: 0, x: 18 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.45, delay: index * 0.08 }}
-                  >
-                    <span className="size-1.5 rounded-full bg-[var(--site-accent)]" />
-                    {note}
-                  </motion.p>
-                ))}
+        <Reveal className="mt-14">
+          <div className="relative grid overflow-hidden rounded border shadow-2xl theme-card-solid lg:grid-cols-[0.44fr_0.56fr]">
+            <div className="absolute inset-x-0 top-0 h-1 bg-[linear-gradient(to_right,#38bdf8,#a78bfa,#34d399,transparent)]" />
+            <div className="absolute -right-20 -top-20 size-56 rounded-full bg-sky-400/10 blur-3xl" />
+            <div className="absolute -bottom-24 left-1/3 size-64 rounded-full bg-emerald-400/10 blur-3xl" />
+
+            <div className="relative border-b p-6 theme-border sm:p-8 lg:border-b-0 lg:border-r">
+              <div className="rounded border p-5 theme-panel">
+                <p className="font-mono text-xs uppercase tracking-[0.24em] theme-accent">
+                  Project signal
+                </p>
+                <h3 className="mt-5 text-3xl font-semibold theme-heading">
+                  The best first message is specific, short, and honest.
+                </h3>
+                <p className="mt-5 leading-8 theme-muted">
+                  Include what you&apos;re building, what feels blocked, and
+                  what kind of help would make the biggest difference.
+                </p>
               </div>
+
+              <div className="relative mt-7 border-l pl-6 theme-border">
+                <motion.span
+                  className="absolute -left-[0.28rem] top-1 size-2 rounded-full bg-[var(--site-accent)] shadow-[0_0_24px_var(--site-glow)]"
+                  animate={{ y: [0, 122, 0] }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+                <p className="text-sm uppercase tracking-[0.22em] theme-subtle">
+                  Available for
+                </p>
+                <div className="mt-5 grid gap-4">
+                  {contactNotes.map((note, index) => (
+                    <motion.p
+                      key={note}
+                      className="flex items-center gap-3 text-base theme-text"
+                      initial={{ opacity: 0, x: 18 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.45, delay: index * 0.08 }}
+                    >
+                      <span className="size-1.5 rounded-full bg-[var(--site-accent)]" />
+                      {note}
+                    </motion.p>
+                  ))}
+                </div>
+              </div>
+
               <div className="mt-8 flex flex-wrap gap-3">
                 {socialLinks.map((item) => (
                   <a
@@ -125,34 +152,11 @@ export default function Contact() {
                 ))}
               </div>
             </div>
-          </Reveal>
-        </div>
 
-        <Reveal className="mt-14">
-          <div className="grid overflow-hidden rounded border shadow-2xl theme-card-solid lg:grid-cols-[0.42fr_0.58fr]">
-            <div className="relative border-b p-6 theme-border sm:p-8 lg:border-b-0 lg:border-r">
-              <div className="absolute inset-x-0 top-0 h-1 bg-[linear-gradient(to_right,var(--site-accent),transparent)]" />
-              <p className="font-mono text-xs uppercase tracking-[0.24em] theme-accent">
-                Project signal
-              </p>
-              <h3 className="mt-5 text-3xl font-semibold theme-heading">
-                The best first message is specific, short, and honest.
-              </h3>
-              <p className="mt-5 leading-8 theme-muted">
-                Include what you&apos;re building, what feels blocked, and what
-                kind of help would make the biggest difference.
-              </p>
-              <div className="mt-8 grid gap-3 text-sm theme-muted">
-                <p className="rounded border p-3 theme-panel">
-                  Typical response: within 24-48 hours
-                </p>
-                <p className="rounded border p-3 theme-panel">
-                  Best fit: product engineering, modern web apps, AI workflows
-                </p>
-              </div>
-            </div>
-
-            <form className="grid gap-4 p-6 sm:p-8" onSubmit={handleSubmit}>
+            <form
+              className="relative grid gap-4 p-6 sm:p-8"
+              onSubmit={handleSubmit}
+            >
               <motion.label
                 className="grid gap-2 text-sm theme-text"
                 custom={0}
