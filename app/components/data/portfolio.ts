@@ -47,25 +47,36 @@ export const projects = [
     title: "Sofstica Website",
     description:
       "Release intelligence dashboard with deployment health, canary insight, and incident context in one fast surface.",
-    image: "/sosftica.png",
-    stack: ["Next.js", "TypeScript", "Postgres"],
+    images: [
+      "/sofstica.png",
+      "/sofstica-1.png",
+      "/sofstica-2.png",
+      "/sofstica-3.png",
+      "/sofstica-4.png",
+    ],
+    stack: ["Next.js", "TypeScript", "Resend"],
     github: "https://github.com/",
     demo: "https://sofstica.com/",
   },
   {
-    title: "Pulse Studio",
+    title: "JOBS Dashboard",
     description:
       "Realtime analytics workspace for product teams with event streams, collaborative notes, and saved views.",
-    image: "/project-pulse.svg",
-    stack: ["React", "WebSockets", "Prisma"],
+    images: [
+      "/jobs-dashboard.png",
+      "/jobs-dashboard-1.png",
+      "/jobs-dashboard-2.png",
+      "/jobs-dashboard-3.png",
+    ],
+    stack: ["Next.js", "WebSockets", "Tailwind CSS"],
     github: "https://github.com/",
-    demo: "https://example.com/",
+    demo: "http://172.16.17.30:96/OnlineJobs/",
   },
   {
     title: "Northstar UI",
     description:
       "Accessible component system used across marketing, product, and internal tools with strict visual contracts.",
-    image: "/project-northstar.svg",
+    images: ["/project-northstar.svg"],
     stack: ["Storybook", "Tailwind", "A11y"],
     github: "https://github.com/",
     demo: "https://example.com/",
@@ -74,7 +85,7 @@ export const projects = [
     title: "SignalOps",
     description:
       "Operational command center that turns logs, traces, and user impact into crisp engineering priorities.",
-    image: "/project-signal.svg",
+    images: ["/project-signal.svg"],
     stack: ["Node.js", "OpenTelemetry", "Redis"],
     github: "https://github.com/",
     demo: "https://example.com/",
