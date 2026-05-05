@@ -50,7 +50,6 @@ export const projects = [
 
     detailedDescription:
       "UBL Funds Customer Portal is a secure digital platform built for UBL Funds customers to manage their investment portfolio and perform key financial transactions from one centralized interface. The portal allows users to view their invested portfolio, make new investments, perform redemptions, request fund conversions, manage billing transactions, and review account-related information. It also supports plan allocation management, limit enhancement requests, bank information updates, profile settings, and other customer service features. The platform is designed with a clean, responsive, and user-friendly interface to provide customers with easy access to their investment services across desktop, tablet, and mobile devices. Backend integrations with .NET services, Oracle, and SQL databases ensure secure transaction processing, reliable data handling, and smooth communication with core business systems.",
-
     images: [
       "/ubl-portal/ubl-portal-1.png",
       "/ubl-portal/ubl-portal-2.png",
