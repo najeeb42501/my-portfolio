@@ -44,6 +44,69 @@ export const skillBars = [
 
 export const projects = [
   {
+    title: "UBL Funds Customer Portal",
+    description:
+      "A customer self-service portal for UBL Funds investors to manage portfolios, investments, redemptions, conversions, billing transactions, and profile-related services.",
+
+    detailedDescription:
+      "UBL Funds Customer Portal is a secure digital platform built for UBL Funds customers to manage their investment portfolio and perform key financial transactions from one centralized interface. The portal allows users to view their invested portfolio, make new investments, perform redemptions, request fund conversions, manage billing transactions, and review account-related information. It also supports plan allocation management, limit enhancement requests, bank information updates, profile settings, and other customer service features. The platform is designed with a clean, responsive, and user-friendly interface to provide customers with easy access to their investment services across desktop, tablet, and mobile devices. Backend integrations with .NET services, Oracle, and SQL databases ensure secure transaction processing, reliable data handling, and smooth communication with core business systems.",
+
+    images: [
+      "/ubl-portal/ubl-portal-1.png",
+      "/ubl-portal/ubl-portal-2.png",
+      "/ubl-portal/ubl-portal-3.png",
+      "/ubl-portal/ubl-portal-4.png",
+      "/ubl-portal/ubl-portal-5.png",
+    ],
+
+    stack: [
+      "Angular 19",
+      "TypeScript",
+      "RxJS",
+      "Angular Forms",
+      "Angular Routing",
+      ".NET Backend",
+      "REST APIs",
+      "Backend Integration",
+      "Oracle Database",
+      "SQL Database",
+      "Authentication & Authorization",
+      "Secure Transaction Processing",
+      "Portfolio Management",
+      "Investment Services",
+      "Responsive Design",
+      "Dashboard UI",
+      "Data Tables",
+      "Form Validation",
+      "Role-Based Access",
+      "Performance Optimization",
+      "Enterprise Application",
+      "Company Server Deployment",
+    ],
+
+    features: [
+      "Customer portfolio overview",
+      "Investment transaction management",
+      "Redemption request processing",
+      "Fund conversion requests",
+      "Billing transaction management",
+      "Plan allocation management",
+      "Limit enhancement requests",
+      "Bank information management",
+      "Customer profile settings",
+      "Account and investment details view",
+      "Secure backend API integration",
+      "Oracle and SQL database integration",
+      "Responsive design for all screen sizes",
+      "User-friendly dashboard interface",
+      "Form validation and error handling",
+      "Optimized performance for enterprise usage",
+    ],
+
+    github: "",
+    demo: "https://online.ublfunds.com/UBL1/",
+  },
+  {
     title: "JOBS Dashboard",
     description:
       "Real-time operational dashboard for monitoring backend jobs, transaction statuses, digital services, and account opening activity.",
@@ -92,8 +155,70 @@ export const projects = [
       "Optimized rendering for high-volume records",
     ],
 
-    github: "https://github.com/",
+    github: "",
     demo: "http://172.16.17.30:96/OnlineJobs/",
+  },
+  {
+    title: "UBL Funds Onboarding",
+    description:
+      "Customer onboarding portal for UBL Funds with a smooth multi-step signup flow, dynamic backend-driven forms, OTP verification, and saved progress.",
+
+    detailedDescription:
+      "UBL Funds Onboarding is a revamped customer onboarding portal built to improve the signup experience for UBL Funds Manager customers. The platform provides a smooth, guided, multi-step form journey where each step can be dynamically controlled from the backend. Users can complete part of the onboarding process, leave, and return later to continue from the same step instead of starting over. The flow also allows users to move back to previous steps with their previously entered data preserved, making corrections easier and reducing friction. The portal includes OTP-based verification, authentication flows, dynamic form rendering, validation, loading states, modal interactions, clear error handling, and a responsive interface optimized for customer-facing use across devices.",
+
+    images: [
+      "/onboarding-react/onboarding-1.png",
+      "/onboarding-react/onboarding-2.png",
+      "/onboarding-react/onboarding-3.png",
+      "/onboarding-react/onboarding-4.png",
+      "/onboarding-react/onboarding-5.png",
+      "/onboarding-react/onboarding-6.png",
+    ],
+
+    stack: [
+      "React 19",
+      "Nodejs",
+      "Material UI",
+      "Dynamic Forms",
+      "Tailwind CSS",
+      "JavaScript",
+      "Express",
+      "REST APIs",
+      "Backend-Driven UI",
+      "State Management",
+      "Authentication",
+      "OTP Verification",
+      "Form Validation",
+      "Reusable Components",
+      "Modals",
+      "Loaders",
+      "Error Handling",
+      "Responsive UI",
+      "Performance Optimization",
+      "Production Deployment",
+    ],
+
+    features: [
+      "Revamped customer onboarding experience",
+      "Backend-controlled multi-step form flow",
+      "Dynamic stepper controlled by backend responses",
+      "Save-and-resume onboarding progress",
+      "Continue from the last completed step after returning later",
+      "Go back to previous steps with stored data",
+      "Dynamic form fields and validations",
+      "OTP-based customer verification",
+      "Authentication and session handling",
+      "Reusable modal components",
+      "Loading states for API-driven actions",
+      "Clear form-level and API error handling",
+      "Responsive customer-facing screens",
+      "Smooth navigation between onboarding steps",
+      "Optimized user experience for live customers",
+      "Production deployment for public onboarding users",
+    ],
+
+    github: "",
+    demo: "https://online.ublfunds.com/onboarding/",
   },
   {
     title: "Payment Dashboard",
@@ -156,7 +281,7 @@ export const projects = [
       "Responsive finance admin interface",
     ],
 
-    github: "https://github.com/",
+    github: "",
     demo: "",
   },
   {
@@ -214,70 +339,8 @@ export const projects = [
       "Mobile-first user experience",
     ],
 
-    github: "https://github.com/",
+    github: "",
     demo: "https://sofstica.com/",
-  },
-  {
-    title: "UBL Funds Onboarding",
-    description:
-      "Customer onboarding portal for UBL Funds with a smooth multi-step signup flow, dynamic backend-driven forms, OTP verification, and saved progress.",
-
-    detailedDescription:
-      "UBL Funds Onboarding is a revamped customer onboarding portal built to improve the signup experience for UBL Funds Manager customers. The platform provides a smooth, guided, multi-step form journey where each step can be dynamically controlled from the backend. Users can complete part of the onboarding process, leave, and return later to continue from the same step instead of starting over. The flow also allows users to move back to previous steps with their previously entered data preserved, making corrections easier and reducing friction. The portal includes OTP-based verification, authentication flows, dynamic form rendering, validation, loading states, modal interactions, clear error handling, and a responsive interface optimized for customer-facing use across devices.",
-
-    images: [
-      "/onboarding-react/onboarding-1.png",
-      "/onboarding-react/onboarding-2.png",
-      "/onboarding-react/onboarding-3.png",
-      "/onboarding-react/onboarding-4.png",
-      "/onboarding-react/onboarding-5.png",
-      "/onboarding-react/onboarding-6.png",
-    ],
-
-    stack: [
-      "React 19",
-      "Nodejs",
-      "Material UI",
-      "Dynamic Forms",
-      "Tailwind CSS",
-      "JavaScript",
-      "Express",
-      "REST APIs",
-      "Backend-Driven UI",
-      "State Management",
-      "Authentication",
-      "OTP Verification",
-      "Form Validation",
-      "Reusable Components",
-      "Modals",
-      "Loaders",
-      "Error Handling",
-      "Responsive UI",
-      "Performance Optimization",
-      "Production Deployment",
-    ],
-
-    features: [
-      "Revamped customer onboarding experience",
-      "Backend-controlled multi-step form flow",
-      "Dynamic stepper controlled by backend responses",
-      "Save-and-resume onboarding progress",
-      "Continue from the last completed step after returning later",
-      "Go back to previous steps with stored data",
-      "Dynamic form fields and validations",
-      "OTP-based customer verification",
-      "Authentication and session handling",
-      "Reusable modal components",
-      "Loading states for API-driven actions",
-      "Clear form-level and API error handling",
-      "Responsive customer-facing screens",
-      "Smooth navigation between onboarding steps",
-      "Optimized user experience for live customers",
-      "Production deployment for public onboarding users",
-    ],
-
-    github: "https://github.com/",
-    demo: "https://online.ublfunds.com/onboarding/",
   },
 ];
 
