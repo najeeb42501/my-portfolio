@@ -3,6 +3,7 @@ import { Resend } from "resend";
 export const runtime = "nodejs";
 
 const CONTACT_TO_EMAIL = "najeeb08089@gmail.com";
+
 const CONTACT_FROM_EMAIL = "Portfolio <onboarding@resend.dev>";
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
