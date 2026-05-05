@@ -3,6 +3,7 @@ import { Resend } from "resend";
 export const runtime = "nodejs";
 
 const CONTACT_TO_EMAIL = "najeeb08089@gmail.com";
+const CONTACT_FROM_EMAIL = "Portfolio <onboarding@resend.dev>";
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type ContactPayload = {
@@ -77,7 +78,7 @@ export async function POST(request: Request) {
 
   try {
     const { error } = await resend.emails.send({
-      from: process.env.RESEND_FROM_EMAIL ?? "Portfolio <onboarding@resend.dev>",
+      from: CONTACT_FROM_EMAIL,
       to: CONTACT_TO_EMAIL,
       replyTo: email,
       subject: `Portfolio contact from ${name}`,
