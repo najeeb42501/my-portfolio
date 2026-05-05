@@ -101,8 +101,33 @@ export default function PortfolioPage() {
         <Skills />
         <Contact />
       </main>
-      <footer className="border-t px-5 py-8 text-center text-sm theme-border theme-subtle sm:px-8">
-        <p>NJB. Built with Next.js, Tailwind CSS, and Framer Motion.</p>
+      <footer className="relative overflow-hidden border-t px-5 py-10 theme-border sm:px-8">
+        <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-[linear-gradient(90deg,transparent,var(--site-accent),transparent)] opacity-70" />
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="space-y-3">
+            <p className="text-xs font-medium uppercase tracking-[0.24em] theme-accent">
+              Portfolio
+            </p>
+            <div>
+              <h2 className="text-2xl font-semibold theme-heading sm:text-3xl">
+                Najeeb Ullah Khan
+              </h2>
+              <p className="mt-2 text-sm font-medium theme-muted">
+                Software Engineer <span className="theme-accent">(4 years)</span>
+              </p>
+            </div>
+          </div>
+
+          <div className="max-w-sm rounded border border-white/15 bg-[color-mix(in_srgb,var(--site-panel)_72%,transparent)] p-4 text-left shadow-[0_18px_60px_var(--site-accent-soft)] backdrop-blur">
+            <p className="text-sm leading-6 theme-text">
+              Building clean interfaces, thoughtful systems, and fast web
+              experiences with a product-first mindset.
+            </p>
+            <p className="mt-3 text-xs theme-muted">
+              Built with Next.js, Tailwind CSS, and Framer Motion.
+            </p>
+          </div>
+        </div>
       </footer>
     </div>
   );
