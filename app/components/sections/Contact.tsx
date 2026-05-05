@@ -7,7 +7,7 @@ import Reveal from "../shared/Reveal";
 const socialLinks = [
   { label: "GitHub", href: "https://example.com/", external: true },
   { label: "LinkedIn", href: "https://example.com/", external: true },
-  { label: "Email", href: "mailto:hello@njb.dev", external: false },
+  { label: "Email", href: "mailto:najeeb08089@gmail.com", external: false },
 ];
 
 const contactNotes = [
@@ -38,16 +38,21 @@ export default function Contact() {
 
     const form = event.currentTarget;
     const formData = new FormData(form);
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
+
+    if (!name || !email || !message) {
+      setStatus("error");
+      setStatusMessage("Please fill in your name, email, and message.");
+      return;
+    }
 
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.get("name"),
-          email: formData.get("email"),
-          message: formData.get("message"),
-        }),
+        body: JSON.stringify({ name, email, message }),
       });
       const data = (await response.json()) as { message?: string };
 
@@ -220,16 +225,19 @@ export default function Contact() {
                   type="submit"
                   disabled={status === "sending"}
                   className="w-full rounded px-6 py-3 text-sm font-semibold transition theme-accent-bg hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+                  aria-busy={status === "sending"}
                 >
                   {status === "sending" ? "Sending..." : "Send Message"}
                 </button>
               </motion.div>
               {statusMessage && (
                 <p
-                  className={`text-sm ${
-                    status === "success" ? "theme-accent" : "text-rose-500"
+                  className={`rounded border px-4 py-3 text-sm ${
+                    status === "success"
+                      ? "border-emerald-300/30 bg-emerald-400/10 text-emerald-500"
+                      : "border-rose-300/30 bg-rose-400/10 text-rose-500"
                   }`}
-                  role="status"
+                  role={status === "error" ? "alert" : "status"}
                 >
                   {statusMessage}
                 </p>
