@@ -58,7 +58,7 @@ export default function IntroTerminal() {
 
   return (
     <div className="border-t font-mono text-[0.68rem] shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_-14px_48px_var(--site-accent-soft)] theme-border theme-panel sm:text-xs">
-      <div className="flex flex-col gap-1.5 border-b px-3 py-1.5 theme-border theme-panel-strong sm:px-5 lg:flex-row lg:items-center lg:justify-between">
+      <div className="flex flex-col gap-1.5 border-b px-3 py-1 theme-border theme-panel-strong sm:px-5 sm:py-1.5 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex min-w-0 items-center gap-2">
           <span className="size-2 rounded-full bg-[#ff5f57] shadow-[0_0_10px_rgba(255,95,87,0.45)]" />
           <span className="size-2 rounded-full bg-[#ffbd2e] shadow-[0_0_10px_rgba(255,189,46,0.4)]" />
@@ -85,7 +85,7 @@ export default function IntroTerminal() {
         </div>
       </div>
 
-      <div className="relative grid gap-1.5 px-4 py-2.5 sm:px-6">
+      <div className="relative grid gap-1 px-4 py-2 sm:px-6 sm:py-2.5">
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(color-mix(in_srgb,var(--site-accent)_8%,transparent)_1px,transparent_1px)] bg-[length:100%_24px]" />
         <p className="relative">
           <span className="text-emerald-500">najeeb</span>

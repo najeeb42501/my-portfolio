@@ -96,28 +96,28 @@ export default function CodeTypewriter() {
   }, []);
 
   return (
-    <div className="flex min-h-0 flex-1 px-5 text-left sm:px-8 lg:px-12">
-      <div className="grid min-h-0 w-full items-center gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(15rem,20rem)] xl:grid-cols-[minmax(0,1fr)_minmax(17rem,23rem)]">
+    <div className="flex min-h-0 flex-1 px-4 py-4 text-left sm:px-8 sm:py-6 md:py-0 lg:px-12">
+      <div className="grid min-h-0 w-full content-center gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(15rem,20rem)] lg:items-center xl:grid-cols-[minmax(0,1fr)_minmax(17rem,23rem)]">
         <div className="max-w-4xl">
-          <p className="mb-3 font-mono text-xs uppercase tracking-[0.28em] theme-accent">
+          <p className="mb-2 font-mono text-[0.68rem] uppercase tracking-[0.24em] theme-accent sm:mb-3 sm:text-xs sm:tracking-[0.28em]">
             full-stack developer
           </p>
-          <h1 className="font-sans text-4xl font-black leading-none drop-shadow-[0_0_28px_var(--site-glow)] theme-heading sm:text-5xl lg:text-6xl xl:text-7xl">
+          <h1 className="font-sans text-[clamp(2.45rem,13vw,4rem)] font-black leading-none drop-shadow-[0_0_28px_var(--site-glow)] theme-heading sm:text-5xl lg:text-6xl xl:text-7xl">
             Najeebullah Khan
           </h1>
-          <p className="mt-4 max-w-2xl font-sans text-base leading-7 theme-text lg:text-lg">
+          <p className="mt-3 max-w-2xl font-sans text-sm leading-6 theme-text sm:text-base sm:leading-7 lg:text-lg">
             4 years building clean interfaces, reliable systems, and
             sharp-feeling products.
           </p>
 
           <pre
-            className="mt-6 whitespace-pre-wrap font-mono text-sm leading-7 theme-code-plain lg:text-base lg:leading-8"
+            className="scrollbar-none mt-5 overflow-x-auto whitespace-pre font-mono text-[0.72rem] leading-6 theme-code-plain sm:text-sm sm:leading-7 lg:text-base lg:leading-8"
             aria-label="Animated software engineer introduction code"
           >
             <code>
               {renderedLines.map((line, lineIndex) => (
-                <span key={lineStarts[lineIndex]} className="block">
-                  <span className="mr-5 select-none theme-subtle">
+                <span key={lineStarts[lineIndex]} className="block min-w-max">
+                  <span className="mr-3 inline-block w-5 select-none text-right theme-subtle sm:mr-5">
                     {String(lineIndex + 1).padStart(2, "0")}
                   </span>
                   {line.map((segment, segmentIndex) => (
