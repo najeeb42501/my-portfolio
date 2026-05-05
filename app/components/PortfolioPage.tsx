@@ -27,6 +27,57 @@ const Contact = dynamic(() => import("./sections/Contact"), {
   loading: sectionLoading,
 });
 
+function CustomCursor() {
+  const [position, setPosition] = useState({ x: -100, y: -100 });
+  const [isInteractive, setIsInteractive] = useState(false);
+
+  useEffect(() => {
+    const finePointer = window.matchMedia("(pointer: fine)").matches;
+    if (!finePointer) {
+      return;
+    }
+
+    document.body.classList.add("custom-cursor-enabled");
+
+    const updateCursor = (event: PointerEvent) => {
+      setPosition({ x: event.clientX, y: event.clientY });
+      const target = event.target;
+      setIsInteractive(
+        target instanceof Element &&
+          Boolean(
+            target.closest(
+              'a, button, [role="button"], input, textarea, select, summary',
+            ),
+          ),
+      );
+    };
+
+    window.addEventListener("pointermove", updateCursor);
+
+    return () => {
+      window.removeEventListener("pointermove", updateCursor);
+      document.body.classList.remove("custom-cursor-enabled");
+    };
+  }, []);
+
+  return (
+    <>
+      <div
+        className="pointer-events-none fixed z-[100] hidden size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--site-accent)] shadow-[0_0_18px_var(--site-glow)] mix-blend-multiply transition-transform duration-150 ease-out md:block dark:mix-blend-screen"
+        style={{ left: position.x, top: position.y }}
+      />
+      <div
+        className={`pointer-events-none fixed z-[99] hidden -translate-x-1/2 -translate-y-1/2 rounded-full border border-[var(--site-accent)] bg-[var(--site-accent-soft)] transition-[width,height,opacity,transform] duration-200 ease-out md:block ${
+          isInteractive
+            ? "size-12 opacity-80 scale-110"
+            : "size-8 opacity-55 scale-100"
+        }`}
+        style={{ left: position.x, top: position.y }}
+      />
+    </>
+  );
+}
+
 export default function PortfolioPage() {
   const [activeSection, setActiveSection] = useState("");
   const [theme, setTheme] = useState<"dark" | "light">("light");
@@ -88,6 +139,7 @@ export default function PortfolioPage() {
 
   return (
     <div className="min-h-screen overflow-x-clip theme-page">
+      <CustomCursor />
       <Header
         activeSection={activeSection}
         theme={theme}

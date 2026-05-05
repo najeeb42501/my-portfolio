@@ -9,7 +9,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative isolate flex h-svh max-h-svh items-center justify-center overflow-hidden pb-4 pt-10"
+      className="relative isolate flex h-svh max-h-svh items-center justify-center overflow-hidden pt-10"
     >
       <div className="absolute inset-0 theme-hero-bg" />
       <div
@@ -28,7 +28,7 @@ export default function Hero() {
           <div className="relative flex min-h-0 flex-1 overflow-hidden">
             <CodeTypewriter />
           </div>
-          <div className="grid border-t theme-border xl:grid-cols-[1fr_auto]">
+          <div className="shrink-0 grid border-t theme-border xl:grid-cols-[1fr_auto]">
             <IntroTerminal />
             <motion.div
               className="flex flex-col gap-3 border-t p-4 theme-border theme-panel xl:border-l xl:border-t-0"

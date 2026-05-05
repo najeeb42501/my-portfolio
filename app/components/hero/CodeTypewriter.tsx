@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 
 type CodeSegment = {
@@ -95,48 +96,64 @@ export default function CodeTypewriter() {
   }, []);
 
   return (
-    <div className="flex-1 px-5 py-7 text-left sm:px-8 sm:py-9 lg:px-12 lg:py-12">
-      <div className="mb-8 max-w-4xl">
-        <p className="mb-3 font-mono text-xs uppercase tracking-[0.28em] theme-accent">
-          full-stack developer
-        </p>
-        <h1 className="font-sans text-4xl font-black leading-none drop-shadow-[0_0_28px_var(--site-glow)] theme-heading sm:text-6xl lg:text-7xl">
-          Najeebullah Khan
-        </h1>
-        <p className="mt-4 max-w-2xl font-sans text-base leading-7 theme-text sm:text-lg">
-          4 years building clean interfaces, reliable systems, and sharp-feeling
-          products.
-        </p>
-      </div>
+    <div className="flex min-h-0 flex-1 px-5 text-left sm:px-8 lg:px-12">
+      <div className="grid min-h-0 w-full items-center gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(15rem,20rem)] xl:grid-cols-[minmax(0,1fr)_minmax(17rem,23rem)]">
+        <div className="max-w-4xl">
+          <p className="mb-3 font-mono text-xs uppercase tracking-[0.28em] theme-accent">
+            full-stack developer
+          </p>
+          <h1 className="font-sans text-4xl font-black leading-none drop-shadow-[0_0_28px_var(--site-glow)] theme-heading sm:text-5xl lg:text-6xl xl:text-7xl">
+            Najeebullah Khan
+          </h1>
+          <p className="mt-4 max-w-2xl font-sans text-base leading-7 theme-text lg:text-lg">
+            4 years building clean interfaces, reliable systems, and
+            sharp-feeling products.
+          </p>
 
-      <pre
-        className="whitespace-pre-wrap font-mono text-sm leading-8 theme-code-plain sm:text-base lg:text-lg lg:leading-9"
-        aria-label="Animated software engineer introduction code"
-      >
-        <code>
-          {renderedLines.map((line, lineIndex) => (
-            <span key={lineStarts[lineIndex]} className="block">
-              <span className="mr-5 select-none theme-subtle">
-                {String(lineIndex + 1).padStart(2, "0")}
-              </span>
-              {line.map((segment, segmentIndex) => (
-                <span
-                  key={`${lineIndex}-${segmentIndex}`}
-                  className={segment.className}
-                >
-                  {segment.text}
+          <pre
+            className="mt-6 whitespace-pre-wrap font-mono text-sm leading-7 theme-code-plain lg:text-base lg:leading-8"
+            aria-label="Animated software engineer introduction code"
+          >
+            <code>
+              {renderedLines.map((line, lineIndex) => (
+                <span key={lineStarts[lineIndex]} className="block">
+                  <span className="mr-5 select-none theme-subtle">
+                    {String(lineIndex + 1).padStart(2, "0")}
+                  </span>
+                  {line.map((segment, segmentIndex) => (
+                    <span
+                      key={`${lineIndex}-${segmentIndex}`}
+                      className={segment.className}
+                    >
+                      {segment.text}
+                    </span>
+                  ))}
+                  {lineIndex ===
+                    lineStarts.findLastIndex(
+                      (start) => visibleCharacters >= start,
+                    ) && (
+                    <span className="ml-1 inline-block h-5 w-2 translate-y-1 animate-pulse bg-[var(--site-accent)] shadow-[0_0_18px_var(--site-glow)]" />
+                  )}
                 </span>
               ))}
-              {lineIndex ===
-                lineStarts.findLastIndex(
-                  (start) => visibleCharacters >= start,
-                ) && (
-                <span className="ml-1 inline-block h-5 w-2 translate-y-1 animate-pulse bg-[var(--site-accent)] shadow-[0_0_18px_var(--site-glow)]" />
-              )}
-            </span>
-          ))}
-        </code>
-      </pre>
+            </code>
+          </pre>
+        </div>
+
+        <div className="pointer-events-none relative hidden h-full min-h-0 self-stretch lg:block">
+          <div className="absolute bottom-8 right-8 size-64 rounded-full bg-[radial-gradient(circle,color-mix(in_srgb,var(--site-accent)_26%,transparent),transparent_68%)] blur-2xl" />
+          <div className="absolute bottom-0 right-4 h-28 w-72 bg-[linear-gradient(90deg,transparent,color-mix(in_srgb,var(--site-accent)_22%,transparent),transparent)] blur-2xl" />
+          <div className="absolute bottom-0 right-0 h-px w-72 bg-[linear-gradient(90deg,transparent,var(--site-accent),transparent)] opacity-60" />
+          <Image
+            src="/najeeb-nobg-1.png"
+            alt="Najeeb Ullah Khan"
+            width={420}
+            height={520}
+            priority
+            className="absolute bottom-0 right-0 max-h-full w-auto object-contain drop-shadow-[0_26px_42px_rgba(15,23,42,0.24)]"
+          />
+        </div>
+      </div>
     </div>
   );
 }

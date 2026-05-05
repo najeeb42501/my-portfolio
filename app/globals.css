@@ -102,6 +102,22 @@ body {
     color 220ms ease;
 }
 
+@media (pointer: fine) {
+  body.custom-cursor-enabled,
+  body.custom-cursor-enabled a,
+  body.custom-cursor-enabled button,
+  body.custom-cursor-enabled [role="button"],
+  body.custom-cursor-enabled summary {
+    cursor: none;
+  }
+
+  body.custom-cursor-enabled input,
+  body.custom-cursor-enabled textarea,
+  body.custom-cursor-enabled select {
+    cursor: text;
+  }
+}
+
 * {
   scrollbar-color:
     color-mix(in srgb, var(--site-muted) 42%, transparent)
