@@ -155,7 +155,7 @@ export const projects = [
     ],
 
     github: "",
-    demo: "http://172.16.17.30:96/OnlineJobs/",
+    demo: "",
   },
   {
     title: "UBL Funds Onboarding",
