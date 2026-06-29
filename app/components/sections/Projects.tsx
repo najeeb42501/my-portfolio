@@ -75,7 +75,7 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" ref={targetRef} className="relative h-[410vh]">
+    <section id="projects" ref={targetRef} className="section-band relative h-[410vh]">
       <div className="sticky top-14 flex h-[calc(100svh-3.5rem)] items-center overflow-hidden px-5 py-5 sm:px-8">
         <div className="mx-auto w-full max-w-7xl">
           <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
@@ -100,7 +100,7 @@ export default function Projects() {
             {projects.map((project, index) => (
               <motion.article
                 key={project.title}
-                className="group relative flex h-[clamp(25rem,calc(100svh-10.5rem),31rem)] w-[82vw] max-w-[44rem] shrink-0 flex-col overflow-hidden rounded border border-white/20 bg-[linear-gradient(135deg,color-mix(in_srgb,var(--site-surface)_88%,transparent),color-mix(in_srgb,var(--site-accent-soft)_42%,transparent))] shadow-[0_24px_80px_var(--site-accent-soft)] transition duration-500 hover:-translate-y-1 hover:border-[var(--site-accent)] sm:w-[72vw]"
+                className="bento-card bento-highlight group relative flex h-[clamp(25rem,calc(100svh-10.5rem),31rem)] w-[82vw] max-w-[44rem] shrink-0 flex-col overflow-hidden transition duration-500 hover:-translate-y-1 hover:border-[var(--site-accent)] sm:w-[72vw]"
                 initial={{ opacity: 0.72, y: 18, scale: 0.98 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ amount: 0.45 }}
@@ -108,7 +108,7 @@ export default function Projects() {
               >
                 <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-[linear-gradient(90deg,transparent,var(--site-accent),transparent)] opacity-80" />
                 <div className="flex h-10 shrink-0 items-center gap-2 border-b border-white/15 bg-[color-mix(in_srgb,var(--site-panel-strong)_78%,transparent)] px-4 backdrop-blur-xl">
-                  <span className="rounded-full border border-[var(--site-accent)] bg-[color-mix(in_srgb,var(--site-accent-soft)_65%,transparent)] px-3 py-1 font-mono text-xs text-[var(--site-accent)] backdrop-blur">
+                  <span className="soft-chip px-3 py-1 font-mono text-xs">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <h3 className="min-w-0 truncate text-sm font-semibold theme-heading sm:text-base">
@@ -133,9 +133,9 @@ export default function Projects() {
                   />
                 </div>
 
-                <div className="grid shrink-0 gap-4 bg-[linear-gradient(180deg,color-mix(in_srgb,var(--site-panel)_74%,transparent),color-mix(in_srgb,var(--site-surface)_92%,transparent))] p-4 sm:p-5">
+                <div className="grid shrink-0 gap-4 p-4 sm:p-5">
                   <div className="min-w-0">
-                    <div className="mb-3 h-px w-14 bg-[linear-gradient(90deg,var(--site-accent),#38bdf8)]" />
+                    <div className="mb-3 h-px w-14 theme-spectrum-line" />
                     <p className="w-full text-sm leading-6 theme-muted">
                       {project.description}
                     </p>
@@ -146,7 +146,7 @@ export default function Projects() {
                       {project.stack.slice(0, 4).map((tech) => (
                         <span
                           key={tech}
-                          className="rounded-full border border-white/20 bg-[color-mix(in_srgb,var(--site-accent-soft)_54%,var(--site-panel))] px-3 py-1 text-xs font-medium text-[var(--site-heading)] shadow-sm"
+                          className="soft-chip px-3 py-1 text-xs font-medium"
                         >
                           {tech}
                         </span>
@@ -157,22 +157,22 @@ export default function Projects() {
                       <button
                         type="button"
                         onClick={() => openProject(index)}
-                        className="rounded bg-[linear-gradient(135deg,var(--site-accent),#38bdf8)] px-4 py-2 text-sm font-semibold text-white shadow-[0_12px_32px_var(--site-accent-soft)] transition hover:-translate-y-0.5"
+                        className="minimal-button theme-accent-bg px-4 py-2 text-sm font-semibold"
                       >
                         View details
                       </button>
                       {project.demo ? (
                         <a
                           href={project.demo}
-                          className="rounded border px-4 py-2 text-sm font-semibold transition theme-panel theme-heading hover:-translate-y-0.5 hover:border-[var(--site-accent)] hover:text-[var(--site-accent)]"
+                          className="minimal-button border px-4 py-2 text-sm font-semibold theme-panel theme-heading hover:border-[var(--site-accent)] hover:text-[var(--site-accent)]"
                           target="_blank"
                           rel="noreferrer"
                         >
                           Live Demo
                         </a>
                       ) : (
-                        <span className="rounded border border-amber-300/35 bg-amber-400/10 px-4 py-2 text-sm font-semibold text-amber-500">
-                          Not live yet
+                        <span className="minimal-button border theme-chip-orange px-4 py-2 text-sm font-semibold">
+                          {project.demoUnavailableLabel ?? "Not live yet"}
                         </span>
                       )}
                     </div>
@@ -193,7 +193,7 @@ export default function Projects() {
           onClick={closeProject}
         >
           <motion.div
-            className="max-h-[92svh] w-full max-w-4xl overflow-hidden rounded-[1.75rem] border border-white/20 bg-[color-mix(in_srgb,var(--site-surface-strong)_82%,transparent)] shadow-2xl backdrop-blur-2xl"
+            className="bento-card bento-highlight max-h-[92svh] w-full max-w-4xl overflow-hidden"
             initial={{ opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.22 }}
@@ -213,7 +213,7 @@ export default function Projects() {
                 type="button"
                 aria-label="Close project details"
                 onClick={closeProject}
-                className="ml-auto grid size-8 place-items-center rounded-full bg-[#ff5f57] text-sm font-semibold leading-none text-red-950 shadow-sm ring-1 ring-black/10 transition hover:scale-105 hover:bg-[#ff7a73] focus:outline-none focus:ring-2 focus:ring-[var(--site-accent)]"
+                className="ml-auto grid size-8 place-items-center rounded-full bg-[var(--theme-card-pink-solid)] text-sm font-semibold leading-none text-white shadow-sm ring-1 ring-black/10 transition hover:scale-105 hover:bg-[color-mix(in_srgb,var(--theme-card-pink-solid)_88%,white)] focus:outline-none focus:ring-2 focus:ring-[var(--site-accent)]"
               >
                 x
               </button>
@@ -222,7 +222,7 @@ export default function Projects() {
             <div className="max-h-[calc(92svh-3.5rem)] overflow-y-auto">
               <section>
                 {selectedGalleryImage && (
-                  <div className="group/gallery relative aspect-[16/9] overflow-hidden border-y border-white/20 bg-[color-mix(in_srgb,var(--site-bg-soft)_84%,transparent)] shadow-[0_24px_70px_rgba(15,23,42,0.18),inset_0_1px_0_rgba(255,255,255,0.24)]">
+                  <div className="group/gallery relative aspect-[16/9] overflow-hidden border-y bg-[color-mix(in_srgb,var(--site-bg-soft)_84%,transparent)] shadow-[0_24px_70px_rgba(15,23,42,0.14),inset_0_1px_0_rgba(255,255,255,0.18)] theme-border">
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={selectedGalleryImage}
@@ -283,9 +283,9 @@ export default function Projects() {
 
               <div className="space-y-5 px-4 pb-5 pt-5 sm:px-6">
                 <section className="grid gap-5">
-                  <div className="relative overflow-hidden rounded-[1.25rem] border border-cyan-300/25 bg-[linear-gradient(135deg,color-mix(in_srgb,var(--site-panel)_90%,transparent),rgba(14,165,233,0.12))] p-5 shadow-sm backdrop-blur">
-                    <div className="absolute inset-y-5 left-0 w-1 rounded-r-full bg-cyan-400" />
-                    <p className="mb-1 text-xs font-medium uppercase text-cyan-500">
+                  <div className="bento-card bento-highlight relative overflow-hidden border-[color-mix(in_srgb,var(--theme-card-sky-solid)_28%,transparent)] p-5">
+                    <div className="absolute inset-y-5 left-0 w-1 rounded-r-full bg-[var(--theme-card-sky-solid)]" />
+                    <p className="mb-1 text-xs font-medium uppercase text-[var(--theme-card-sky-solid)]">
                       Description
                     </p>
                     <h4 className="mb-3 text-lg font-semibold theme-heading">
@@ -296,9 +296,9 @@ export default function Projects() {
                     </p>
                   </div>
 
-                  <div className="relative overflow-hidden rounded-[1.25rem] border border-emerald-300/25 bg-[linear-gradient(135deg,color-mix(in_srgb,var(--site-panel)_90%,transparent),rgba(16,185,129,0.12))] p-5 shadow-sm backdrop-blur">
-                    <div className="absolute inset-y-5 left-0 w-1 rounded-r-full bg-emerald-400" />
-                    <p className="mb-1 text-xs font-medium uppercase text-emerald-500">
+                  <div className="bento-card bento-highlight relative overflow-hidden border-[color-mix(in_srgb,var(--theme-card-emerald-solid)_28%,transparent)] p-5">
+                    <div className="absolute inset-y-5 left-0 w-1 rounded-r-full bg-[var(--theme-card-emerald-solid)]" />
+                    <p className="mb-1 text-xs font-medium uppercase text-[var(--theme-card-emerald-solid)]">
                       Features
                     </p>
                     <h4 className="mb-4 text-lg font-semibold theme-heading">
@@ -308,18 +308,18 @@ export default function Projects() {
                       {selectedProject.features.map((feature) => (
                         <li
                           key={feature}
-                          className="flex gap-2 rounded border border-emerald-300/15 bg-emerald-400/[0.06] px-3 py-2 text-sm leading-5 theme-text"
+                          className="flex gap-2 rounded border border-[color-mix(in_srgb,var(--theme-card-emerald-solid)_18%,transparent)] bg-[color-mix(in_srgb,var(--theme-card-emerald-solid)_7%,transparent)] px-3 py-2 text-sm leading-5 theme-text"
                         >
-                          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.55)]" />
+                          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--theme-card-emerald-solid)] shadow-[0_0_12px_var(--site-glow)]" />
                           <span>{feature}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="relative overflow-hidden rounded-[1.25rem] border border-violet-300/25 bg-[linear-gradient(135deg,color-mix(in_srgb,var(--site-panel)_90%,transparent),rgba(139,92,246,0.12))] p-5 shadow-sm backdrop-blur">
-                    <div className="absolute inset-y-5 left-0 w-1 rounded-r-full bg-violet-400" />
-                    <p className="mb-1 text-xs font-medium uppercase text-violet-500">
+                  <div className="bento-card bento-highlight relative overflow-hidden border-[color-mix(in_srgb,var(--theme-card-purple-solid)_28%,transparent)] p-5">
+                    <div className="absolute inset-y-5 left-0 w-1 rounded-r-full bg-[var(--theme-card-purple-solid)]" />
+                    <p className="mb-1 text-xs font-medium uppercase text-[var(--theme-card-purple-solid)]">
                       Skills used
                     </p>
                     <h4 className="mb-3 text-lg font-semibold theme-heading">
@@ -331,10 +331,10 @@ export default function Projects() {
                           key={tech}
                           className={`rounded-full border px-3 py-1 text-xs font-medium shadow-sm ${
                             techIndex % 3 === 0
-                              ? "border-violet-300/30 bg-violet-400/10 text-violet-500"
+                              ? "theme-chip-purple"
                               : techIndex % 3 === 1
-                                ? "border-cyan-300/30 bg-cyan-400/10 text-cyan-500"
-                                : "border-amber-300/30 bg-amber-400/10 text-amber-500"
+                                ? "theme-chip-sky"
+                                : "theme-chip-orange"
                           }`}
                         >
                           {tech}
@@ -356,15 +356,15 @@ export default function Projects() {
                   {selectedProject.demo ? (
                     <a
                       href={selectedProject.demo}
-                      className="rounded border px-4 py-2 text-sm font-semibold transition theme-panel theme-heading hover:-translate-y-0.5 hover:border-[var(--site-accent)] hover:text-[var(--site-accent)]"
+                      className="minimal-button border px-4 py-2 text-sm font-semibold theme-panel theme-heading hover:border-[var(--site-accent)] hover:text-[var(--site-accent)]"
                       target="_blank"
                       rel="noreferrer"
                     >
                       Live Demo
                     </a>
                   ) : (
-                    <span className="rounded border border-amber-300/35 bg-amber-400/10 px-4 py-2 text-sm font-semibold text-amber-500">
-                      Not live yet
+                    <span className="minimal-button border theme-chip-orange px-4 py-2 text-sm font-semibold">
+                      {selectedProject.demoUnavailableLabel ?? "Not live yet"}
                     </span>
                   )}
                 </div>
@@ -376,3 +376,6 @@ export default function Projects() {
     </section>
   );
 }
+
+
+

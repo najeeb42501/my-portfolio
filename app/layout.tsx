@@ -59,9 +59,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full theme-page">{children}</body>
+      <body className="min-h-full theme-page" suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }

@@ -14,14 +14,14 @@ const floatingIcons = [
   {
     label: "React",
     Icon: SiReact,
-    className: "left-[7%] top-[18%] text-cyan-200",
+    className: "left-[7%] top-[18%] text-[var(--theme-card-sky-solid)]",
     size: "text-5xl",
     delay: 0,
   },
   {
     label: "Node.js",
     Icon: SiNodedotjs,
-    className: "right-[10%] top-[20%] text-emerald-200",
+    className: "right-[10%] top-[20%] text-[var(--theme-card-emerald-solid)]",
     size: "text-5xl",
     delay: 0.7,
   },
@@ -35,14 +35,14 @@ const floatingIcons = [
   {
     label: "Git",
     Icon: SiGit,
-    className: "right-[17%] bottom-[16%] text-rose-200",
+    className: "right-[17%] bottom-[16%] text-[var(--theme-card-pink-solid)]",
     size: "text-5xl",
     delay: 1.5,
   },
   {
     label: "TypeScript",
     Icon: SiTypescript,
-    className: "left-[47%] top-[10%] text-sky-200",
+    className: "left-[47%] top-[10%] text-[var(--theme-primary)]",
     size: "text-4xl",
     delay: 0.3,
   },
@@ -101,3 +101,4 @@ export default function FloatingTechIcons() {
     </div>
   );
 }
+

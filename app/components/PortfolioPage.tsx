@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
+import { FiDownload, FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
 import Header from "./Header";
 import { sectionIds } from "./data/portfolio";
 import SectionLoader from "./shared/SectionLoader";
@@ -27,56 +28,12 @@ const Contact = dynamic(() => import("./sections/Contact"), {
   loading: sectionLoading,
 });
 
-function CustomCursor() {
-  const [position, setPosition] = useState({ x: -100, y: -100 });
-  const [isInteractive, setIsInteractive] = useState(false);
-
-  useEffect(() => {
-    const finePointer = window.matchMedia("(pointer: fine)").matches;
-    if (!finePointer) {
-      return;
-    }
-
-    document.body.classList.add("custom-cursor-enabled");
-
-    const updateCursor = (event: PointerEvent) => {
-      setPosition({ x: event.clientX, y: event.clientY });
-      const target = event.target;
-      setIsInteractive(
-        target instanceof Element &&
-          Boolean(
-            target.closest(
-              'a, button, [role="button"], input, textarea, select, summary',
-            ),
-          ),
-      );
-    };
-
-    window.addEventListener("pointermove", updateCursor);
-
-    return () => {
-      window.removeEventListener("pointermove", updateCursor);
-      document.body.classList.remove("custom-cursor-enabled");
-    };
-  }, []);
-
-  return (
-    <>
-      <div
-        className="pointer-events-none fixed z-[100] hidden size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--site-accent)] shadow-[0_0_18px_var(--site-glow)] mix-blend-multiply transition-transform duration-150 ease-out md:block dark:mix-blend-screen"
-        style={{ left: position.x, top: position.y }}
-      />
-      <div
-        className={`pointer-events-none fixed z-[99] hidden -translate-x-1/2 -translate-y-1/2 rounded-full border border-[var(--site-accent)] bg-[var(--site-accent-soft)] transition-[width,height,opacity,transform] duration-200 ease-out md:block ${
-          isInteractive
-            ? "size-12 opacity-80 scale-110"
-            : "size-8 opacity-55 scale-100"
-        }`}
-        style={{ left: position.x, top: position.y }}
-      />
-    </>
-  );
-}
+const footerLinks = [
+  { label: "GitHub", href: "https://example.com/", icon: FiGithub, external: true },
+  { label: "LinkedIn", href: "https://example.com/", icon: FiLinkedin, external: true },
+  { label: "Email", href: "mailto:najeeb08089@gmail.com", icon: FiMail },
+  { label: "CV", href: "/Najeeb-Ullah-Khan-CV.pdf", icon: FiDownload, download: true },
+];
 
 export default function PortfolioPage() {
   const [activeSection, setActiveSection] = useState("");
@@ -139,7 +96,6 @@ export default function PortfolioPage() {
 
   return (
     <div className="min-h-screen overflow-x-clip theme-page">
-      <CustomCursor />
       <Header
         activeSection={activeSection}
         theme={theme}
@@ -153,34 +109,44 @@ export default function PortfolioPage() {
         <Skills />
         <Contact />
       </main>
-      <footer className="relative overflow-hidden border-t px-5 py-10 theme-border sm:px-8">
-        <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-[linear-gradient(90deg,transparent,var(--site-accent),transparent)] opacity-70" />
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <div className="space-y-3">
-            <p className="text-xs font-medium uppercase tracking-[0.24em] theme-accent">
+      <footer className="theme-footer-bg relative overflow-hidden px-5 py-8 sm:px-8">
+        <div className="pointer-events-none absolute -right-20 -top-24 size-72 rounded-full bg-white/14 blur-3xl" />
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.24em] text-white/72">
               Portfolio
             </p>
-            <div>
-              <h2 className="text-2xl font-semibold theme-heading sm:text-3xl">
-                Najeeb Ullah Khan
-              </h2>
-              <p className="mt-2 text-sm font-medium theme-muted">
-                Software Engineer <span className="theme-accent">(4 years)</span>
-              </p>
-            </div>
+            <h2 className="mt-2 text-2xl font-black text-white sm:text-3xl">
+              Najeeb Ullah Khan
+            </h2>
+            <p className="mt-1 text-sm font-medium text-white/72">
+              Software Engineer building clean, fast product interfaces.
+            </p>
           </div>
 
-          <div className="max-w-sm rounded border border-white/15 bg-[color-mix(in_srgb,var(--site-panel)_72%,transparent)] p-4 text-left shadow-[0_18px_60px_var(--site-accent-soft)] backdrop-blur">
-            <p className="text-sm leading-6 theme-text">
-              Building clean interfaces, thoughtful systems, and fast web
-              experiences with a product-first mindset.
-            </p>
-            <p className="mt-3 text-xs theme-muted">
-              Built with Next.js, Tailwind CSS, and Framer Motion.
-            </p>
+          <div className="flex flex-wrap items-center gap-3">
+            {footerLinks.map((item) => {
+              const Icon = item.icon;
+              return (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  aria-label={item.label}
+                  className="group inline-flex size-12 items-center justify-center rounded-xl border border-white/18 bg-white/12 text-xl text-white backdrop-blur transition hover:-translate-y-1 hover:bg-white/20"
+                  target={item.external ? "_blank" : undefined}
+                  rel={item.external ? "noreferrer" : undefined}
+                  download={item.download ? true : undefined}
+                  title={item.label}
+                >
+                  <Icon aria-hidden className="transition group-hover:scale-110" />
+                </a>
+              );
+            })}
           </div>
         </div>
       </footer>
     </div>
   );
 }
+
+

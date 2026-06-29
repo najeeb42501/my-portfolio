@@ -2,12 +2,39 @@
 
 import { motion, type Variants } from "framer-motion";
 import { type FormEvent, useState } from "react";
+import {
+  FiArrowUpRight,
+  FiCheckCircle,
+  FiGithub,
+  FiLinkedin,
+  FiMail,
+  FiMessageSquare,
+  FiSend,
+} from "react-icons/fi";
 import Reveal from "../shared/Reveal";
 
 const socialLinks = [
-  { label: "GitHub", href: "https://example.com/", external: true },
-  { label: "LinkedIn", href: "https://example.com/", external: true },
-  { label: "Email", href: "mailto:najeeb08089@gmail.com", external: false },
+  {
+    label: "GitHub",
+    href: "https://example.com/",
+    external: true,
+    icon: FiGithub,
+    tone: "text-[var(--theme-card-purple-solid)]",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://example.com/",
+    external: true,
+    icon: FiLinkedin,
+    tone: "text-[var(--theme-card-sky-solid)]",
+  },
+  {
+    label: "Email",
+    href: "mailto:najeeb08089@gmail.com",
+    external: false,
+    icon: FiMail,
+    tone: "text-[var(--theme-card-pink-solid)]",
+  },
 ];
 
 const contactNotes = [
@@ -76,94 +103,115 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden px-5 py-24 sm:px-8"
+      className="section-band relative overflow-hidden px-5 py-16 sm:px-8"
     >
-      <div className="absolute inset-x-0 top-28 h-px bg-[linear-gradient(to_right,transparent,var(--site-accent),transparent)] opacity-20" />
       <div className="mx-auto max-w-7xl">
-        <Reveal className="mx-auto max-w-5xl text-center">
-          <p className="font-mono text-sm uppercase tracking-[0.28em] theme-accent">
+        <Reveal className="mx-auto max-w-4xl text-center">
+          <p className="font-mono text-xs font-semibold uppercase tracking-[0.26em] theme-accent">
             Contact
           </p>
-          <h2 className="mt-5 text-balance text-2xl font-semibold leading-tight theme-heading sm:text-3xl lg:text-4xl">
+          <h2 className="mt-5 text-balance text-3xl font-black leading-tight tracking-tight theme-heading sm:text-4xl lg:text-5xl">
             Let&apos;s turn a sharp idea into a serious product.
           </h2>
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 theme-muted">
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-8 theme-muted">
             Send the shape of the problem, the goal, and where the product needs
             momentum. I&apos;ll reply with a clear next step.
           </p>
         </Reveal>
 
-        <Reveal className="mt-14">
-          <div className="relative grid overflow-hidden rounded border shadow-2xl theme-card-solid lg:grid-cols-[0.44fr_0.56fr]">
-            <div className="absolute inset-x-0 top-0 h-1 bg-[linear-gradient(to_right,#38bdf8,#a78bfa,#34d399,transparent)]" />
-            <div className="absolute -right-20 -top-20 size-56 rounded-full bg-sky-400/10 blur-3xl" />
-            <div className="absolute -bottom-24 left-1/3 size-64 rounded-full bg-emerald-400/10 blur-3xl" />
+        <Reveal className="mt-12">
+          <div className="grid lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
+            <aside
+              className="theme-primary-bg relative flex min-h-[34rem] flex-col justify-between overflow-hidden rounded-[1.5rem] border border-white/18 p-6 text-white sm:p-8 lg:rounded-r-none"
+            >
+              <div className="absolute -right-16 -top-16 size-56 rounded-full bg-white/18 blur-3xl" />
+              <div className="absolute -bottom-24 left-1/4 size-72 rounded-full bg-black/10 blur-3xl" />
 
-            <div className="relative border-b p-6 theme-border sm:p-8 lg:border-b-0 lg:border-r">
-              <div className="rounded border p-5 theme-panel">
-                <p className="font-mono text-xs uppercase tracking-[0.24em] theme-accent">
-                  Project signal
-                </p>
-                <h3 className="mt-5 text-3xl font-semibold theme-heading">
+              <div className="relative z-10">
+                <div className="flex items-center gap-3">
+                  <span className="grid size-12 place-items-center rounded-2xl bg-white text-[var(--theme-primary)] shadow-lg">
+                    <FiMessageSquare aria-hidden className="text-xl" />
+                  </span>
+                  <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-white/82">
+                    project signal
+                  </p>
+                </div>
+
+                <h3 className="mt-8 max-w-xl text-balance text-3xl font-black leading-tight text-white sm:text-4xl">
                   The best first message is specific, short, and honest.
                 </h3>
-                <p className="mt-5 leading-8 theme-muted">
+                <p className="mt-5 max-w-lg text-base leading-8 text-white/82">
                   Include what you&apos;re building, what feels blocked, and
                   what kind of help would make the biggest difference.
                 </p>
-              </div>
 
-              <div className="relative mt-7 border-l pl-6 theme-border">
-                <motion.span
-                  className="absolute -left-[0.28rem] top-1 size-2 rounded-full bg-[var(--site-accent)] shadow-[0_0_24px_var(--site-glow)]"
-                  animate={{ y: [0, 122, 0] }}
-                  transition={{
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-                <p className="text-sm uppercase tracking-[0.22em] theme-subtle">
-                  Available for
-                </p>
-                <div className="mt-5 grid gap-4">
+                <div className="mt-8 grid gap-3">
                   {contactNotes.map((note, index) => (
-                    <motion.p
+                    <motion.div
                       key={note}
-                      className="flex items-center gap-3 text-base theme-text"
+                      className="flex items-center gap-3 rounded-xl border border-white/18 bg-white/12 px-4 py-3 backdrop-blur"
                       initial={{ opacity: 0, x: 18 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.45, delay: index * 0.08 }}
                     >
-                      <span className="size-1.5 rounded-full bg-[var(--site-accent)]" />
-                      {note}
-                    </motion.p>
+                      <FiCheckCircle
+                        aria-hidden
+                        className="shrink-0 text-lg text-white"
+                      />
+                      <span className="text-sm font-medium leading-6 text-white/86">
+                        {note}
+                      </span>
+                    </motion.div>
                   ))}
                 </div>
               </div>
 
-              <div className="mt-8 flex flex-wrap gap-3">
-                {socialLinks.map((item) => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className="rounded-full border px-4 py-2 text-sm font-medium transition theme-panel theme-text hover:border-[var(--site-accent)] hover:text-[var(--site-accent)]"
-                    target={item.external ? "_blank" : undefined}
-                    rel={item.external ? "noreferrer" : undefined}
-                  >
-                    {item.label}
-                  </a>
-                ))}
+              <div className="relative z-10 mt-9 grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+                {socialLinks.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      className="group flex items-center justify-between gap-3 rounded-xl border border-white/18 bg-white px-4 py-3 text-sm font-bold text-[var(--site-heading)] shadow-[0_18px_48px_rgba(15,23,42,0.12)] transition hover:-translate-y-1"
+                      target={item.external ? "_blank" : undefined}
+                      rel={item.external ? "noreferrer" : undefined}
+                    >
+                      <span className="flex items-center gap-2">
+                        <Icon aria-hidden className={`${item.tone} text-lg`} />
+                        {item.label}
+                      </span>
+                      <FiArrowUpRight
+                        aria-hidden
+                        className="text-[var(--site-subtle)] transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      />
+                    </a>
+                  );
+                })}
               </div>
-            </div>
+            </aside>
 
             <form
-              className="relative grid gap-4 p-6 sm:p-8"
+              className="bento-highlight relative grid content-start gap-5 overflow-hidden rounded-[1.5rem] border border-[var(--site-accent)] bg-[color-mix(in_srgb,var(--site-surface)_86%,var(--site-panel)_78%)] p-6 shadow-[0_24px_80px_color-mix(in_srgb,var(--site-shadow)_74%,transparent)] backdrop-blur-[18px] sm:p-8 lg:rounded-l-none lg:border-l-0"
               onSubmit={handleSubmit}
             >
+              <div className="mb-1 flex items-center justify-between gap-4">
+                <div>
+                  <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] theme-accent">
+                    Message
+                  </p>
+                  <h3 className="mt-2 text-2xl font-black theme-heading">
+                    Tell me what you&apos;re building
+                  </h3>
+                </div>
+                <span className="hidden size-12 place-items-center rounded-2xl theme-primary-bg sm:grid">
+                  <FiSend aria-hidden />
+                </span>
+              </div>
+
               <motion.label
-                className="grid gap-2 text-sm theme-text"
+                className="grid gap-2 text-sm font-semibold theme-text"
                 custom={0}
                 initial="hidden"
                 whileInView="visible"
@@ -174,13 +222,13 @@ export default function Contact() {
                 <input
                   name="name"
                   autoComplete="name"
-                  className="rounded border px-4 py-3 outline-none transition theme-input focus:border-[var(--site-accent)]"
+                  className="rounded-xl border px-4 py-3 outline-none transition theme-input focus:border-[var(--site-accent)] focus:shadow-[0_0_0_4px_var(--site-accent-soft)]"
                   placeholder="Your name"
                   required
                 />
               </motion.label>
               <motion.label
-                className="grid gap-2 text-sm theme-text"
+                className="grid gap-2 text-sm font-semibold theme-text"
                 custom={1}
                 initial="hidden"
                 whileInView="visible"
@@ -192,13 +240,13 @@ export default function Contact() {
                   name="email"
                   type="email"
                   autoComplete="email"
-                  className="rounded border px-4 py-3 outline-none transition theme-input focus:border-[var(--site-accent)]"
+                  className="rounded-xl border px-4 py-3 outline-none transition theme-input focus:border-[var(--site-accent)] focus:shadow-[0_0_0_4px_var(--site-accent-soft)]"
                   placeholder="you@example.com"
                   required
                 />
               </motion.label>
               <motion.label
-                className="grid gap-2 text-sm theme-text"
+                className="grid gap-2 text-sm font-semibold theme-text"
                 custom={2}
                 initial="hidden"
                 whileInView="visible"
@@ -208,8 +256,8 @@ export default function Contact() {
                 Message
                 <textarea
                   name="message"
-                  rows={6}
-                  className="resize-none rounded border px-4 py-3 outline-none transition theme-input focus:border-[var(--site-accent)]"
+                  rows={7}
+                  className="resize-none rounded-xl border px-4 py-3 outline-none transition theme-input focus:border-[var(--site-accent)] focus:shadow-[0_0_0_4px_var(--site-accent-soft)]"
                   placeholder="Tell me what you are building..."
                   required
                 />
@@ -224,18 +272,19 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={status === "sending"}
-                  className="w-full rounded px-6 py-3 text-sm font-semibold transition theme-accent-bg hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+                  className="minimal-button theme-primary-bg inline-flex w-full items-center justify-center gap-2 px-6 py-3 text-sm font-bold disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
                   aria-busy={status === "sending"}
                 >
+                  <FiSend aria-hidden />
                   {status === "sending" ? "Sending..." : "Send Message"}
                 </button>
               </motion.div>
               {statusMessage && (
                 <p
-                  className={`rounded border px-4 py-3 text-sm ${
+                  className={`rounded-xl border px-4 py-3 text-sm font-semibold ${
                     status === "success"
-                      ? "border-emerald-300/30 bg-emerald-400/10 text-emerald-500"
-                      : "border-rose-300/30 bg-rose-400/10 text-rose-500"
+                      ? "theme-chip-emerald"
+                      : "theme-chip-pink"
                   }`}
                   role={status === "error" ? "alert" : "status"}
                 >
@@ -249,3 +298,6 @@ export default function Contact() {
     </section>
   );
 }
+
+
+

@@ -23,13 +23,13 @@ export default function Header({
   });
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b backdrop-blur-xl theme-header">
+    <header className="fixed inset-x-0 top-3 z-50 px-3 sm:px-5">
       <motion.div
-        className="absolute bottom-0 left-0 h-px w-full origin-left bg-[var(--site-accent)]"
+        className="pointer-events-none absolute bottom-0 left-0 h-px w-full origin-left theme-spectrum-line"
         style={{ scaleX: progress }}
       />
       <nav
-        className="mx-auto grid min-h-14 max-w-7xl grid-cols-[auto_1fr_auto_auto] items-center gap-3 px-4 sm:px-6"
+        className="bento-card mx-auto grid min-h-14 max-w-7xl grid-cols-[auto_1fr_auto_auto] items-center gap-3 overflow-hidden px-4 shadow-[0_18px_50px_var(--site-glow)] sm:px-5"
         aria-label="Primary navigation"
       >
         <a
@@ -37,9 +37,9 @@ export default function Header({
           className="flex items-center gap-2"
           aria-label="Go to top"
         >
-          <span className="size-3 rounded-full bg-[#ff5f57] shadow-[0_0_12px_rgba(255,95,87,0.45)]" />
-          <span className="size-3 rounded-full bg-[#ffbd2e] shadow-[0_0_12px_rgba(255,189,46,0.38)]" />
-          <span className="size-3 rounded-full bg-[#28c840] shadow-[0_0_12px_rgba(40,200,64,0.35)]" />
+          <span className="size-3 rounded-full bg-[var(--theme-card-pink-solid)] shadow-[0_0_12px_color-mix(in_srgb,var(--theme-card-pink-solid)_45%,transparent)]" />
+          <span className="size-3 rounded-full bg-[var(--theme-card-orange-solid)] shadow-[0_0_12px_color-mix(in_srgb,var(--theme-card-orange-solid)_38%,transparent)]" />
+          <span className="size-3 rounded-full bg-[var(--theme-card-emerald-solid)] shadow-[0_0_12px_color-mix(in_srgb,var(--theme-card-emerald-solid)_35%,transparent)]" />
         </a>
         <div className="min-w-0 justify-self-center rounded border px-2.5 py-1 font-mono text-[0.68rem] theme-panel theme-muted sm:px-3 sm:text-sm">
           <span className="hidden theme-subtle sm:inline">~/portfolio/</span>
@@ -47,7 +47,7 @@ export default function Header({
           <span className="hidden theme-accent sm:inline">ullah_Khan</span>
           <span className="hidden theme-muted md:inline">.software-engineer</span>
         </div>
-        <div className="hidden justify-end gap-1 rounded bg-transparent p-0 md:flex md:gap-2">
+        <div className="hidden justify-end gap-1 bg-transparent p-0 md:flex md:gap-2">
           {navItems.map((item) => {
             const id = item.href.slice(1);
             const isActive = activeSection === id;
@@ -71,7 +71,7 @@ export default function Header({
         <button
           type="button"
           onClick={onToggleTheme}
-          className="hidden items-center gap-2 rounded border px-3 py-1.5 text-xs font-semibold transition theme-panel theme-muted hover:border-[var(--site-accent)] hover:text-[var(--site-heading)] sm:flex"
+          className="minimal-button hidden items-center gap-2 border px-3 py-1.5 text-xs font-semibold theme-panel theme-muted hover:border-[var(--site-accent)] hover:text-[var(--site-heading)] sm:flex"
           aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
         >
           {theme === "dark" ? <FiSun aria-hidden /> : <FiMoon aria-hidden />}
@@ -80,7 +80,7 @@ export default function Header({
         <button
           type="button"
           onClick={() => setIsMenuOpen((current) => !current)}
-          className="grid size-9 place-items-center rounded border transition theme-panel theme-muted hover:border-[var(--site-accent)] hover:text-[var(--site-heading)] md:hidden"
+          className="minimal-button grid size-9 place-items-center border theme-panel theme-muted hover:border-[var(--site-accent)] hover:text-[var(--site-heading)] md:hidden"
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
           aria-label="Toggle navigation menu"
@@ -106,14 +106,14 @@ export default function Header({
       </nav>
       <motion.div
         id="mobile-navigation"
-        className="overflow-hidden border-t theme-border md:hidden"
+        className="mx-auto max-w-7xl overflow-hidden md:hidden"
         initial={false}
         animate={
           isMenuOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }
         }
         transition={{ duration: 0.22, ease: "easeOut" }}
       >
-        <div className="grid gap-2 px-4 py-3 theme-panel">
+        <div className="bento-card mt-2 grid gap-2 px-4 py-3">
           <div className="grid gap-2">
             {navItems.map((item) => {
               const id = item.href.slice(1);
@@ -150,3 +150,6 @@ export default function Header({
     </header>
   );
 }
+
+
+

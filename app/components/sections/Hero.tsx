@@ -1,57 +1,124 @@
 "use client";
 
 import { motion } from "framer-motion";
-import CodeTypewriter from "../hero/CodeTypewriter";
-import FloatingTechIcons from "../hero/FloatingTechIcons";
-import IntroTerminal from "../hero/IntroTerminal";
+import Image from "next/image";
+import {
+  FiArrowDown,
+  FiArrowUpRight,
+  FiDownload,
+  FiGithub,
+  FiLinkedin,
+  FiMail,
+} from "react-icons/fi";
+
+const heroLinks = [
+  { label: "GitHub", href: "https://example.com/", icon: FiGithub },
+  { label: "LinkedIn", href: "https://example.com/", icon: FiLinkedin },
+  { label: "Email", href: "mailto:najeeb08089@gmail.com", icon: FiMail },
+];
 
 export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative isolate flex min-h-svh items-stretch justify-center overflow-hidden px-3 pb-3 pt-16 sm:px-4 md:h-svh md:max-h-svh md:items-center md:pt-14"
+      className="relative flex min-h-svh items-center overflow-hidden bg-[var(--site-bg)] px-5 pb-10 pt-24 sm:px-8 lg:h-svh lg:max-h-svh"
     >
-      <div className="absolute inset-0 theme-hero-bg" />
-      <div
-        className="hero-grid absolute inset-0 opacity-50"
-        aria-hidden="true"
-      />
-      <FloatingTechIcons />
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14">
+        <motion.div
+          className="relative z-10 max-w-3xl"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <p className="font-mono text-xs font-semibold uppercase tracking-[0.3em] theme-accent">
+            Full-stack developer
+          </p>
 
-      <motion.div
-        className="relative z-10 flex min-h-[calc(100svh-4.75rem)] w-full overflow-hidden rounded border backdrop-blur theme-surface md:h-full md:min-h-0"
-        initial={{ opacity: 0, y: 28, scale: 0.985 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
-          <div className="relative flex min-h-0 flex-1 md:overflow-hidden">
-            <CodeTypewriter />
-          </div>
-          <div className="grid shrink-0 border-t theme-border xl:grid-cols-[minmax(0,1fr)_auto]">
-            <IntroTerminal />
-            <motion.div
-              className="grid grid-cols-2 gap-2 border-t p-2.5 theme-border theme-panel sm:gap-3 sm:p-3 xl:flex xl:flex-col xl:border-l xl:border-t-0 xl:p-4"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.72, duration: 0.55 }}
+          <h1 className="mt-6 text-balance text-[clamp(3rem,6.5vw,5.75rem)] font-black leading-[0.92] tracking-tight theme-heading">
+            I&apos;m <span className="theme-accent">Najeeb</span>, Software
+            Engineer
+          </h1>
+
+          <p className="mt-6 max-w-2xl text-base leading-8 theme-muted sm:text-lg">
+            I build colorful, high-performance web products with clean UI
+            systems, reliable backend integrations, and polished developer
+            energy.
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a
+              href="#about"
+              className="minimal-button theme-ink-bg inline-flex items-center gap-2 px-6 py-3 text-sm font-bold"
             >
-              <a
-                href="#projects"
-                className="rounded px-3 py-2 text-center text-xs font-semibold shadow-[0_0_32px_var(--site-glow)] transition theme-accent-bg hover:scale-[1.03] hover:shadow-[0_0_42px_var(--site-glow)] sm:py-2.5 sm:text-sm xl:px-5 xl:py-3"
-              >
-                View Projects
-              </a>
-              <a
-                href="#contact"
-                className="rounded border px-3 py-2 text-center text-xs font-semibold transition theme-panel theme-heading hover:scale-[1.03] hover:border-[var(--site-accent)] hover:shadow-[0_0_30px_var(--site-glow)] sm:py-2.5 sm:text-sm xl:px-5 xl:py-3"
-              >
-                Contact Me
-              </a>
-            </motion.div>
+              About
+            </a>
+            <a
+              href="/Najeeb-Ullah-Khan-CV.pdf"
+              download
+              className="minimal-button theme-primary-bg inline-flex items-center gap-2 px-6 py-3 text-sm font-bold"
+            >
+              <FiDownload aria-hidden />
+              Download CV
+            </a>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+
+        <motion.div
+          className="relative mx-auto flex w-full max-w-xl items-center justify-center lg:mr-0"
+          initial={{ opacity: 0, x: 28 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.12, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="relative w-[min(76vw,27rem)] overflow-hidden rounded-[2rem]">
+            <Image
+              src="/najeeb-profile.png"
+              alt="Najeeb Ullah Khan"
+              width={720}
+              height={840}
+              priority
+              className="h-auto w-full object-contain"
+            />
+          </div>
+
+          <a
+            href="#contact"
+            aria-label="Go to contact section"
+            className="absolute bottom-0 right-[calc(50%-14rem)] grid size-20 place-items-center rounded-full border-[10px] border-[var(--site-bg)] bg-[var(--theme-primary-bg-start)] text-3xl text-white transition hover:scale-105 sm:size-24 sm:text-4xl lg:right-2"
+          >
+            <FiArrowUpRight aria-hidden />
+          </a>
+
+          <div className="absolute -right-2 top-1/2 hidden -translate-y-1/2 items-center gap-4 lg:flex">
+            <span
+              className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-[var(--theme-primary-bg-start)]"
+              style={{ writingMode: "vertical-rl" }}
+            >
+              Follow me on
+            </span>
+            <span className="h-16 w-px bg-[var(--site-border-strong)]" />
+            <div className="grid gap-3">
+              {heroLinks.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    aria-label={item.label}
+                    className="grid size-8 place-items-center rounded-full text-[var(--theme-primary-bg-start)] transition hover:-translate-y-0.5 hover:bg-[var(--theme-primary-soft)]"
+                  >
+                    <Icon aria-hidden />
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+
+          <FiArrowDown
+            aria-hidden
+            className="absolute -left-6 top-12 hidden rotate-[-35deg] text-4xl text-[var(--site-heading)] lg:block"
+          />
+        </motion.div>
+      </div>
     </section>
   );
 }

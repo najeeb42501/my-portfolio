@@ -106,6 +106,71 @@ export const projects = [
     demo: "https://online.ublfunds.com/UBL1/",
   },
   {
+    title: "Corporate Payment Portal",
+    description:
+      "Enterprise payment management dashboard for handling bills, vendors, payees, salaries, approvals, and role-based finance workflows.",
+
+    detailedDescription:
+      "Payment Dashboard is an enterprise-grade payment management platform designed to support bill payments, vendor payments, payee management, salary processing, and finance approval workflows. The system includes multiple user levels such as Super Admin, Company Admin, Maker, Checker, and Authorizer, allowing organizations to manage payment operations with controlled access and approval-based processing. The dashboard provides a clean admin interface for reviewing transactions, managing payment records, tracking activity, and handling operational actions through dynamic role and permission management. Built with a custom theme system, reusable UI patterns, advanced filtering, authentication, authorization, and structured error handling, the platform is designed for scalable finance operations across different companies and user roles.",
+
+    images: [
+      "/payment-dashboard/payment-dashboard-1.png",
+      "/payment-dashboard/payment-dashboard-2.png",
+      "/payment-dashboard/payment-dashboard-3.png",
+      "/payment-dashboard/payment-dashboard-4.png",
+      "/payment-dashboard/payment-dashboard-5.png",
+    ],
+
+    stack: [
+      "Angular 19",
+      "Spring Boot",
+      "TypeScript",
+      "PrimeNG",
+      "Custom CSS",
+      "Global CSS Tokens",
+      "Custom Theme System",
+      "Microservices",
+      "REST APIs",
+      "Background Jobs",
+      "Async Programming",
+      "Authentication",
+      "Authorization",
+      "Role-Based Access Control",
+      "Dynamic Roles & Permissions",
+      "Reusable Grid Components",
+      "Advanced Filters",
+      "Global Error Handling",
+      "Form Validation",
+      "Admin UI",
+      "Responsive Design",
+    ],
+
+    features: [
+      "Bill payment management",
+      "Vendor payment workflows",
+      "Payee management",
+      "Salary payment processing",
+      "Super Admin and Company Admin access",
+      "Maker, Checker, and Authorizer approval flow",
+      "Dynamic role and permission management",
+      "Secure login and signup flows",
+      "Authentication and authorization handling",
+      "Reusable data grid with advanced filters",
+      "Transaction review and payment tracking",
+      "Custom theme with global design tokens",
+      "Microservice-based backend integration",
+      "Background job processing",
+      "Async request handling",
+      "Global API error handling",
+      "Form-level validation and error messages",
+      "Responsive finance admin interface",
+    ],
+
+    github: "",
+    demo: "",
+    demoUnavailableLabel: "Private",
+  },
+  {
     title: "JOBS Dashboard",
     description:
       "Real-time operational dashboard for monitoring backend jobs, transaction statuses, digital services, and account opening activity.",
@@ -156,6 +221,7 @@ export const projects = [
 
     github: "",
     demo: "",
+    demoUnavailableLabel: "Private",
   },
   {
     title: "UBL Funds Onboarding",
@@ -219,70 +285,7 @@ export const projects = [
     github: "",
     demo: "https://online.ublfunds.com/onboarding/",
   },
-  {
-    title: "Payment Dashboard",
-    description:
-      "Enterprise payment management dashboard for handling bills, vendors, payees, salaries, approvals, and role-based finance workflows.",
 
-    detailedDescription:
-      "Payment Dashboard is an enterprise-grade payment management platform designed to support bill payments, vendor payments, payee management, salary processing, and finance approval workflows. The system includes multiple user levels such as Super Admin, Company Admin, Maker, Checker, and Authorizer, allowing organizations to manage payment operations with controlled access and approval-based processing. The dashboard provides a clean admin interface for reviewing transactions, managing payment records, tracking activity, and handling operational actions through dynamic role and permission management. Built with a custom theme system, reusable UI patterns, advanced filtering, authentication, authorization, and structured error handling, the platform is designed for scalable finance operations across different companies and user roles.",
-
-    images: [
-      "/payment-dashboard/payment-dashboard-1.png",
-      "/payment-dashboard/payment-dashboard-2.png",
-      "/payment-dashboard/payment-dashboard-3.png",
-      "/payment-dashboard/payment-dashboard-4.png",
-      "/payment-dashboard/payment-dashboard-5.png",
-    ],
-
-    stack: [
-      "Angular 19",
-      "Spring Boot",
-      "TypeScript",
-      "PrimeNG",
-      "Custom CSS",
-      "Global CSS Tokens",
-      "Custom Theme System",
-      "Microservices",
-      "REST APIs",
-      "Background Jobs",
-      "Async Programming",
-      "Authentication",
-      "Authorization",
-      "Role-Based Access Control",
-      "Dynamic Roles & Permissions",
-      "Reusable Grid Components",
-      "Advanced Filters",
-      "Global Error Handling",
-      "Form Validation",
-      "Admin UI",
-      "Responsive Design",
-    ],
-
-    features: [
-      "Bill payment management",
-      "Vendor payment workflows",
-      "Payee management",
-      "Salary payment processing",
-      "Super Admin and Company Admin access",
-      "Maker, Checker, and Authorizer approval flow",
-      "Dynamic role and permission management",
-      "Secure login and signup flows",
-      "Authentication and authorization handling",
-      "Reusable data grid with advanced filters",
-      "Transaction review and payment tracking",
-      "Custom theme with global design tokens",
-      "Microservice-based backend integration",
-      "Background job processing",
-      "Async request handling",
-      "Global API error handling",
-      "Form-level validation and error messages",
-      "Responsive finance admin interface",
-    ],
-
-    github: "",
-    demo: "",
-  },
   {
     title: "Sofstica Website",
     description:
@@ -345,7 +348,7 @@ export const projects = [
 
 export const timeline = [
   {
-    role: "Software Engineer I (Leading Frontend)",
+    role: "Software Engineer",
     company: "Jami Partners Pvt. Ltd.",
     period: "Sept'2025 - Present",
     focuses: [
@@ -359,7 +362,7 @@ export const timeline = [
       "Leading frontend delivery for enterprise dashboards and business applications with a focus on clean UI systems, scalable architecture, and reliable production releases.",
     impact:
       "Owns modern frontend implementation, reusable components, dashboard UX, API integration patterns, and performance-focused interface decisions across active products.",
-    accent: "from-sky-400 via-cyan-300 to-emerald-300",
+    accent: "theme-card-sky",
     highlights: [
       "Leading Angular 15+ and React dashboard development",
       "Building reusable grids, filters, forms, and admin workflows",
@@ -385,7 +388,7 @@ export const timeline = [
     ],
   },
   {
-    role: "Software Engineer",
+    role: "Jr. Software Engineer",
     company: "Sofstica Solutions Pvt. Ltd.",
     period: "Feb'2024 - Sept'2025",
     focuses: [
@@ -399,7 +402,7 @@ export const timeline = [
       "Built customer-facing websites, dashboards, onboarding experiences, and backend-connected interfaces for business teams and live users.",
     impact:
       "Delivered responsive web applications with clean interaction flows, reusable UI patterns, API integrations, form handling, and production deployment support.",
-    accent: "from-amber-300 via-orange-300 to-rose-300",
+    accent: "theme-card-orange",
     highlights: [
       "Shipped responsive dashboards and customer-facing platforms",
       "Integrated frontend apps with backend APIs and auth flows",
@@ -427,8 +430,8 @@ export const timeline = [
     ],
   },
   {
-    role: "AI Trainer (LLM Models) (Part Time) ",
-    company: "Turing (Remote Contract)",
+    role: "AI Trainer",
+    company: "Turing (Part Time Contract) ",
     period: "Jan'2024 - May'2024",
     focuses: [
       "AI evaluation",
@@ -441,7 +444,7 @@ export const timeline = [
       "Worked on LLM training and evaluation tasks, reviewing model responses, improving prompt quality, and helping refine coding and reasoning outputs.",
     impact:
       "Strengthened technical review skills by assessing code quality, instruction following, edge cases, and clarity across AI-generated solutions.",
-    accent: "from-violet-400 via-fuchsia-300 to-sky-300",
+    accent: "theme-card-purple",
     highlights: [
       "Reviewed AI-generated coding and reasoning responses",
       "Improved prompts for clearer, more reliable model outputs",
@@ -479,7 +482,7 @@ export const timeline = [
       "Delivered freelance frontend work for clients on Fiverr and Upwork, building responsive websites, React interfaces, and WordPress-based business pages.",
     impact:
       "Worked directly with clients to understand requirements, create clean user interfaces, improve existing website layouts, and deliver practical frontend updates with quick turnaround.",
-    accent: "from-emerald-300 via-teal-300 to-cyan-300",
+    accent: "theme-card-emerald",
     highlights: [
       "Built responsive React.js interfaces for client requirements",
       "Created and customized WordPress websites and landing pages",

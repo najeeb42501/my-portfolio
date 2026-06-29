@@ -60,9 +60,9 @@ export default function IntroTerminal() {
     <div className="border-t font-mono text-[0.68rem] shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_-14px_48px_var(--site-accent-soft)] theme-border theme-panel sm:text-xs">
       <div className="flex flex-col gap-1.5 border-b px-3 py-1 theme-border theme-panel-strong sm:px-5 sm:py-1.5 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex min-w-0 items-center gap-2">
-          <span className="size-2 rounded-full bg-[#ff5f57] shadow-[0_0_10px_rgba(255,95,87,0.45)]" />
-          <span className="size-2 rounded-full bg-[#ffbd2e] shadow-[0_0_10px_rgba(255,189,46,0.4)]" />
-          <span className="size-2 rounded-full bg-[#28c840] shadow-[0_0_10px_rgba(40,200,64,0.4)]" />
+          <span className="size-2 rounded-full bg-[var(--theme-card-pink-solid)] shadow-[0_0_10px_color-mix(in_srgb,var(--theme-card-pink-solid)_45%,transparent)]" />
+          <span className="size-2 rounded-full bg-[var(--theme-card-orange-solid)] shadow-[0_0_10px_color-mix(in_srgb,var(--theme-card-orange-solid)_40%,transparent)]" />
+          <span className="size-2 rounded-full bg-[var(--theme-card-emerald-solid)] shadow-[0_0_10px_color-mix(in_srgb,var(--theme-card-emerald-solid)_40%,transparent)]" />
           <span className="ml-1 truncate text-[0.62rem] font-semibold uppercase tracking-[0.2em] theme-muted">
             njb-terminal
           </span>
@@ -88,13 +88,13 @@ export default function IntroTerminal() {
       <div className="relative grid gap-1 px-4 py-2 sm:px-6 sm:py-2.5">
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(color-mix(in_srgb,var(--site-accent)_8%,transparent)_1px,transparent_1px)] bg-[length:100%_24px]" />
         <p className="relative">
-          <span className="text-emerald-500">najeeb</span>
+          <span className="text-[var(--theme-card-emerald-solid)]">najeeb</span>
           <span className="theme-muted">@</span>
           <span className="theme-accent">portfolio</span>
           <span className="theme-muted">:</span>
-          <span className="text-violet-500">~/hero</span>
+          <span className="text-[var(--theme-card-purple-solid)]">~/hero</span>
           <span className="theme-muted"> $ </span>
-          <span className="text-amber-500">{active.command}</span>
+          <span className="text-[var(--theme-card-orange-solid)]">{active.command}</span>
         </p>
         <div className="relative grid gap-1 pl-4">
           {active.lines.map((line, index) => (
@@ -110,3 +110,7 @@ export default function IntroTerminal() {
     </div>
   );
 }
+
+
+
+
