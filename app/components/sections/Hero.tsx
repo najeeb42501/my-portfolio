@@ -69,31 +69,32 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.12, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="relative w-[min(76vw,27rem)] overflow-hidden rounded-[2rem]">
+          <div className="relative aspect-[6/7] w-[min(76vw,27rem)] overflow-hidden rounded-[2rem] bg-[#1698df] ">
             <Image
-              src="/najeeb-profile.png"
+              src="/najeeb-profile.webp"
               alt="Najeeb Ullah Khan"
-              width={720}
-              height={840}
-              priority
-              className="h-auto w-full object-contain"
+              fill
+              preload
+              sizes="(max-width: 1024px) 76vw, 432px"
+              className="scale-[1.095] object-cover object-center"
             />
+            <div className="absolute bottom-[-15px] right-[-15px] z-20 grid size-24 place-items-center rounded-tl-[4rem] rounded-tr-[3rem] rounded-bl-[3rem] bg-[var(--site-bg)] sm:size-28">
+              <a
+                href="#contact"
+                aria-label="Go to contact section"
+                className="theme-primary-bg grid size-16 place-items-center rounded-full border border-white/30 text-3xl text-white  transition hover:-translate-y-1 hover:scale-105 sm:size-[4.5rem] sm:text-4xl"
+              >
+                <FiArrowUpRight aria-hidden />
+              </a>
+            </div>
           </div>
-
-          <a
-            href="#contact"
-            aria-label="Go to contact section"
-            className="absolute bottom-0 right-[calc(50%-14rem)] grid size-20 place-items-center rounded-full border-[10px] border-[var(--site-bg)] bg-[var(--theme-primary-bg-start)] text-3xl text-white transition hover:scale-105 sm:size-24 sm:text-4xl lg:right-2"
-          >
-            <FiArrowUpRight aria-hidden />
-          </a>
 
           <div className="absolute -right-2 top-1/2 hidden -translate-y-1/2 items-center gap-4 lg:flex">
             <span
               className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-[var(--theme-primary-bg-start)]"
               style={{ writingMode: "vertical-rl" }}
             >
-              Follow me on
+              Follow Us on
             </span>
             <span className="h-16 w-px bg-[var(--site-border-strong)]" />
             <div className="grid gap-3">

@@ -511,6 +511,25 @@ body {
   }
 }
 
+
+@keyframes skills-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.skills-marquee-track {
+  animation: skills-marquee 28s linear infinite;
+}
+
+.skills-marquee-track:hover {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .skills-marquee-track {
+    animation: none;
+  }
+}
 .section-band {
   position: relative;
   isolation: isolate;
@@ -560,7 +579,7 @@ body {
 }
 
 .gradient-heading {
-  background: linear-gradient(90deg, var(--site-heading), var(--theme-primary) 42%, var(--theme-card-purple-solid) 72%, var(--site-heading));
+  background: linear-gradient(90deg, #38bdf8 0%, #0284c7 38%, #4c1d95 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -581,4 +600,46 @@ body {
 
 
 
+
+
+
+.process-dash-flow {
+  stroke-dasharray: 12 14;
+  animation: process-dash-flow 18s linear infinite;
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--site-accent) 34%, transparent));
+}
+
+.process-dash-flow-muted {
+  opacity: 0.7;
+  animation-duration: 22s;
+}
+
+@keyframes process-dash-flow {
+  to {
+    stroke-dashoffset: -260;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .process-dash-flow {
+    animation: none;
+  }
+}
+
+
+.process-flow-handle {
+  width: 1px !important;
+  height: 1px !important;
+  border: 0 !important;
+  background: transparent !important;
+  opacity: 0;
+}
+
+.react-flow__edge-process-flow .react-flow__edge-path,
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke: #0ea5e9;
+  stroke-width: 3;
+  stroke-dasharray: 12 14;
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--site-accent) 34%, transparent));
+}
 

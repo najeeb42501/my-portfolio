@@ -1,7 +1,3 @@
-"use client";
-
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
 import { timeline } from "../data/portfolio";
 import SectionHeading from "../shared/SectionHeading";
 
@@ -32,28 +28,15 @@ function ExperienceCard({
   index: number;
 }) {
   const tone = cardTones[index % cardTones.length];
-  const cardRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ["start 72%", "start 18%"],
-  });
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
-  const y = useTransform(scrollYProgress, [0, 1], [0, -18]);
   const stickyTop = `calc(6rem + ${index * 1.4}rem)`;
 
   return (
     <div
-      ref={cardRef}
       className="relative sticky"
       style={{ top: stickyTop, zIndex: timeline.length + index }}
     >
-      <motion.article
+      <article
         className={`${tone.bg} overflow-hidden rounded-[1.25rem] border border-white/15 p-6 text-white sm:p-7`}
-        style={{ scale, y }}
-        initial={{ opacity: 0, y: 26 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.35 }}
-        transition={{ duration: 0.5, delay: index * 0.06 }}
       >
         <div className="grid gap-5">
           <div className="flex flex-wrap items-center justify-between gap-3">
@@ -95,7 +78,7 @@ function ExperienceCard({
             </p>
           </div>
         </div>
-      </motion.article>
+      </article>
     </div>
   );
 }

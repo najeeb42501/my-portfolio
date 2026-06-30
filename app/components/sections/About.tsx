@@ -1,9 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FiCheck, FiCloud, FiCode, FiCpu, FiLayers, FiZap } from "react-icons/fi";
+import {
+  FiCheck,
+  FiCloud,
+  FiCode,
+  FiCpu,
+  FiLayers,
+  FiZap,
+} from "react-icons/fi";
 import { stats } from "../data/portfolio";
 import Reveal from "../shared/Reveal";
+import SectionHeading from "../shared/SectionHeading";
 
 const focusLines = [
   "I turn unclear product ideas into clean web experiences with practical architecture.",
@@ -67,20 +75,16 @@ const workflow = [
 
 export default function About() {
   return (
-    <section id="about" className="section-band relative overflow-hidden px-5 py-16 sm:px-8">
+    <section
+      id="about"
+      className="section-band relative overflow-hidden px-5 py-16 sm:px-8"
+    >
       <div className="mx-auto max-w-7xl">
-        <Reveal className="mx-auto mb-12 max-w-4xl text-center">
-          <p className="font-mono text-xs font-semibold uppercase tracking-[0.26em] theme-accent">
-            About
-          </p>
-          <h2 className="mt-5 text-balance text-2xl font-black leading-tight tracking-tight theme-heading sm:text-3xl lg:text-4xl">
-            Thoughtful engineering for products that need to feel effortless.
-          </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-8 theme-muted">
-            I blend product clarity, interface craft, and maintainable systems
-            to build modern web apps that feel calm, useful, and reliable.
-          </p>
-        </Reveal>
+        <SectionHeading
+          eyebrow="About"
+          title="Thoughtful engineering for products that need to feel effortless."
+          copy="I blend product clarity, interface craft, and maintainable systems to build modern web apps that feel calm, useful, and reliable."
+        />
 
         <div className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
           <Reveal>
@@ -145,19 +149,31 @@ export default function About() {
             {capabilityCards.map((item, index) => {
               const Icon = item.icon;
               return (
-                <Reveal key={item.title} delay={index * 0.08} className="h-full">
+                <Reveal
+                  key={item.title}
+                  delay={index * 0.08}
+                  className="h-full"
+                >
                   <motion.article
                     className="relative flex h-full min-h-[6.5rem] items-center border-b px-3 py-4 theme-border lg:min-h-0"
                     whileHover={{ y: -4 }}
                     transition={{ type: "spring", stiffness: 260, damping: 24 }}
                   >
                     <div className="flex w-full items-center gap-4">
-                      <span className={`${item.tone} grid size-11 shrink-0 place-items-center rounded-xl border theme-border`}>
+                      <span
+                        className={`${item.tone} grid size-11 shrink-0 place-items-center rounded-xl border theme-border`}
+                      >
                         <Icon aria-hidden className="text-lg" />
                       </span>
                       <div>
-                        <h3 className={`${item.tone} text-lg font-black leading-tight`}>{item.title}</h3>
-                        <p className={`${item.tone} mt-1.5 text-sm leading-6 opacity-80`}>
+                        <h3
+                          className={`${item.tone} text-lg font-black leading-tight`}
+                        >
+                          {item.title}
+                        </h3>
+                        <p
+                          className={`${item.tone} mt-1.5 text-sm leading-6 opacity-80`}
+                        >
                           {item.copy}
                         </p>
                       </div>
@@ -169,7 +185,7 @@ export default function About() {
           </div>
         </div>
 
-        <Reveal className="mt-10">
+        {/* <Reveal className="mt-10">
           <div className="grid gap-5 lg:flex lg:items-start lg:gap-0">
             {workflow.map((step, index) => (
               <motion.article
@@ -204,22 +220,8 @@ export default function About() {
               </motion.article>
             ))}
           </div>
-        </Reveal>
+        </Reveal> */}
       </div>
     </section>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

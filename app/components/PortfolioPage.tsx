@@ -18,6 +18,9 @@ const About = dynamic(() => import("./sections/About"), {
 const Projects = dynamic(() => import("./sections/Projects"), {
   loading: sectionLoading,
 });
+const MyProcess = dynamic(() => import("./sections/MyProcess"), {
+  loading: sectionLoading,
+});
 const Experience = dynamic(() => import("./sections/Experience"), {
   loading: sectionLoading,
 });
@@ -29,10 +32,25 @@ const Contact = dynamic(() => import("./sections/Contact"), {
 });
 
 const footerLinks = [
-  { label: "GitHub", href: "https://example.com/", icon: FiGithub, external: true },
-  { label: "LinkedIn", href: "https://example.com/", icon: FiLinkedin, external: true },
+  {
+    label: "GitHub",
+    href: "https://example.com/",
+    icon: FiGithub,
+    external: true,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://example.com/",
+    icon: FiLinkedin,
+    external: true,
+  },
   { label: "Email", href: "mailto:najeeb08089@gmail.com", icon: FiMail },
-  { label: "CV", href: "/Najeeb-Ullah-Khan-CV.pdf", icon: FiDownload, download: true },
+  {
+    label: "CV",
+    href: "/Najeeb-Ullah-Khan-CV.pdf",
+    icon: FiDownload,
+    download: true,
+  },
 ];
 
 export default function PortfolioPage() {
@@ -104,9 +122,10 @@ export default function PortfolioPage() {
       <main>
         <Hero />
         <About />
+        <Skills />
+        <MyProcess />
         <Projects />
         <Experience />
-        <Skills />
         <Contact />
       </main>
       <footer className="theme-footer-bg relative overflow-hidden px-5 py-8 sm:px-8">
@@ -138,7 +157,10 @@ export default function PortfolioPage() {
                   download={item.download ? true : undefined}
                   title={item.label}
                 >
-                  <Icon aria-hidden className="transition group-hover:scale-110" />
+                  <Icon
+                    aria-hidden
+                    className="transition group-hover:scale-110"
+                  />
                 </a>
               );
             })}
@@ -148,5 +170,3 @@ export default function PortfolioPage() {
     </div>
   );
 }
-
-

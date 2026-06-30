@@ -1,6 +1,7 @@
 export const navItems = [
   { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
+  { label: "Process", href: "#process" },
   { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
@@ -9,6 +10,7 @@ export const navItems = [
 export const sectionIds = [
   "about",
   "projects",
+  "process",
   "experience",
   "skills",
   "contact",
@@ -506,3 +508,4 @@ export const timeline = [
     ],
   },
 ];
+
