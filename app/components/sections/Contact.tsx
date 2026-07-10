@@ -16,14 +16,14 @@ import SectionHeading from "../shared/SectionHeading";
 const socialLinks = [
   {
     label: "GitHub",
-    href: "https://example.com/",
+    href: "https://github.com/najeeb42501",
     external: true,
     icon: FiGithub,
     iconClass: "text-[#24292f]",
   },
   {
     label: "LinkedIn",
-    href: "https://example.com/",
+    href: "https://www.linkedin.com/in/najeebullah-khan-86b759170/",
     external: true,
     icon: FiLinkedin,
     iconClass: "text-[#0a66c2]",
@@ -170,7 +170,10 @@ export default function Contact() {
                       target={item.external ? "_blank" : undefined}
                       rel={item.external ? "noreferrer" : undefined}
                     >
-                      <Icon aria-hidden className={`${item.iconClass} text-lg transition`} />
+                      <Icon
+                        aria-hidden
+                        className={`${item.iconClass} text-lg transition`}
+                      />
                     </a>
                   );
                 })}

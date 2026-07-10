@@ -12,8 +12,12 @@ import {
 } from "react-icons/fi";
 
 const heroLinks = [
-  { label: "GitHub", href: "https://example.com/", icon: FiGithub },
-  { label: "LinkedIn", href: "https://example.com/", icon: FiLinkedin },
+  { label: "GitHub", href: "https://github.com/najeeb42501", icon: FiGithub },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/najeebullah-khan-86b759170/",
+    icon: FiLinkedin,
+  },
   { label: "Email", href: "mailto:najeeb08089@gmail.com", icon: FiMail },
 ];
 
@@ -53,7 +57,7 @@ export default function Hero() {
               About
             </a>
             <a
-              href="/Najeeb-Ullah-Khan-CV.pdf"
+              href="/NajeebullahKhan-resume.pdf"
               download
               className="minimal-button theme-primary-bg inline-flex items-center gap-2 px-6 py-3 text-sm font-bold"
             >
