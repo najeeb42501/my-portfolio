@@ -47,6 +47,22 @@ export const skillBars = [
 export const projects = [
   {
     title: "UBL Funds Portal",
+    category: "Customer investment platform",
+    summary:
+      "Self-service investing for portfolios, transactions, and account services—designed to simplify everyday fund management.",
+    capabilities: [
+      "Angular 19",
+      "TypeScript",
+      "RxJS",
+      ".NET",
+      "REST APIs",
+      "Secure workflows",
+    ],
+    theme: {
+      card: "bg-[linear-gradient(135deg,#064e3b_0%,#047857_52%,#0f766e_100%)]",
+      glow: "bg-emerald-300",
+      chip: "bg-emerald-950/30",
+    },
     description:
       "A customer self-service portal for UBL Funds investors to manage portfolios, investments, redemptions, conversions, billing transactions, and profile-related services.",
 
@@ -109,6 +125,22 @@ export const projects = [
   },
   {
     title: "UBL Corporate Portal",
+    category: "Enterprise fintech",
+    summary:
+      "Role-based payment operations for bills, vendors, salaries, and approvals—built for enterprise finance teams.",
+    capabilities: [
+      "Angular 19",
+      "Spring Boot",
+      "TypeScript",
+      "RBAC",
+      "Microservices",
+      "REST APIs",
+    ],
+    theme: {
+      card: "bg-[linear-gradient(135deg,#312e81_0%,#6d28d9_52%,#7c3aed_100%)]",
+      glow: "bg-violet-300",
+      chip: "bg-violet-950/30",
+    },
     description:
       "Enterprise payment management dashboard for handling bills, vendors, payees, salaries, approvals, and role-based finance workflows.",
 
@@ -174,6 +206,22 @@ export const projects = [
   },
   {
     title: "JOBS Dashboard",
+    category: "Real-time operations",
+    summary:
+      "Live visibility across jobs, transactions, digital services, and onboarding—without manual refreshes.",
+    capabilities: [
+      "React 19",
+      "Spring Boot",
+      "Socket.IO",
+      "WebSockets",
+      "Real-time data",
+      "IIS",
+    ],
+    theme: {
+      card: "bg-[linear-gradient(135deg,#0c4a6e_0%,#0369a1_52%,#0891b2_100%)]",
+      glow: "bg-sky-300",
+      chip: "bg-sky-950/30",
+    },
     description:
       "Real-time operational dashboard for monitoring backend jobs, transaction statuses, digital services, and account opening activity.",
 
@@ -227,6 +275,22 @@ export const projects = [
   },
   {
     title: "UBL Funds Onboarding",
+    category: "Digital onboarding",
+    summary:
+      "A guided, backend-driven onboarding journey with OTP verification, saved progress, and resilient multi-step forms.",
+    capabilities: [
+      "React 19",
+      "Node.js",
+      "Dynamic forms",
+      "OTP",
+      "REST APIs",
+      "State management",
+    ],
+    theme: {
+      card: "bg-[linear-gradient(135deg,#7c2d12_0%,#c2410c_52%,#ea580c_100%)]",
+      glow: "bg-orange-300",
+      chip: "bg-orange-950/30",
+    },
     description:
       "Customer onboarding portal for UBL Funds with a smooth multi-step signup flow, dynamic backend-driven forms, OTP verification, and saved progress.",
 
@@ -287,9 +351,90 @@ export const projects = [
     github: "",
     demo: "https://online.ublfunds.com/onboarding/",
   },
+  {
+    title: "RADGA Website",
+    category: "Architecture & social impact",
+    summary:
+      "An image-led portfolio connecting research-based architecture, community impact, and purposeful project storytelling.",
+    capabilities: [
+      "Next.js",
+      "GSAP",
+      "Image-led design",
+      "Project storytelling",
+      "SEO",
+      "Accessibility",
+    ],
+    theme: {
+      card: "bg-[linear-gradient(135deg,#1c1917_0%,#78350f_52%,#a16207_100%)]",
+      glow: "bg-amber-300",
+      chip: "bg-amber-950/35",
+    },
+    description:
+      "Architecture portfolio website for Rickman Architecture + Design, presenting research-driven commercial and social-impact work through an image-led experience.",
 
+    detailedDescription:
+      "RADGA is the digital portfolio for Rickman Architecture + Design, a creative, collaborative, research-based social enterprise architecture firm in northwest Georgia. The experience communicates the firm’s belief that well-designed environments can act as a catalyst for positive social change while showcasing commercial, civic, cultural, and community-focused projects. A bold image-led layout, clear project discovery, responsive presentation, firm story, and direct contact paths help visitors understand both the work and the purpose behind it.",
+
+    images: [
+      "/radga-website/radga-1.png",
+      "/radga-website/radga-2.png",
+      "/radga-website/radga-3.png",
+    ],
+
+    stack: [
+      "Nextjs",
+      "GSAP",
+      "Tailwind CSS",
+      "Framer Motion",
+      "3D Models",
+      "Image Optimization",
+      "Performance Optimization",
+      "SEO Optimization",
+      "Responsive UI",
+      "Portfolio Presentation",
+      "Project Discovery",
+      "Contact Integration",
+      "Social Media Integration",
+      "Responsive Web Design",
+      "Image-Led UI",
+    ],
+
+    features: [
+      "Featured architecture project showcase",
+      "Commercial and social-impact project presentation",
+      "Completed and active-build project statuses",
+      "Project location and category information",
+      "Image-led portfolio browsing",
+      "Firm mission and values storytelling",
+      "Research-based design positioning",
+      "Responsive layouts across screen sizes",
+      "About, projects, and contact navigation",
+      "Direct contact and social media links",
+      "Accessible content hierarchy",
+      "Performance-conscious image presentation",
+    ],
+
+    github: "",
+    demo: "https://radga.com/",
+  },
   {
     title: "Sofstica Website",
+    category: "Business platform",
+    summary:
+      "A polished company platform combining services, publishing, lead capture, and interactive 3D storytelling.",
+    capabilities: [
+      "Next.js",
+      "TypeScript",
+      "Resend",
+      "Framer Motion",
+      "SEO",
+      "Cloudflare",
+    ],
+    theme: {
+      card: "bg-[linear-gradient(135deg,#831843_0%,#be185d_52%,#db2777_100%)]",
+      glow: "bg-pink-300",
+      chip: "bg-pink-950/30",
+    },
     description:
       "Modern business website for Sofstica with polished service sections, 3D visuals, blog publishing, lead capture, and optimized performance.",
 
@@ -346,51 +491,67 @@ export const projects = [
     github: "",
     demo: "https://sofstica.com/",
   },
+
   {
-    title: "RADGA Website",
+    title: "PakLexAI",
+    category: "AI legal information assistant",
+    summary:
+      "Source-grounded legal guidance connecting natural-language questions to relevant laws, sections, and original PDF references.",
+    capabilities: [
+      "LLM",
+      "RAG",
+      "Legal retrieval",
+      "PDF citations",
+      "Semantic search",
+      "Grounded answers",
+    ],
+    theme: {
+      card: "bg-[linear-gradient(135deg,#0f172a_0%,#164e63_52%,#0e7490_100%)]",
+      glow: "bg-cyan-300",
+      chip: "bg-cyan-950/35",
+    },
     description:
-      "Architecture portfolio website for Rickman Architecture + Design, presenting research-driven commercial and social-impact work through an image-led experience.",
+      "LLM-powered legal information assistant that connects user questions to relevant Pakistani laws, sections, source PDFs, and practical prevention steps.",
 
     detailedDescription:
-      "RADGA is the digital portfolio for Rickman Architecture + Design, a creative, collaborative, research-based social enterprise architecture firm in northwest Georgia. The experience communicates the firm’s belief that well-designed environments can act as a catalyst for positive social change while showcasing commercial, civic, cultural, and community-focused projects. A bold image-led layout, clear project discovery, responsive presentation, firm story, and direct contact paths help visitors understand both the work and the purpose behind it.",
+      "PakLexAI is an AI legal information assistant designed to make Pakistani law easier to understand and navigate. Users can ask questions in natural language and receive guidance on potentially relevant laws and statutory sections, supported by original source PDF references and the applicable section text. The assistant also presents practical prevention or compliance steps and keeps source material visible so users can verify the underlying legal content. Its conversational experience helps people explore dense legal information more clearly while remaining an informational tool rather than a substitute for professional legal advice.",
 
-    images: [
-      "/radga-website/radga-1.png",
-      "/radga-website/radga-2.png",
-      "/radga-website/radga-3.png",
-    ],
+    images: ["/lawbot/lawbot-1.png", "/lawbot/lawbot-2.png"],
 
     stack: [
-      "Responsive Web Design",
-      "Image-Led UI",
-      "Project Storytelling",
-      "Content Architecture",
-      "Project Gallery",
-      "SEO",
-      "Accessibility",
-      "Performance Optimization",
-      "Responsive Navigation",
-      "Contact Integration",
-      "Social Media Integration",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "FastAPI",
+      "OpenAI API",
+      "LangChain",
+      "Vector Databases",
+      "Pinecone",
+      "Weaviate",
+      "ChromaDB",
+      "Large Language Models",
+      "Retrieval-Augmented Generation",
+      "Legal Document Retrieval",
+      "Semantic Search",
     ],
 
     features: [
-      "Featured architecture project showcase",
-      "Commercial and social-impact project presentation",
-      "Completed and active-build project statuses",
-      "Project location and category information",
-      "Image-led portfolio browsing",
-      "Firm mission and values storytelling",
-      "Research-based design positioning",
-      "Responsive layouts across screen sizes",
-      "About, projects, and contact navigation",
-      "Direct contact and social media links",
-      "Accessible content hierarchy",
-      "Performance-conscious image presentation",
+      "Natural-language legal questions",
+      "Relevant law and section identification",
+      "Applicable statutory section text",
+      "References to original law source PDFs",
+      "Source-grounded legal explanations",
+      "Practical prevention and compliance steps",
+      "Follow-up questions in a conversational flow",
+      "Clear presentation of dense legal information",
+      "Context-aware response generation",
+      "Citation-first answer structure",
+      "Responsive chatbot interface",
+      "Informational-use legal disclaimer",
     ],
 
     github: "",
-    demo: "https://radga.com/",
+    demo: "https://paklex.vercel.app/",
   },
 ];
 

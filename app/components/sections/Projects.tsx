@@ -23,120 +23,6 @@ import {
 } from "react-icons/fi";
 import { projects } from "../data/portfolio";
 
-const projectThemes = [
-  {
-    card: "bg-[linear-gradient(135deg,#064e3b_0%,#047857_52%,#0f766e_100%)]",
-    glow: "bg-emerald-300",
-    chip: "bg-emerald-950/30",
-  },
-  {
-    card: "bg-[linear-gradient(135deg,#312e81_0%,#6d28d9_52%,#7c3aed_100%)]",
-    glow: "bg-violet-300",
-    chip: "bg-violet-950/30",
-  },
-  {
-    card: "bg-[linear-gradient(135deg,#0c4a6e_0%,#0369a1_52%,#0891b2_100%)]",
-    glow: "bg-sky-300",
-    chip: "bg-sky-950/30",
-  },
-  {
-    card: "bg-[linear-gradient(135deg,#7c2d12_0%,#c2410c_52%,#ea580c_100%)]",
-    glow: "bg-orange-300",
-    chip: "bg-orange-950/30",
-  },
-  {
-    card: "bg-[linear-gradient(135deg,#831843_0%,#be185d_52%,#db2777_100%)]",
-    glow: "bg-pink-300",
-    chip: "bg-pink-950/30",
-  },
-  {
-    card: "bg-[linear-gradient(135deg,#1c1917_0%,#78350f_52%,#a16207_100%)]",
-    glow: "bg-amber-300",
-    chip: "bg-amber-950/35",
-  },
-] as const;
-
-const projectShowcase = [
-  {
-    category: "Customer investment platform",
-    summary:
-      "Self-service investing for portfolios, transactions, and account services—designed to simplify everyday fund management.",
-    capabilities: [
-      "Angular 19",
-      "TypeScript",
-      "RxJS",
-      ".NET",
-      "REST APIs",
-      "Secure workflows",
-    ],
-  },
-  {
-    category: "Enterprise fintech",
-    summary:
-      "Role-based payment operations for bills, vendors, salaries, and approvals—built for enterprise finance teams.",
-    capabilities: [
-      "Angular 19",
-      "Spring Boot",
-      "TypeScript",
-      "RBAC",
-      "Microservices",
-      "REST APIs",
-    ],
-  },
-  {
-    category: "Real-time operations",
-    summary:
-      "Live visibility across jobs, transactions, digital services, and onboarding—without manual refreshes.",
-    capabilities: [
-      "React 19",
-      "Spring Boot",
-      "Socket.IO",
-      "WebSockets",
-      "Real-time data",
-      "IIS",
-    ],
-  },
-  {
-    category: "Digital onboarding",
-    summary:
-      "A guided, backend-driven onboarding journey with OTP verification, saved progress, and resilient multi-step forms.",
-    capabilities: [
-      "React 19",
-      "Node.js",
-      "Dynamic forms",
-      "OTP",
-      "REST APIs",
-      "State management",
-    ],
-  },
-  {
-    category: "Business platform",
-    summary:
-      "A polished company platform combining services, publishing, lead capture, and interactive 3D storytelling.",
-    capabilities: [
-      "Next.js",
-      "TypeScript",
-      "Resend",
-      "Framer Motion",
-      "SEO",
-      "Cloudflare",
-    ],
-  },
-  {
-    category: "Architecture & social impact",
-    summary:
-      "An image-led portfolio connecting research-based architecture, community impact, and purposeful project storytelling.",
-    capabilities: [
-      "Responsive UI",
-      "Image-led design",
-      "Project storytelling",
-      "Content architecture",
-      "SEO",
-      "Accessibility",
-    ],
-  },
-] as const;
-
 export default function Projects() {
   const stackRef = useRef<HTMLDivElement>(null);
   const [selectedProjectIndex, setSelectedProjectIndex] = useState<
@@ -275,8 +161,7 @@ function ProjectCard({
   onOpen: () => void;
 }) {
   const reduceMotion = useReducedMotion();
-  const theme = projectThemes[index % projectThemes.length];
-  const showcase = projectShowcase[index % projectShowcase.length];
+  const { theme } = project;
   const transitionCount = Math.max(projects.length - 1, 1);
   const segmentStart = index === 0 ? 0 : (index - 1) / transitionCount;
   const segmentEnd = index === 0 ? 0.001 : index / transitionCount;
@@ -332,17 +217,17 @@ function ProjectCard({
 
         <div className="relative z-10 my-auto py-4 sm:py-6">
           <p className="mb-2 font-mono text-[0.65rem] font-black uppercase tracking-[0.2em] text-white/65 sm:mb-3">
-            {showcase.category}
+            {project.category}
           </p>
           <h3 className="max-w-xl text-balance text-2xl font-black leading-[1.08] sm:text-3xl xl:text-4xl">
             {project.title}
           </h3>
           <p className="mt-3 line-clamp-3 max-w-xl text-xs font-medium leading-5 text-white/78 sm:mt-5 sm:text-base sm:leading-7">
-            {showcase.summary}
+            {project.summary}
           </p>
 
           <div className="mt-5 hidden flex-wrap gap-2 sm:flex">
-            {showcase.capabilities.map((tech) => (
+            {project.capabilities.map((tech) => (
               <span
                 key={tech}
                 className={`rounded-full border border-white/20 ${theme.chip} px-3 py-1.5 text-[0.68rem] font-bold text-white/90 shadow-sm`}
