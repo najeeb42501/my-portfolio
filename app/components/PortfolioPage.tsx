@@ -91,25 +91,58 @@ export default function PortfolioPage() {
   }
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    let animationFrame = 0;
 
-        if (visible?.target.id) {
-          setActiveSection(visible.target.id);
+    const updateActiveSection = () => {
+      window.cancelAnimationFrame(animationFrame);
+      animationFrame = window.requestAnimationFrame(() => {
+        const sections = sectionIds
+          .map((id) => document.getElementById(id))
+          .filter((section): section is HTMLElement => section !== null)
+          .sort((a, b) => a.offsetTop - b.offsetTop);
+
+        const activationLine = window.innerHeight * 0.32;
+        let currentSection = "";
+
+        for (const section of sections) {
+          if (section.getBoundingClientRect().top <= activationLine) {
+            currentSection = section.id;
+          } else {
+            break;
+          }
         }
-      },
-      { rootMargin: "-35% 0px -45% 0px", threshold: [0.1, 0.35, 0.6] },
-    );
 
-    sectionIds.forEach((id) => {
-      const section = document.getElementById(id);
-      if (section) observer.observe(section);
-    });
+        const reachedPageEnd =
+          window.scrollY + window.innerHeight >=
+          document.documentElement.scrollHeight - 2;
 
-    return () => observer.disconnect();
+        if (reachedPageEnd && sections.length > 0) {
+          currentSection = sections[sections.length - 1].id;
+        }
+
+        setActiveSection((current) =>
+          current === currentSection ? current : currentSection,
+        );
+      });
+    };
+
+    const contentObserver = new MutationObserver(updateActiveSection);
+    const main = document.querySelector("main");
+
+    if (main) {
+      contentObserver.observe(main, { childList: true, subtree: true });
+    }
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+      contentObserver.disconnect();
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
   }, []);
 
   return (

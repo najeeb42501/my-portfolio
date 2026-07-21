@@ -1,18 +1,18 @@
 export const navItems = [
   { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Process", href: "#process" },
-  { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
+  { label: "Process", href: "#process" },
+  { label: "Projects", href: "#projects" },
+  { label: "Experience", href: "#experience" },
   { label: "Contact", href: "#contact" },
 ];
 
 export const sectionIds = [
   "about",
-  "projects",
-  "process",
-  "experience",
   "skills",
+  "process",
+  "projects",
+  "experience",
   "contact",
 ];
 

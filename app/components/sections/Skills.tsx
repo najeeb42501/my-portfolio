@@ -33,6 +33,7 @@ const SKILLS = [
     skills: ["LLMs", "RAG", "Agents", "Vector DBs", "LangChain", "OpenAI"],
     icon: FiCpu,
     tone: "theme-card-pink",
+    chipTone: "bg-[var(--theme-card-pink-solid)]",
   },
   {
     label: "Frontend",
@@ -63,6 +64,7 @@ const SKILLS = [
     ],
     icon: FiLayers,
     tone: "theme-card-orange",
+    chipTone: "bg-[var(--theme-card-orange-solid)]",
   },
   {
     label: "Backend",
@@ -92,6 +94,7 @@ const SKILLS = [
     ],
     icon: FiDatabase,
     tone: "theme-card-purple",
+    chipTone: "bg-[var(--theme-card-purple-solid)]",
   },
   {
     label: "DevOps",
@@ -100,6 +103,7 @@ const SKILLS = [
     skills: ["Docker", "CI/CD", "Cloudflare", "AWS", "IIS", "Github Actions"],
     icon: FiCloud,
     tone: "theme-card-sky",
+    chipTone: "bg-[var(--theme-card-sky-solid)]",
   },
 ];
 
@@ -203,11 +207,11 @@ function BentoCard({
             {group.summary}
           </p>
 
-          <div className="relative z-10 mt-auto flex flex-wrap gap-1.5 pt-4">
+          <div className="relative z-10 mt-auto flex flex-wrap gap-2 pt-4">
             {group.skills.map((skill) => (
               <span
                 key={skill}
-                className="rounded-full border border-white/30 bg-white/24 px-2.5 py-1 text-[0.62rem] font-bold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.22)] backdrop-blur-md"
+                className={`inline-flex min-h-6 items-center rounded-full border border-white/25 ${group.chipTone} px-2.5 py-1 text-[0.68rem] font-semibold leading-none tracking-[-0.01em] text-white shadow-[0_3px_10px_rgba(0,0,0,0.14)] ring-1 ring-inset ring-black/5`}
               >
                 {skill}
               </span>
