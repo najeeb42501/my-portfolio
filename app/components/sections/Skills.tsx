@@ -122,25 +122,25 @@ export default function Skills() {
 
         <SkillsShowcase />
 
-        <div className="mx-auto flex max-w-5xl gap-3">
-          <div className="flex flex-1 flex-col gap-3 pt-6">
-            <BentoCard group={SKILLS[0]} index={0} className="h-44 flex-none" />
+        <div className="mx-auto flex max-w-5xl flex-col gap-3 md:flex-row">
+          <div className="flex w-full flex-col gap-3 md:flex-1 md:pt-6">
+            <BentoCard group={SKILLS[0]} index={0} className="min-h-44 md:h-44 md:flex-none" />
 
             <BentoCard
               group={SKILLS[1]}
               index={1}
-              className="flex-1 pl-6 ml-6"
+              className="min-h-[24rem] md:ml-6 md:flex-1 md:pl-6"
             />
           </div>
 
-          <div className="flex flex-1 flex-col gap-3 pb-6 pt-4">
+          <div className="flex w-full flex-col gap-3 md:flex-1 md:pb-6 md:pt-4">
             <BentoCard
               group={SKILLS[2]}
               index={2}
-              className="flex-1 pr-6 mr-6"
+              className="min-h-[24rem] md:mr-6 md:flex-1 md:pr-6"
             />
 
-            <BentoCard group={SKILLS[3]} index={3} className="h-44 flex-none" />
+            <BentoCard group={SKILLS[3]} index={3} className="min-h-44 md:h-44 md:flex-none" />
           </div>
         </div>
       </div>
