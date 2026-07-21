@@ -46,7 +46,7 @@ export const skillBars = [
 
 export const projects = [
   {
-    title: "UBL Funds Customer Portal",
+    title: "UBL Funds Portal",
     description:
       "A customer self-service portal for UBL Funds investors to manage portfolios, investments, redemptions, conversions, billing transactions, and profile-related services.",
 
@@ -108,7 +108,7 @@ export const projects = [
     demo: "https://online.ublfunds.com/UBL1/",
   },
   {
-    title: "Corporate Payment Portal",
+    title: "UBL Corporate Portal",
     description:
       "Enterprise payment management dashboard for handling bills, vendors, payees, salaries, approvals, and role-based finance workflows.",
 
@@ -346,6 +346,52 @@ export const projects = [
     github: "",
     demo: "https://sofstica.com/",
   },
+  {
+    title: "RADGA Website",
+    description:
+      "Architecture portfolio website for Rickman Architecture + Design, presenting research-driven commercial and social-impact work through an image-led experience.",
+
+    detailedDescription:
+      "RADGA is the digital portfolio for Rickman Architecture + Design, a creative, collaborative, research-based social enterprise architecture firm in northwest Georgia. The experience communicates the firm’s belief that well-designed environments can act as a catalyst for positive social change while showcasing commercial, civic, cultural, and community-focused projects. A bold image-led layout, clear project discovery, responsive presentation, firm story, and direct contact paths help visitors understand both the work and the purpose behind it.",
+
+    images: [
+      "/radga-website/radga-1.png",
+      "/radga-website/radga-2.png",
+      "/radga-website/radga-3.png",
+    ],
+
+    stack: [
+      "Responsive Web Design",
+      "Image-Led UI",
+      "Project Storytelling",
+      "Content Architecture",
+      "Project Gallery",
+      "SEO",
+      "Accessibility",
+      "Performance Optimization",
+      "Responsive Navigation",
+      "Contact Integration",
+      "Social Media Integration",
+    ],
+
+    features: [
+      "Featured architecture project showcase",
+      "Commercial and social-impact project presentation",
+      "Completed and active-build project statuses",
+      "Project location and category information",
+      "Image-led portfolio browsing",
+      "Firm mission and values storytelling",
+      "Research-based design positioning",
+      "Responsive layouts across screen sizes",
+      "About, projects, and contact navigation",
+      "Direct contact and social media links",
+      "Accessible content hierarchy",
+      "Performance-conscious image presentation",
+    ],
+
+    github: "",
+    demo: "https://radga.com/",
+  },
 ];
 
 export const timeline = [
@@ -508,4 +554,3 @@ export const timeline = [
     ],
   },
 ];
-

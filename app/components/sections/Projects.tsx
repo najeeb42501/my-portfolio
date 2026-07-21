@@ -1,29 +1,152 @@
 "use client";
 
+import type { MotionValue } from "framer-motion";
 import {
   AnimatePresence,
   motion,
+  useReducedMotion,
   useScroll,
+  useSpring,
   useTransform,
 } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import {
+  FiArrowUpRight,
   FiChevronLeft,
   FiChevronRight,
   FiExternalLink,
   FiGithub,
+  FiLock,
   FiX,
 } from "react-icons/fi";
 import { projects } from "../data/portfolio";
 
+const projectThemes = [
+  {
+    card: "bg-[linear-gradient(135deg,#064e3b_0%,#047857_52%,#0f766e_100%)]",
+    glow: "bg-emerald-300",
+    chip: "bg-emerald-950/30",
+  },
+  {
+    card: "bg-[linear-gradient(135deg,#312e81_0%,#6d28d9_52%,#7c3aed_100%)]",
+    glow: "bg-violet-300",
+    chip: "bg-violet-950/30",
+  },
+  {
+    card: "bg-[linear-gradient(135deg,#0c4a6e_0%,#0369a1_52%,#0891b2_100%)]",
+    glow: "bg-sky-300",
+    chip: "bg-sky-950/30",
+  },
+  {
+    card: "bg-[linear-gradient(135deg,#7c2d12_0%,#c2410c_52%,#ea580c_100%)]",
+    glow: "bg-orange-300",
+    chip: "bg-orange-950/30",
+  },
+  {
+    card: "bg-[linear-gradient(135deg,#831843_0%,#be185d_52%,#db2777_100%)]",
+    glow: "bg-pink-300",
+    chip: "bg-pink-950/30",
+  },
+  {
+    card: "bg-[linear-gradient(135deg,#1c1917_0%,#78350f_52%,#a16207_100%)]",
+    glow: "bg-amber-300",
+    chip: "bg-amber-950/35",
+  },
+] as const;
+
+const projectShowcase = [
+  {
+    category: "Customer investment platform",
+    summary:
+      "Self-service investing for portfolios, transactions, and account services—designed to simplify everyday fund management.",
+    capabilities: [
+      "Angular 19",
+      "TypeScript",
+      "RxJS",
+      ".NET",
+      "REST APIs",
+      "Secure workflows",
+    ],
+  },
+  {
+    category: "Enterprise fintech",
+    summary:
+      "Role-based payment operations for bills, vendors, salaries, and approvals—built for enterprise finance teams.",
+    capabilities: [
+      "Angular 19",
+      "Spring Boot",
+      "TypeScript",
+      "RBAC",
+      "Microservices",
+      "REST APIs",
+    ],
+  },
+  {
+    category: "Real-time operations",
+    summary:
+      "Live visibility across jobs, transactions, digital services, and onboarding—without manual refreshes.",
+    capabilities: [
+      "React 19",
+      "Spring Boot",
+      "Socket.IO",
+      "WebSockets",
+      "Real-time data",
+      "IIS",
+    ],
+  },
+  {
+    category: "Digital onboarding",
+    summary:
+      "A guided, backend-driven onboarding journey with OTP verification, saved progress, and resilient multi-step forms.",
+    capabilities: [
+      "React 19",
+      "Node.js",
+      "Dynamic forms",
+      "OTP",
+      "REST APIs",
+      "State management",
+    ],
+  },
+  {
+    category: "Business platform",
+    summary:
+      "A polished company platform combining services, publishing, lead capture, and interactive 3D storytelling.",
+    capabilities: [
+      "Next.js",
+      "TypeScript",
+      "Resend",
+      "Framer Motion",
+      "SEO",
+      "Cloudflare",
+    ],
+  },
+  {
+    category: "Architecture & social impact",
+    summary:
+      "An image-led portfolio connecting research-based architecture, community impact, and purposeful project storytelling.",
+    capabilities: [
+      "Responsive UI",
+      "Image-led design",
+      "Project storytelling",
+      "Content architecture",
+      "SEO",
+      "Accessibility",
+    ],
+  },
+] as const;
+
 export default function Projects() {
-  const targetRef = useRef<HTMLElement>(null);
+  const stackRef = useRef<HTMLDivElement>(null);
   const [selectedProjectIndex, setSelectedProjectIndex] = useState<
     number | null
   >(null);
   const [galleryImageIndex, setGalleryImageIndex] = useState(0);
+  const { scrollYProgress } = useScroll({
+    target: stackRef,
+    offset: ["start start", "end end"],
+  });
 
   const selectedProject =
     selectedProjectIndex === null ? null : projects[selectedProjectIndex];
@@ -33,12 +156,6 @@ export default function Projects() {
     ? (selectedProject.images[galleryImageIndex] ?? selectedProject.images[0])
     : null;
   const selectedProjectImageCount = selectedProject?.images.length ?? 0;
-
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ["start 12%", "end end"],
-  });
-  const x = useTransform(scrollYProgress, [0, 0.14, 1], ["0%", "0%", "-68%"]);
 
   useEffect(() => {
     if (selectedProjectImageCount <= 1) {
@@ -65,20 +182,14 @@ export default function Projects() {
   };
 
   const showPreviousGalleryImage = () => {
-    if (!selectedProject) {
-      return;
-    }
-
+    if (!selectedProject) return;
     setGalleryImageIndex((current) =>
       current === 0 ? selectedProject.images.length - 1 : current - 1,
     );
   };
 
   const showNextGalleryImage = () => {
-    if (!selectedProject) {
-      return;
-    }
-
+    if (!selectedProject) return;
     setGalleryImageIndex(
       (current) => (current + 1) % selectedProject.images.length,
     );
@@ -101,39 +212,45 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      ref={targetRef}
-      className="section-band relative h-[360vh]"
+      className="section-band relative scroll-mt-20 overflow-clip"
     >
-      <div className="sticky top-0 flex min-h-svh items-center overflow-hidden px-5 py-14 sm:px-8">
-        <div className="mx-auto w-full max-w-7xl">
-          <div className="mb-5 max-w-[38rem] sm:max-w-[calc(76vw+1.5rem)] lg:max-w-[calc(76rem+1.5rem)]">
-            <p className="mb-2 text-center font-mono text-xs font-semibold uppercase tracking-[0.26em] theme-accent">
-              Projects
+      <div className="pointer-events-none absolute inset-0 opacity-[0.035] [background-image:linear-gradient(90deg,var(--site-heading)_1px,transparent_1px),linear-gradient(var(--site-heading)_1px,transparent_1px)] [background-size:40px_40px]" />
+
+      <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-16 sm:px-8">
+        <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div>
+            <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.26em] theme-accent">
+              Selected projects
             </p>
-            <div className="grid gap-3 sm:grid-cols-[minmax(0,38rem)_auto] sm:items-end sm:justify-between">
-              <h2 className="max-w-xl text-balance text-2xl font-black leading-tight theme-heading sm:text-[2.35rem] lg:text-[1.75rem]">
-                Selected builds with product thinking.
-              </h2>
-              <p className="text-sm leading-6 theme-muted sm:max-w-56 sm:text-right">
-                Scroll to move through the work.
-              </p>
+            <h3 className="max-w-3xl text-balance text-xl font-black leading-tight theme-heading sm:text-2xl">
+              Work that turns complex ideas into clear products.
+            </h3>
+          </div>
+          <p className="max-w-sm text-sm leading-6 theme-muted lg:text-right">
+            Scroll vertically. Projects enter horizontally from the right.
+          </p>
+        </div>
+      </div>
+
+      <div
+        ref={stackRef}
+        className="relative"
+        style={{ height: `${projects.length * 100}svh` }}
+      >
+        <div className="sticky top-0 h-svh overflow-hidden">
+          <div className="h-full w-full px-4 pb-4 pt-[5.25rem] sm:px-6 sm:pb-6 lg:px-8">
+            <div className="relative size-full">
+              {projects.map((project, index) => (
+                <ProjectCard
+                  key={project.title}
+                  project={project}
+                  index={index}
+                  scrollProgress={scrollYProgress}
+                  onOpen={() => openProject(index)}
+                />
+              ))}
             </div>
           </div>
-
-          <motion.div
-            style={{ x }}
-            className="flex w-max gap-6 will-change-transform"
-            aria-label="Featured project carousel"
-          >
-            {projects.map((project, index) => (
-              <ProjectCard
-                key={project.title}
-                project={project}
-                index={index}
-                onOpen={() => openProject(index)}
-              />
-            ))}
-          </motion.div>
         </div>
       </div>
 
@@ -149,82 +266,136 @@ type Project = (typeof projects)[number];
 function ProjectCard({
   project,
   index,
+  scrollProgress,
   onOpen,
 }: {
   project: Project;
   index: number;
+  scrollProgress: MotionValue<number>;
   onOpen: () => void;
 }) {
+  const reduceMotion = useReducedMotion();
+  const theme = projectThemes[index % projectThemes.length];
+  const showcase = projectShowcase[index % projectShowcase.length];
+  const transitionCount = Math.max(projects.length - 1, 1);
+  const segmentStart = index === 0 ? 0 : (index - 1) / transitionCount;
+  const segmentEnd = index === 0 ? 0.001 : index / transitionCount;
+  const rawX = useTransform(
+    scrollProgress,
+    [segmentStart, segmentEnd],
+    index === 0 ? ["0%", "0%"] : ["102%", "0%"],
+  );
+  const smoothX = useSpring(rawX, {
+    stiffness: 105,
+    damping: 26,
+    mass: 0.42,
+  });
+
   return (
     <motion.article
-      className="bento-card group relative grid h-[clamp(26rem,calc(100svh-12rem),31rem)] w-[78vw] max-w-[38rem] shrink-0 grid-rows-[auto_minmax(12rem,1fr)_auto] overflow-hidden transition duration-500 hover:-translate-y-1 hover:border-[var(--site-accent)] sm:w-[62vw]"
-      initial={{ opacity: 0.72, y: 18, scale: 0.98 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ amount: 0.42 }}
-      transition={{ duration: 0.55 }}
+      style={{ x: reduceMotion ? rawX : smoothX, zIndex: index + 1 }}
+      className={`group absolute inset-0 grid size-full overflow-hidden border-y border-white/20 text-white shadow-[-24px_28px_90px_rgba(15,23,42,0.34)] ${theme.card} grid-rows-[minmax(0,0.92fr)_minmax(12rem,1.08fr)] md:grid-cols-[0.84fr_1.16fr] md:grid-rows-1`}
     >
-      <div className="flex min-h-12 items-center gap-3 border-b px-4 theme-border bg-[color-mix(in_srgb,var(--site-panel-strong)_78%,transparent)] backdrop-blur-xl">
-        <span className="rounded-full border px-3 py-1 font-mono text-xs font-semibold theme-accent-soft">
+      {index > 0 ? (
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 left-0 z-30 w-1 bg-white/30 shadow-[8px_0_28px_rgba(15,23,42,0.28)]"
+        />
+      ) : null}
+      <div className="relative flex min-h-0 flex-col overflow-hidden p-5 sm:p-7 lg:p-10 xl:p-12">
+        <div
+          className={`pointer-events-none absolute -left-24 -top-24 size-72 rounded-full ${theme.glow} opacity-20 blur-3xl`}
+        />
+        <span className="pointer-events-none absolute bottom-0 right-4 font-mono text-[8rem] font-black leading-none text-white/[0.055] sm:text-[11rem]">
           {String(index + 1).padStart(2, "0")}
         </span>
-        <h3 className="min-w-0 flex-1 truncate text-base font-black theme-heading">
-          {project.title}
-        </h3>
-        <span className="hidden items-center gap-2 sm:flex">
-          <span className="size-2.5 rounded-full bg-red-400" />
-          <span className="size-2.5 rounded-full bg-yellow-400" />
-          <span className="size-2.5 rounded-full bg-green-400" />
-        </span>
-      </div>
 
-      <div className="relative overflow-hidden border-b bg-[color-mix(in_srgb,var(--site-bg-soft)_86%,transparent)] theme-border">
-        <div className="absolute inset-x-0 top-0 z-10 h-20 bg-[linear-gradient(to_bottom,var(--site-accent-soft),transparent)] opacity-70" />
-        <Image
-          src={project.images[0]}
-          alt={`${project.title} interface preview`}
-          fill
-          sizes="(max-width: 640px) 78vw, 608px"
-          className="object-contain p-4 transition duration-700 group-hover:scale-[1.015] sm:p-5"
-          preload={index === 0}
-        />
-      </div>
-
-      <div className="grid gap-4 p-4 sm:p-5">
-        <div className="min-w-0">
-          <div className="mb-3 h-px w-14 theme-spectrum-line" />
-          <p className="line-clamp-2 text-sm leading-6 theme-muted">
-            {project.description}
-          </p>
+        <div
+          className="relative z-10 flex items-center gap-3"
+          aria-label={`Project ${index + 1} of ${projects.length}`}
+        >
+          <div className="flex items-center gap-1.5" aria-hidden>
+            {projects.map((item, dotIndex) => (
+              <span
+                key={item.title}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  dotIndex === index ? "w-6 bg-white" : "w-1.5 bg-white/30"
+                }`}
+              />
+            ))}
+          </div>
+          <span className="font-mono text-xs font-bold text-white/80">
+            {String(index + 1).padStart(2, "0")} /{" "}
+            {String(projects.length).padStart(2, "0")}
+          </span>
         </div>
 
-        <div className="flex flex-wrap gap-3 sm:justify-end">
+        <div className="relative z-10 my-auto py-4 sm:py-6">
+          <p className="mb-2 font-mono text-[0.65rem] font-black uppercase tracking-[0.2em] text-white/65 sm:mb-3">
+            {showcase.category}
+          </p>
+          <h3 className="max-w-xl text-balance text-2xl font-black leading-[1.08] sm:text-3xl xl:text-4xl">
+            {project.title}
+          </h3>
+          <p className="mt-3 line-clamp-3 max-w-xl text-xs font-medium leading-5 text-white/78 sm:mt-5 sm:text-base sm:leading-7">
+            {showcase.summary}
+          </p>
+
+          <div className="mt-5 hidden flex-wrap gap-2 sm:flex">
+            {showcase.capabilities.map((tech) => (
+              <span
+                key={tech}
+                className={`rounded-full border border-white/20 ${theme.chip} px-3 py-1.5 text-[0.68rem] font-bold text-white/90 shadow-sm`}
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="relative z-10 flex flex-wrap gap-2 sm:gap-3">
           <button
             type="button"
             onClick={onOpen}
-            className="minimal-button theme-accent-bg px-4 py-2 text-sm font-semibold"
+            className="minimal-button inline-flex items-center gap-2 bg-white px-4 py-2 text-xs font-black text-slate-900 shadow-lg hover:shadow-xl sm:px-5 sm:py-2.5 sm:text-sm"
           >
-            View details
+            Explore case study <FiArrowUpRight aria-hidden />
           </button>
           {project.demo ? (
             <a
               href={project.demo}
-              className="minimal-button border px-4 py-2 text-sm font-semibold theme-panel theme-heading hover:border-[var(--site-accent)] hover:text-[var(--site-accent)]"
+              className="minimal-button inline-flex items-center gap-2 border border-white/28 bg-white/10 px-4 py-2 text-xs font-bold text-white backdrop-blur-sm hover:bg-white/18 sm:px-5 sm:py-2.5 sm:text-sm"
               target="_blank"
               rel="noreferrer"
             >
-              Live Demo
+              Live demo <FiExternalLink aria-hidden />
             </a>
           ) : (
-            <span className="minimal-button border theme-chip-orange px-4 py-2 text-sm font-semibold">
-              {project.demoUnavailableLabel ?? "Not live yet"}
+            <span className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-black/15 px-4 py-2 text-xs font-bold text-white/80 sm:px-5 sm:py-2.5 sm:text-sm">
+              <FiLock aria-hidden />
+              {project.demoUnavailableLabel === "Private"
+                ? "Private deployment"
+                : (project.demoUnavailableLabel ?? "Not live yet")}
             </span>
           )}
+        </div>
+      </div>
+
+      <div className="relative min-h-0 overflow-hidden">
+        <div className="absolute inset-x-3 -bottom-[18%] top-7 overflow-hidden rounded-[1.5rem] border border-white/25 bg-[#f8fafc] shadow-[0_28px_75px_rgba(15,23,42,0.34)] ring-1 ring-black/10 sm:inset-x-5 sm:top-10 md:-bottom-[16%] md:left-2 md:right-6 md:top-[12%] lg:left-3 lg:right-8">
+          <Image
+            src={project.images[0]}
+            alt={`${project.title} interface preview`}
+            fill
+            sizes="(max-width: 768px) 100vw, 62vw"
+            className="object-contain object-top"
+            priority={index === 0}
+          />
         </div>
       </div>
     </motion.article>
   );
 }
-
 function ProjectModal({
   project,
   projectNumber,
@@ -427,8 +598,11 @@ function ProjectModal({
                 Live Demo
               </a>
             ) : (
-              <span className="minimal-button border theme-chip-orange px-4 py-2 text-sm font-semibold">
-                {project.demoUnavailableLabel ?? "Not live yet"}
+              <span className="minimal-button inline-flex items-center gap-2 border theme-chip-orange px-4 py-2 text-sm font-semibold">
+                <FiLock aria-hidden />
+                {project.demoUnavailableLabel === "Private"
+                  ? "Private deployment"
+                  : (project.demoUnavailableLabel ?? "Not live yet")}
               </span>
             )}
           </div>
