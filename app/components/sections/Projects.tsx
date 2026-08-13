@@ -267,7 +267,7 @@ function ProjectCard({
       </div>
 
       <div className="relative min-h-0 overflow-hidden">
-        <div className="absolute inset-x-3 -bottom-[18%] top-7 overflow-hidden rounded-[1.5rem] border border-white/25 bg-[#f8fafc] shadow-[0_28px_75px_rgba(15,23,42,0.34)] ring-1 ring-black/10 sm:inset-x-5 sm:top-10 md:-bottom-[16%] md:left-2 md:right-6 md:top-[12%] lg:left-3 lg:right-8">
+        <div className="absolute inset-x-3 -bottom-[18%] top-7 overflow-hidden rounded-[1.5rem] border border-white/25 bg-[#f8fafc] shadow-[0_28px_75px_rgba(15,23,42,0.34)] ring-1 ring-black/10 sm:inset-x-5 sm:top-10 md:-bottom-[16%] md:left-2 md:right-6 md:top-[27%] lg:left-3 lg:right-8">
           <Image
             src={project.images[0]}
             alt={`${project.title} interface preview`}

@@ -45,12 +45,12 @@ const footerLinks = [
     external: true,
   },
   { label: "Email", href: "mailto:najeeb08089@gmail.com", icon: FiMail },
-  {
-    label: "CV",
-    href: "/Najeeb-Ullah-Khan-CV.pdf",
-    icon: FiDownload,
-    download: true,
-  },
+  // {
+  //   label: "CV",
+  //   href: "/Najeeb-Ullah-Khan-CV.pdf",
+  //   icon: FiDownload,
+  //   download: true,
+  // },
 ];
 
 export default function PortfolioPage() {
@@ -187,7 +187,6 @@ export default function PortfolioPage() {
                   className="group inline-flex size-12 items-center justify-center rounded-xl border border-white/18 bg-white/12 text-xl text-white backdrop-blur transition hover:-translate-y-1 hover:bg-white/20"
                   target={item.external ? "_blank" : undefined}
                   rel={item.external ? "noreferrer" : undefined}
-                  download={item.download ? true : undefined}
                   title={item.label}
                 >
                   <Icon

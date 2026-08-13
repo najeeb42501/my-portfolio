@@ -1,11 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import {
   FiArrowDown,
   FiArrowUpRight,
-  FiDownload,
   FiGithub,
   FiLinkedin,
   FiMail,
@@ -22,6 +21,13 @@ const heroLinks = [
 ];
 
 export default function Hero() {
+  const shouldReduceMotion = useReducedMotion();
+
+  const revealFrom = (distance: number) => ({
+    opacity: 0,
+    y: shouldReduceMotion ? 0 : distance,
+  });
+
   return (
     <section
       id="hero"
@@ -30,41 +36,101 @@ export default function Hero() {
       <div className="mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14">
         <motion.div
           className="relative z-10 max-w-3xl"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+          initial="hidden"
+          animate="visible"
         >
-          <p className="font-mono text-xs font-semibold uppercase tracking-[0.3em] theme-accent">
-            Full-stack developer
-          </p>
+          <motion.div
+            className="flex items-center gap-3"
+            variants={{
+              hidden: revealFrom(12),
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <span className="h-px w-10 bg-[var(--site-accent)]" />
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.28em] theme-accent">
+              Najeeb Ullah Khan · Software Engineer
+            </p>
+          </motion.div>
 
-          <h1 className="mt-6 text-balance text-[clamp(3rem,6.5vw,5.75rem)] font-black leading-[0.92] tracking-tight theme-heading">
-            I&apos;m <span className="theme-accent">Najeeb</span>, Software
-            Engineer
-          </h1>
+          <motion.h1
+            className="mt-7 max-w-[11ch] text-balance text-[clamp(3.15rem,6.5vw,5.75rem)] font-black leading-[0.94] tracking-[-0.055em] theme-heading"
+            variants={{
+              hidden: revealFrom(24),
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{
+              delay: shouldReduceMotion ? 0 : 0.08,
+              duration: 0.65,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            Building digital products that{" "}
+            <span className="relative inline-block theme-accent">
+              feel effortless.
+              <motion.span
+                aria-hidden
+                className="absolute -bottom-1 left-0 h-1 w-full origin-left rounded-full bg-[var(--site-accent)] opacity-25"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{
+                  delay: shouldReduceMotion ? 0 : 0.7,
+                  duration: shouldReduceMotion ? 0 : 0.7,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              />
+            </span>
+          </motion.h1>
 
-          <p className="mt-6 max-w-2xl text-base leading-8 theme-muted sm:text-lg">
-            I build colorful, high-performance web products with clean UI
-            systems, reliable backend integrations, and polished developer
-            energy.
-          </p>
+          <motion.p
+            className="mt-7 max-w-xl text-base leading-8 theme-muted sm:text-lg"
+            variants={{
+              hidden: revealFrom(18),
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{
+              delay: shouldReduceMotion ? 0 : 0.18,
+              duration: 0.6,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            I turn complex ideas into fast, dependable web experiences—with
+            thoughtful interfaces, scalable systems, and details that make the
+            product feel complete.
+          </motion.p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href="#about"
-              className="minimal-button theme-ink-bg inline-flex items-center gap-2 px-6 py-3 text-sm font-bold"
-            >
-              About
-            </a>
-            <a
-              href="/NajeebullahKhan-resume.pdf"
-              download
-              className="minimal-button theme-primary-bg inline-flex items-center gap-2 px-6 py-3 text-sm font-bold"
-            >
-              <FiDownload aria-hidden />
-              Download CV
-            </a>
-          </div>
+          <motion.div
+            className="mt-9 flex items-center gap-4 border-l-2 border-[var(--site-accent)] pl-4"
+            variants={{
+              hidden: revealFrom(14),
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{
+              delay: shouldReduceMotion ? 0 : 0.28,
+              duration: 0.55,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            <span className="relative flex size-2.5 shrink-0">
+              <motion.span
+                className="absolute inline-flex size-full rounded-full bg-emerald-400"
+                animate={
+                  shouldReduceMotion
+                    ? undefined
+                    : { opacity: [0.65, 0, 0.65], scale: [1, 1.8, 1] }
+                }
+                transition={{
+                  duration: 2.4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              <span className="relative inline-flex size-2.5 rounded-full bg-emerald-500" />
+            </span>
+            <p className="text-sm font-medium leading-6 theme-muted">
+              Available for full-stack, dashboard, and AI-enabled product work.
+            </p>
+          </motion.div>
         </motion.div>
 
         <motion.div

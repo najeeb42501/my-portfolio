@@ -17,9 +17,9 @@ export const sectionIds = [
 ];
 
 export const stats = [
-  { value: "3+", label: "years shipping products" },
-  { value: "42%", label: "average perf gains" },
-  { value: "6", label: "systems modernized" },
+  { value: "4+", label: "years shipping products" },
+  { value: "52%", label: "average perf gains" },
+  { value: "7", label: "systems modernized" },
 ];
 
 export const skills = [
@@ -122,6 +122,82 @@ export const projects = [
 
     github: "",
     demo: "https://online.ublfunds.com/UBL1/",
+  },
+  {
+    title: "Corporate Pension Portal",
+    category: "Corporate pension management",
+    summary:
+      "Centralized pension operations for employee contributions, investments, withdrawals, balances, and portfolio valuation.",
+    capabilities: [
+      "Angular",
+      "TypeScript",
+      ".NET",
+      "REST APIs",
+      "Docker",
+      "IIS",
+    ],
+    theme: {
+      card: "bg-[linear-gradient(135deg,#0c4a6e_0%,#075985_52%,#c2410c_100%)]",
+      glow: "bg-sky-300",
+      chip: "bg-sky-950/30",
+    },
+    description:
+      "A secure portal for UBL Funds corporate clients to manage pension investments, employee contributions, withdrawals, assets, portfolios, balances, and cost-to-market-value reporting.",
+
+    detailedDescription:
+      "Corporate Pension Portal is a secure investment and pension management platform for UBL Funds corporate clients. It gives organizations a centralized view of pension assets, gross employee contributions, covered employees, withdrawals, gains or losses, and portfolio allocation across fund categories and scheme types. Finance and HR teams can review employee-level balances and contribution histories, manage employee pension records, monitor investments and redemptions, export operational data, and compare contribution cost with current market value for the full organization or an individual employee. The platform combines an Angular frontend with .NET services and REST APIs, and is packaged with Docker for controlled enterprise deployment through IIS.",
+
+    images: [
+      "/pension-portal/pension-portal-1.png",
+      "/pension-portal/pension-portal-2.png",
+      "/pension-portal/pension-portal-3.png",
+      "/pension-portal/pension-portal-4.png",
+      "/pension-portal/pension-portal-5.png",
+      "/pension-portal/pension-portal-6.png",
+    ],
+
+    stack: [
+      "Angular",
+      "TypeScript",
+      "RxJS",
+      ".NET",
+      ".NET Web API",
+      "REST APIs",
+      "Docker",
+      "IIS",
+      "Authentication & Authorization",
+      "Role-Based Access",
+      "Enterprise Application",
+      "Responsive Design",
+      "Dashboard UI",
+      "Data Tables",
+      "Advanced Filtering",
+      "CSV Export",
+      "Company Server Deployment",
+    ],
+
+    features: [
+      "Corporate pension performance dashboard",
+      "Pension asset and portfolio management",
+      "Employee pension record management",
+      "Employee and total contribution tracking",
+      "Investment and redemption management",
+      "Withdrawal and exit tracking",
+      "Employee-level balance reporting",
+      "Asset allocation by fund category and scheme type",
+      "Cost and market value comparison",
+      "Organization-wide and employee-level gain/loss calculation",
+      "Date-based reporting and filters",
+      "Searchable, paginated employee data tables",
+      "CSV export for operational reporting",
+      "Secure corporate access",
+      "Responsive light and dark interfaces",
+      "Containerized enterprise deployment",
+    ],
+
+    github: "",
+    demo: "",
+    demoUnavailableLabel: "Private",
   },
   {
     title: "UBL Corporate Portal",
