@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-Create a local environment file for the contact form:
+Create `.env.local` in the project root (beside `package.json`) for the contact form:
 
 ```bash
 RESEND_API_KEY=your_resend_api_key
@@ -12,6 +12,12 @@ SITE_URL=https://your-portfolio-domain.com
 ```
 
 `RESEND_FROM_EMAIL` must use a sender/domain allowed by your Resend account.
+
+If the form reports **"Email service is not configured yet"**, `RESEND_API_KEY` is missing from the running server. Add a real key from [Resend API keys](https://resend.com/api-keys) to `.env.local`, then restart Next.js. Keep the key server-only; never prefix it with `NEXT_PUBLIC_` or commit it.
+
+For local testing, `RESEND_FROM_EMAIL="Portfolio <onboarding@resend.dev>"` works only when `CONTACT_TO_EMAIL` is the email associated with your Resend account. To send to another address, use a sender on a [verified domain](https://resend.com/docs/dashboard/domains/introduction).
+
+If running a temporary preview copy, configure the environment in that copy as well; it cannot read the original project's `.env.local`. For a hosted deployment, add these variables in the hosting provider's environment settings and restart or redeploy the app.
 
 Set `SITE_URL` to the production origin before deployment. It controls the canonical URL, social metadata, structured data, robots, and sitemap. The existing `https://njb.dev` origin is the fallback.
 
