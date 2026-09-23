@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "@xyflow/react/dist/style.css";
+import { siteUrl, siteDescription } from "./lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -11,16 +11,18 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  preload: false,
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://njb.dev"),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "NJB | Software Engineer",
-    template: "%s | NJB",
+    default: "Najeeb Ullah Khan — Software Engineer & Product Builder",
+    template: "%s | Najeeb Ullah Khan",
   },
-  description:
-    "Portfolio for a software engineer building fast, accessible, production-grade web products with Next.js, React, and TypeScript.",
+  description: siteDescription,
+  alternates: { canonical: "/" },
+  icons: { icon: "/icon.svg" },
   keywords: [
     "software engineer",
     "frontend engineer",
@@ -29,22 +31,29 @@ export const metadata: Metadata = {
     "TypeScript",
     "portfolio",
   ],
-  authors: [{ name: "NJB" }],
-  creator: "NJB",
+  authors: [{ name: "Najeeb Ullah Khan", url: siteUrl }],
+  creator: "Najeeb Ullah Khan",
   openGraph: {
-    title: "NJB | Software Engineer",
-    description:
-      "Fast, accessible web products with polished interfaces and reliable systems.",
-    url: "https://njb.dev",
-    siteName: "NJB Portfolio",
+    title: "Najeeb Ullah Khan — Thoughtful code. Remarkable experiences.",
+    description: siteDescription,
+    url: siteUrl,
+    siteName: "Najeeb Ullah Khan",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Najeeb Ullah Khan — Software Engineer",
+      },
+    ],
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "NJB | Software Engineer",
-    description:
-      "Fast, accessible web products with polished interfaces and reliable systems.",
+    title: "Najeeb Ullah Khan — Software Engineer",
+    description: siteDescription,
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
@@ -60,13 +69,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full theme-page" suppressHydrationWarning>
-        {children}
-      </body>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='dark'?'dark':'light'}catch{}`,
+          }}
+        />
+      </head>
+      <body className="min-h-full theme-page">{children}</body>
     </html>
   );
 }
-

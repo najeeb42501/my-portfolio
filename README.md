@@ -8,9 +8,14 @@ Create a local environment file for the contact form:
 RESEND_API_KEY=your_resend_api_key
 CONTACT_TO_EMAIL=you@example.com
 RESEND_FROM_EMAIL="Portfolio Contact <hello@yourdomain.com>"
+SITE_URL=https://your-portfolio-domain.com
 ```
 
 `RESEND_FROM_EMAIL` must use a sender/domain allowed by your Resend account.
+
+Set `SITE_URL` to the production origin before deployment. It controls the canonical URL, social metadata, structured data, robots, and sitemap. The existing `https://njb.dev` origin is the fallback.
+
+The featured horizontal stack is configured by `featuredIndexes` in `app/components/sections/Projects.tsx`. The gallery includes every project from `app/components/data/portfolio.ts`. Small screens and reduced-motion preferences use a static featured layout; the original experience stack remains in place.
 
 First, run the development server:
 

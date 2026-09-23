@@ -2,15 +2,18 @@ import { Resend } from "resend";
 
 export const runtime = "nodejs";
 
-const CONTACT_TO_EMAIL = "najeeb08089@gmail.com";
+const CONTACT_TO_EMAIL =
+  process.env.CONTACT_TO_EMAIL || "najeeb08089@gmail.com";
 
-const CONTACT_FROM_EMAIL = "Portfolio <onboarding@resend.dev>";
+const CONTACT_FROM_EMAIL =
+  process.env.RESEND_FROM_EMAIL || "Portfolio <onboarding@resend.dev>";
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type ContactPayload = {
   name?: unknown;
   email?: unknown;
   message?: unknown;
+  website?: unknown;
 };
 
 function cleanText(value: unknown) {
@@ -38,9 +41,25 @@ export async function POST(request: Request) {
     );
   }
 
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    return Response.json({ message: "Invalid request." }, { status: 400 });
+  }
+  if (cleanText(payload.website)) {
+    return Response.json({ message: "Message received." });
+  }
   const name = cleanText(payload.name);
   const email = cleanText(payload.email).toLowerCase();
   const message = cleanText(payload.message);
+
+  if (name.length > 100 || email.length > 254 || message.length > 5000) {
+    return Response.json(
+      {
+        message:
+          "Please keep your name under 100 characters and your message under 5,000 characters.",
+      },
+      { status: 400 },
+    );
+  }
 
   if (!name || !email || !message) {
     return Response.json(

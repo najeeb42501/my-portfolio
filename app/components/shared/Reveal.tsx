@@ -1,41 +1,47 @@
 "use client";
-
-import { motion, type Variants } from "framer-motion";
-
-const reveal: Variants = {
-  hidden: { opacity: 0, y: 28, scale: 0.98 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-  },
-};
-
+import { useEffect, useRef } from "react";
+// Server content stays visible, including with JavaScript disabled.
 export default function Reveal({
   children,
-  className,
+  className = "",
   delay = 0,
 }: {
   children: React.ReactNode;
   className?: string;
   delay?: number;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const element = ref.current;
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (!element || preference.matches || !window.IntersectionObserver) return;
+    let animation: Animation | undefined;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        if (!preference.matches && entry.boundingClientRect.top > 0) {
+          animation = element.animate(
+            [{ transform: "translateY(22px)" }, { transform: "translateY(0)" }],
+            {
+              duration: 650,
+              delay: delay * 1000,
+              easing: "cubic-bezier(.22,1,.36,1)",
+            },
+          );
+        }
+        observer.disconnect();
+      },
+      { threshold: 0.08 },
+    );
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
+      animation?.cancel();
+    };
+  }, [delay]);
   return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-90px" }}
-      variants={{
-        ...reveal,
-        visible: {
-          ...reveal.visible,
-          transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] },
-        },
-      }}
-    >
+    <div ref={ref} className={className}>
       {children}
-    </motion.div>
+    </div>
   );
 }
