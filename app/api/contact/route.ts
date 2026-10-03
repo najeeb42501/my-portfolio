@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { budgets, projectTypes } from "@/data/site";
 
 export const runtime = "nodejs";
 
@@ -14,7 +15,14 @@ type ContactPayload = {
   email?: unknown;
   message?: unknown;
   website?: unknown;
+  projectType?: unknown;
+  budget?: unknown;
 };
+
+function pick(value: unknown, allowed: string[]) {
+  const text = cleanText(value);
+  return allowed.includes(text) ? text : "";
+}
 
 function cleanText(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
@@ -50,6 +58,8 @@ export async function POST(request: Request) {
   const name = cleanText(payload.name);
   const email = cleanText(payload.email).toLowerCase();
   const message = cleanText(payload.message);
+  const projectType = pick(payload.projectType, projectTypes);
+  const budget = pick(payload.budget, budgets);
 
   if (name.length > 100 || email.length > 254 || message.length > 5000) {
     return Response.json(
@@ -107,6 +117,8 @@ export async function POST(request: Request) {
           <h2 style="margin: 0 0 16px;">New portfolio message</h2>
           <p><strong>Name:</strong> ${safeName}</p>
           <p><strong>Email:</strong> ${safeEmail}</p>
+          ${projectType ? `<p><strong>Project type:</strong> ${escapeHtml(projectType)}</p>` : ""}
+          ${budget ? `<p><strong>Budget:</strong> ${escapeHtml(budget)}</p>` : ""}
           <div style="margin-top: 20px;">
             <strong>Message:</strong>
             <div style="margin-top: 8px; padding: 16px; border: 1px solid #e5e7eb; border-radius: 8px; background: #f9fafb;">
@@ -115,7 +127,18 @@ export async function POST(request: Request) {
           </div>
         </div>
       `,
-      text: `New portfolio message\n\nName: ${name}\nEmail: ${email}\n\n${message}`,
+      text: [
+        "New portfolio message",
+        "",
+        `Name: ${name}`,
+        `Email: ${email}`,
+        projectType ? `Project type: ${projectType}` : null,
+        budget ? `Budget: ${budget}` : null,
+        "",
+        message,
+      ]
+        .filter((line) => line !== null)
+        .join("\n"),
     });
 
     if (error) {

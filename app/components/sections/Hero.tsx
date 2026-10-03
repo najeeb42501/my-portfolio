@@ -1,150 +1,89 @@
 "use client";
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
-import {
-  FiArrowDown,
-  FiArrowUpRight,
-  FiCode,
-  FiGithub,
-  FiLinkedin,
-} from "react-icons/fi";
-import portrait from "../../../public/najeeb-new.png";
+import { FiArrowRight } from "react-icons/fi";
+import { profile, proof } from "@/data/site";
+import { scrollToId } from "../../lib/client";
+import BrowserFrame from "../ui/BrowserFrame";
 
 export default function Hero() {
-  const ref = useRef<HTMLElement>(null);
-  const reducedMotion = useReducedMotion();
+  const visualRef = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
+    target: visualRef,
+    offset: ["start end", "start 0.25"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], [0, 90]);
-  const rotate = useTransform(scrollYProgress, [0, 1], [-12, 24]);
+  const rotateX = useTransform(scrollYProgress, [0, 1], [22, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.92, 1]);
+
+  const jump = (id: string) => (event: React.MouseEvent) => {
+    event.preventDefault();
+    scrollToId(id);
+  };
+
   return (
-    <section id="hero" ref={ref} className="hero-section">
-      <div className="page-container hero-intro">
-        <p className="eyebrow">
-          <span className="status-dot" /> Available for meaningful work
-        </p>
-        <h1>
-          Thoughtful code.
-          <br />
-          <span className="serif-word">Remarkable</span> experiences.
-        </h1>
-        <p className="hero-subtitle">
-          I’m Najeeb Ullah Khan. A software engineer connecting
-          <br className="hidden sm:block" /> considered design with dependable
-          technology.
-        </p>
-      </div>
-      <div className="page-container hero-stage">
-        <div className="hero-side hero-side-left">
-          <span className="tiny-label">THE APPROACH</span>
-          <p>
-            Complex under the hood.
-            <br />
-            <strong>Effortless in your hands.</strong>
-          </p>
-          <a href="#projects" className="text-link">
-            Explore my work <FiArrowDown aria-hidden />
-          </a>
-          <div className="hero-socials">
-            <a
-              href="https://github.com/najeeb42501"
-              aria-label="Najeeb on GitHub"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FiGithub aria-hidden />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/najeebullah-khan-86b759170/"
-              aria-label="Najeeb on LinkedIn"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FiLinkedin aria-hidden />
-            </a>
-            <span className="tiny-label">LET’S CONNECT</span>
-          </div>
-        </div>
-        <div className="portrait-scene">
-          <div className="portrait-halo" aria-hidden />
-          <div className="portrait-orbit" aria-hidden />
-          <span className="portrait-cross cross-one" aria-hidden>
-            +
+    <section className="hero" id="top" aria-labelledby="hero-title">
+      <div className="hero-grid-bg" aria-hidden />
+      <div className="container hero-copy">
+        <div className="enter">
+          <span className="badge">
+            <span className="pulse-dot" aria-hidden />
+            {profile.availability}
           </span>
-          <span className="portrait-cross cross-two" aria-hidden>
-            +
-          </span>
-          <motion.div
-            className="portrait-image"
-            style={{ y: reducedMotion ? 0 : y }}
-          >
-            <Image
-              src={portrait}
-              alt="Najeeb Ullah Khan, software engineer"
-              fill
-              preload
-              sizes="(max-width: 640px) 92vw, (max-width: 1024px) 62vw, 560px"
-              className="object-cover object-top"
-            />
-          </motion.div>
-          <motion.div
-            aria-hidden
-            className="hero-code-object"
-            style={{ rotate: reducedMotion ? -12 : rotate }}
-          >
-            <FiCode />
-          </motion.div>
-          <div className="portrait-caption">
-            <span className="status-dot" />
-            <span>ENGINEER BY CRAFT. BUILDER AT HEART.</span>
-          </div>
         </div>
-        <div className="hero-side hero-side-right">
-          <svg
-            className="hero-asterisk"
-            viewBox="0 0 80 80"
-            fill="none"
-            aria-hidden
-          >
-            <path
-              d="M40 0v80M0 40h80M12 12l56 56M12 68l56-56"
-              stroke="currentColor"
-              strokeWidth="10"
-            />
-          </svg>
-          <p>
-            From the first idea
+        <div className="enter-lcp">
+          <h1 className="display" id="hero-title">
+            Thoughtful code.{" "}
             <br />
-            to the final interaction.
-          </p>
-          <a
-            href="#contact"
-            className="round-cta"
-            aria-label="Let’s discuss your project"
-          >
-            <FiArrowUpRight aria-hidden />
+            <span className="serif serif-accent">Remarkable</span> experiences.
+          </h1>
+        </div>
+        <p className="lead enter" style={{ "--delay": "120ms" } as React.CSSProperties}>
+          {profile.supportLine}
+        </p>
+        <div className="hero-ctas enter" style={{ "--delay": "180ms" } as React.CSSProperties}>
+          <a href="#work" onClick={jump("work")} className="btn btn-solid">
+            View my work
           </a>
-          <span className="tiny-label">LET’S BUILD SOMETHING GOOD</span>
+          <a href="#contact" onClick={jump("contact")} className="btn btn-ghost">
+            Let&rsquo;s talk <FiArrowRight aria-hidden />
+          </a>
+        </div>
+        <div className="proof enter" style={{ "--delay": "240ms" } as React.CSSProperties}>
+          <span className="proof-avatar">
+            <Image src={profile.portrait} alt="" fill sizes="32px" />
+          </span>
+          {proof.map((item, i) => (
+            <span key={item} style={{ display: "contents" }}>
+              {i > 0 ? (
+                <span className="proof-sep" aria-hidden>
+                  ·
+                </span>
+              ) : null}
+              <span>{item}</span>
+            </span>
+          ))}
         </div>
       </div>
-      <div className="hero-bottom page-container">
-        <span>FRONTEND PRECISION. FULL-STACK THINKING.</span>
-        <div>
-          <span>React & Next.js</span>
-          <span>Enterprise platforms</span>
-          <span>AI experiences</span>
+
+      <div className="container-wide">
+        <div ref={visualRef} className="hero-visual enter" style={{ "--delay": "300ms" } as React.CSSProperties}>
+          <div className="glow" aria-hidden />
+          <motion.div
+            className="hero-visual-inner"
+            style={reduced ? undefined : { rotateX, scale }}
+          >
+            <BrowserFrame
+              src="/ubl-portal/ubl-portal-1.png"
+              alt="UBL Funds customer portal dashboard showing consolidated portfolio allocation, returns and accounts"
+              url="online.ublfunds.com"
+              sizes="(max-width: 1440px) 96vw, 1400px"
+            />
+          </motion.div>
+          <div className="hero-fade" aria-hidden />
         </div>
-        <a href="#projects" aria-label="Scroll to selected projects">
-          <FiArrowDown aria-hidden />
-        </a>
       </div>
     </section>
   );

@@ -1,24 +1,42 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { siteUrl, siteDescription } from "./lib/site";
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import "lenis/dist/lenis.css";
 import "./globals.css";
+import { siteDescription, siteUrl } from "./lib/site";
+import Nav from "./components/layout/Nav";
+import Footer from "./components/layout/Footer";
+import CommandMenu from "./components/layout/CommandMenu";
+import SmoothScroll from "./components/layout/SmoothScroll";
+import Toaster from "./components/ui/Toaster";
+import MotionProvider from "./components/ui/MotionProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: "italic",
+  display: "swap",
   preload: false,
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Najeeb Ullah Khan — Software Engineer & Product Builder",
-    template: "%s | Najeeb Ullah Khan",
+    default: "Najeeb Ullah Khan — Software Engineer",
+    template: "%s · Najeeb Ullah Khan",
   },
   description: siteDescription,
   alternates: { canonical: "/" },
@@ -26,10 +44,13 @@ export const metadata: Metadata = {
   keywords: [
     "software engineer",
     "frontend engineer",
+    "fintech",
+    "dashboards",
     "Next.js",
     "React",
+    "Angular",
     "TypeScript",
-    "portfolio",
+    "Karachi",
   ],
   authors: [{ name: "Najeeb Ullah Khan", url: siteUrl }],
   creator: "Najeeb Ullah Khan",
@@ -38,14 +59,6 @@ export const metadata: Metadata = {
     description: siteDescription,
     url: siteUrl,
     siteName: "Najeeb Ullah Khan",
-    images: [
-      {
-        url: "/opengraph-image",
-        width: 1200,
-        height: 630,
-        alt: "Najeeb Ullah Khan — Software Engineer",
-      },
-    ],
     locale: "en_US",
     type: "website",
   },
@@ -53,34 +66,44 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Najeeb Ullah Khan — Software Engineer",
     description: siteDescription,
-    images: ["/opengraph-image"],
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafaf9" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0b" },
+  ],
+};
+
+const themeScript = `try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.dataset.theme=t}catch(e){}`;
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"
       suppressHydrationWarning
-      data-scroll-behavior="smooth"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
     >
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='dark'?'dark':'light'}catch{}`,
-          }}
-        />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="min-h-full theme-page">{children}</body>
+      <body>
+        <MotionProvider>
+          <a href="#main" className="skip-link">
+            Skip to content
+          </a>
+          <SmoothScroll />
+          <Nav />
+          <main id="main">{children}</main>
+          <Footer />
+          <CommandMenu />
+          <Toaster />
+        </MotionProvider>
+      </body>
     </html>
   );
 }

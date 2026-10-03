@@ -21,7 +21,13 @@ If running a temporary preview copy, configure the environment in that copy as w
 
 Set `SITE_URL` to the production origin before deployment. It controls the canonical URL, social metadata, structured data, robots, and sitemap. The existing `https://njb.dev` origin is the fallback.
 
-The featured horizontal stack is configured by `featuredIndexes` in `app/components/sections/Projects.tsx`. The gallery includes every project from `app/components/data/portfolio.ts`. Small screens and reduced-motion preferences use a static featured layout; the original experience stack remains in place.
+All content lives in `data/`, so copy can change without touching components:
+
+- `data/projects.ts`: every archive project, plus the three flagship case studies (`caseStudies`) that drive the stacking cards on the home page and the `/work/[slug]` pages. Add `year` to a project to show it in the archive. Give a project the `Lab` filter (with a GitHub or live link) and a Lab tab appears automatically.
+- `data/experience.ts`: the experience timeline.
+- `data/site.ts`: profile details, hero proof row, impact numbers, logo strip, capabilities, principles, process steps, and the contact form's project-type and budget options.
+
+The stacking cards fall back to a plain list under 768px and when the visitor prefers reduced motion. Press ⌘K / Ctrl+K anywhere for the command menu.
 
 First, run the development server:
 
