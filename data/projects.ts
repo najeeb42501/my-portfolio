@@ -70,7 +70,13 @@ export const projects: Project[] = [
       "Clear informational-use disclaimer",
     ],
     stack: ["Next.js", "FastAPI", "OpenAI API", "LangChain", "Vector DBs"],
-    images: ["/lawbot/lawbot-1.png", "/lawbot/lawbot-2.png"],
+    images: [
+      "/lawbot/lawbot-1.webp",
+      "/lawbot/lawbot-2.webp",
+      "/lawbot/lawbot-3.webp",
+      "/lawbot/lawbot-4.webp",
+      "/lawbot/lawbot-5.webp",
+    ],
     status: "Live",
     demo: "https://paklex.vercel.app/",
     size: "normal",
@@ -338,7 +344,7 @@ export const caseStudies: CaseStudy[] = [
     outcome:
       "Plain-language answers about Pakistani law, each one traceable to the section and source PDF it came from.",
     tint: "#0d9488",
-    cover: "/lawbot/lawbot-1.png",
+    cover: "/lawbot/lawbot-1.webp",
     metrics: ["Grounded with RAG", "Cites source PDFs", "Live on Vercel"],
     tags: ["Next.js", "FastAPI", "OpenAI API", "LangChain", "RAG"],
     demo: "https://paklex.vercel.app/",

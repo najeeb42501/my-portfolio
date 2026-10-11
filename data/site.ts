@@ -30,14 +30,11 @@ export const navItems = [
   { label: "Contact", id: "contact", sections: ["contact"] },
 ];
 
-/** Shown in the hero proof row. Keep these in sync with `impact`. */
-export const proof = ["3+ years", "8 products shipped", "Based in Karachi"];
-
 export const impact = [
-  { value: 3, suffix: "+", label: "Years shipping production software" },
-  { value: 8, suffix: "", label: "Products shipped" },
-  { value: 5, suffix: "", label: "Live, public deployments" },
-  { value: 4, suffix: "", label: "Engineering roles" },
+  { value: 3, suffix: "+", label: "Years shipping production software", short: "Years shipping" },
+  { value: 8, suffix: "", label: "Products shipped", short: "Products shipped" },
+  { value: 5, suffix: "", label: "Live, public deployments", short: "Live in production" },
+  { value: 4, suffix: "", label: "Engineering roles", short: "Roles" },
 ];
 
 /** Employers and client platforms. Swap the wordmarks for SVG logos when you have them. */
