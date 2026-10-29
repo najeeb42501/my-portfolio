@@ -90,74 +90,81 @@ export default function Nav() {
 
   return (
     <>
-      <header className={`nav${scrolled ? " is-scrolled" : ""}`}>
-        <Link
-          href="/"
-          className="logo"
-          aria-label={`${profile.name}, home`}
-          onClick={(event) => {
-            if (isHome) {
-              event.preventDefault();
-              scrollToId("top");
-            }
-          }}
-        >
-          nk<span>.</span>
-        </Link>
-
-        <nav className="nav-links" aria-label="Primary">
-          {navItems.map((item) => (
-            <a
-              key={item.id}
-              href={href(item.id)}
-              onClick={go(item.id)}
-              className="nav-link"
-              aria-current={active === item.id ? "location" : undefined}
+      <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
+        <div className="site-header-inner">
+          <div className="brand">
+            <Link
+              href="/"
+              className="logo"
+              aria-label={`${profile.name}, home`}
+              onClick={(event) => {
+                if (isHome) {
+                  event.preventDefault();
+                  scrollToId("top");
+                }
+              }}
             >
-              {active === item.id ? (
-                <motion.span
-                  layoutId="nav-active"
-                  className="nav-link-bg"
-                  transition={{ type: "spring", stiffness: 420, damping: 36 }}
-                />
-              ) : null}
-              {item.label}
-            </a>
-          ))}
-        </nav>
+              nk
+            </Link>
+            <span className="brand-status">
+              <span className="pulse-dot" aria-hidden /> Available for work
+            </span>
+          </div>
 
-        <div className="nav-actions">
-          <button
-            type="button"
-            className="kbd-btn"
-            onClick={openCommandMenu}
-            aria-label="Open command menu"
-            aria-keyshortcuts="Control+K Meta+K"
-          >
-            <FiCommand aria-hidden /> K
-          </button>
-          <ThemeToggle />
-          <a href={href("contact")} onClick={go("contact")} className="btn btn-accent btn-sm nav-cta">
-            Let&rsquo;s talk
-          </a>
-          <button
-            ref={menuButton}
-            type="button"
-            className="icon-btn nav-menu-btn"
-            onClick={() => setOpen((value) => !value)}
-            aria-expanded={open}
-            aria-controls="mobile-sheet"
-            aria-label={open ? "Close menu" : "Open menu"}
-          >
-            {open ? <FiX aria-hidden /> : <FiMenu aria-hidden />}
-          </button>
+          <nav className="nav-pill" aria-label="Primary">
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={href(item.id)}
+                onClick={go(item.id)}
+                className="nav-link"
+                aria-current={active === item.id ? "location" : undefined}
+              >
+                {active === item.id ? (
+                  <motion.span
+                    layoutId="nav-active"
+                    className="nav-link-bg"
+                    transition={{ type: "spring", stiffness: 420, damping: 36 }}
+                  />
+                ) : null}
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="header-actions">
+            <ThemeToggle />
+            <button
+              type="button"
+              className="kbd-btn"
+              onClick={openCommandMenu}
+              aria-label="Open command menu"
+              aria-keyshortcuts="Control+K Meta+K"
+            >
+              <FiCommand aria-hidden /> K
+            </button>
+            <a href={href("contact")} onClick={go("contact")} className="btn btn-solid btn-sm header-cta">
+              Let&rsquo;s talk
+            </a>
+            <button
+              ref={menuButton}
+              type="button"
+              className="icon-btn mobile-menu-button"
+              onClick={() => setOpen((value) => !value)}
+              aria-expanded={open}
+              aria-controls="mobile-navigation"
+              aria-label={open ? "Close menu" : "Open menu"}
+            >
+              {open ? <FiX aria-hidden /> : <FiMenu aria-hidden />}
+            </button>
+          </div>
         </div>
       </header>
 
       <AnimatePresence>
         {open ? (
           <motion.div
-            id="mobile-sheet"
+            id="mobile-navigation"
             ref={sheetRef}
             className="sheet"
             role="dialog"
@@ -169,7 +176,7 @@ export default function Nav() {
             transition={{ duration: 0.25 }}
           >
             <nav className="sheet-links" aria-label="Mobile">
-              {navItems.map((item, index) => (
+              {[...navItems, { label: "Contact", id: "contact" }].map((item, index) => (
                 <motion.a
                   key={item.id}
                   href={href(item.id)}
@@ -184,7 +191,7 @@ export default function Nav() {
               ))}
             </nav>
             <div className="sheet-foot">
-              <a href={href("contact")} onClick={go("contact")} className="btn btn-accent">
+              <a href={href("contact")} onClick={go("contact")} className="btn btn-solid">
                 Let&rsquo;s talk
               </a>
               <div className="row">

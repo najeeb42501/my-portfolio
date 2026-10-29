@@ -1,13 +1,13 @@
 import { profile, socials } from "@/data/site";
 import { siteDescription, siteUrl } from "./lib/site";
 import Hero from "./components/sections/Hero";
-import LogoStrip from "./components/sections/LogoStrip";
-import SelectedWork from "./components/sections/SelectedWork";
-import Archive from "./components/sections/Archive";
-import Impact from "./components/sections/Impact";
-import Capabilities from "./components/sections/Capabilities";
-import Experience from "./components/sections/Experience";
+import Glance from "./components/sections/Glance";
+import Featured from "./components/sections/Featured";
+import Gallery from "./components/sections/Gallery";
+import Ribbon from "./components/sections/Ribbon";
+import StackMap from "./components/sections/StackMap";
 import About from "./components/sections/About";
+import Experience from "./components/sections/Experience";
 import Contact from "./components/sections/Contact";
 
 const person = {
@@ -34,13 +34,13 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(person).replace(/</g, "\\u003c") }}
       />
       <Hero />
-      <LogoStrip />
-      <SelectedWork />
-      <Archive />
-      <Impact />
-      <Capabilities />
-      <Experience />
+      <Glance />
+      <Featured />
+      <Gallery />
+      <Ribbon />
+      <StackMap />
       <About />
+      <Experience />
       <Contact />
     </>
   );

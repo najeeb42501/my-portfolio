@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import { useState, type FormEvent } from "react";
 import { FiArrowRight, FiClock, FiCopy, FiMapPin } from "react-icons/fi";
 import { budgets, profile, projectTypes, socials } from "@/data/site";
@@ -99,13 +100,23 @@ export default function Contact() {
     ) : null;
 
   return (
-    <section className="section" id="contact" aria-labelledby="contact-title" style={{ borderTop: "1px solid var(--border)" }}>
+    <section className="section contact" id="contact" aria-labelledby="contact-title">
+      <Reveal className="container cta">
+        <h2 className="cta-title" id="contact-title">
+          <span className="cta-line">
+            <span className="cta-avatar" aria-hidden>
+              <Image src="/najeeb-profile.webp" alt="" fill sizes="96px" />
+            </span>
+            Let&rsquo;s create
+          </span>
+          <span className="cta-line cta-line-muted">
+            something <span className="serif">effortless.</span>
+          </span>
+        </h2>
+        <div className="cta-ring" aria-hidden />
+      </Reveal>
       <div className="container contact-grid">
         <Reveal className="contact-intro">
-          <p className="eyebrow">06 — Contact</p>
-          <h2 className="h2" id="contact-title">
-            A good idea deserves a <span className="serif serif-accent">great partner</span>.
-          </h2>
           <p className="lead">
             Have a product in mind, a problem to untangle, or just a good question? I&rsquo;d love to hear it.
           </p>

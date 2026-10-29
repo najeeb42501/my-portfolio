@@ -24,10 +24,11 @@ export const socials = [
 ];
 
 export const navItems = [
-  { label: "Work", id: "work", sections: ["work", "archive", "impact", "capabilities"] },
+  { label: "Work", id: "work", sections: ["work"] },
+  { label: "Projects", id: "gallery", sections: ["gallery"] },
+  { label: "Stack", id: "stack", sections: ["stack"] },
   { label: "Experience", id: "experience", sections: ["experience"] },
-  { label: "About", id: "about", sections: ["about"] },
-  { label: "Contact", id: "contact", sections: ["contact"] },
+  { label: "About", id: "about", sections: ["about", "contact"] },
 ];
 
 export const impact = [
@@ -73,6 +74,67 @@ export const capabilities = [
     tools: ["Docker", "CI/CD", "IIS", "AWS", "Cloudflare", "Vercel"],
   },
 ] as const;
+
+/** One line per tool for the stack map's detail card. Tools come from `capabilities`. */
+export const toolNotes: Record<string, string> = {
+  React: "Component systems that stay readable as a product grows.",
+  "Next.js": "Server rendering, routing and fast first loads.",
+  Angular: "Large enterprise dashboards with strict structure and RxJS.",
+  TypeScript: "Typed from the API response to the button label.",
+  "Tailwind CSS": "Design tokens turned into a consistent interface.",
+  "Framer Motion": "Motion that explains what just changed.",
+  "Node.js": "Services and integrations behind the interface.",
+  "Spring Boot": "Java services for payments, jobs and operations.",
+  ".NET": "Enterprise APIs behind the fund and pension portals.",
+  PostgreSQL: "Relational data and reporting queries.",
+  Redis: "Caching and fast lookups for busy dashboards.",
+  "REST APIs": "Clear contracts between frontend and backend.",
+  "OpenAI API": "Language models inside real product features.",
+  LangChain: "Chaining retrieval, prompts and tools.",
+  RAG: "Answers grounded in source documents, with citations.",
+  "Vector DBs": "Finding the right passage for each question.",
+  FastAPI: "Python APIs that serve the AI features.",
+  "LLM evaluation": "Checking model output for correctness, not just tone.",
+  Docker: "The same environment on every machine.",
+  "CI/CD": "Every merge tested and released.",
+  IIS: "On-prem releases for internal banking tools.",
+  AWS: "Cloud hosting for client platforms.",
+  Cloudflare: "DNS, caching and edge delivery for websites.",
+  Vercel: "A preview link for every branch.",
+};
+
+/** Pairs of tools used together in real projects; drawn as lines on the stack map. */
+export const toolPairs: [string, string][] = [
+  ["React", "Next.js"],
+  ["React", "TypeScript"],
+  ["Angular", "TypeScript"],
+  ["React", "Tailwind CSS"],
+  ["Next.js", "Tailwind CSS"],
+  ["Next.js", "Framer Motion"],
+  ["Next.js", "Vercel"],
+  ["Next.js", "Cloudflare"],
+  ["Next.js", "FastAPI"],
+  ["Angular", ".NET"],
+  ["Angular", "Spring Boot"],
+  ["React", "Spring Boot"],
+  ["React", "Node.js"],
+  ["Node.js", "REST APIs"],
+  [".NET", "REST APIs"],
+  [".NET", "Redis"],
+  ["Spring Boot", "PostgreSQL"],
+  ["Spring Boot", "AWS"],
+  [".NET", "IIS"],
+  ["Docker", ".NET"],
+  ["Docker", "CI/CD"],
+  ["CI/CD", "Vercel"],
+  ["FastAPI", "LangChain"],
+  ["LangChain", "OpenAI API"],
+  ["LangChain", "RAG"],
+  ["RAG", "Vector DBs"],
+  ["OpenAI API", "LLM evaluation"],
+];
+
+export const ribbon = ["Accessible", "Fast", "Typed", "Tested", "Responsive", "Secure", "Scalable"];
 
 export const principles = [
   {

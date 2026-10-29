@@ -57,7 +57,8 @@ export default function CommandMenu() {
     const linkedin = socials.find((s) => s.label === "LinkedIn")!.href;
     return [
       { id: "work", group: "Navigate", label: "Selected work", icon: FiBriefcase, run: section("work") },
-      { id: "archive", group: "Navigate", label: "Project archive", icon: FiFileText, run: section("archive") },
+      { id: "gallery", group: "Navigate", label: "All projects", icon: FiFileText, run: section("gallery") },
+      { id: "stack", group: "Navigate", label: "Stack", icon: FiFileText, run: section("stack") },
       { id: "experience", group: "Navigate", label: "Experience", icon: FiBriefcase, run: section("experience") },
       { id: "about", group: "Navigate", label: "About", icon: FiUser, run: section("about") },
       { id: "contact", group: "Navigate", label: "Contact", icon: FiMail, run: section("contact") },
