@@ -23,11 +23,11 @@ Set `SITE_URL` to the production origin before deployment. It controls the canon
 
 All content lives in `data/`, so copy can change without touching components:
 
-- `data/projects.ts`: every archive project, plus the three flagship case studies (`caseStudies`) that drive the stacking cards on the home page and the `/work/[slug]` pages. Add `year` to a project to show it in the archive. Give a project the `Lab` filter (with a GitHub or live link) and a Lab tab appears automatically.
+- `data/projects.ts`: every project in the gallery, plus the three flagship case studies (`caseStudies`) that drive the featured slider on the home page and the `/work/[slug]` pages. Add `year` to a project to show it on its gallery card. Give a project the `Lab` filter (with a GitHub or live link) and a Lab tab appears automatically.
 - `data/experience.ts`: the experience timeline.
-- `data/site.ts`: profile details, hero proof row, impact numbers, logo strip, capabilities, principles, process steps, and the contact form's project-type and budget options.
+- `data/site.ts`: profile details, the companies on the ribbon, capabilities (the four groups on the stack map), `toolNotes` and `toolPairs` (the stack map's descriptions and connecting lines), principles, and the contact form's project-type and budget options.
 
-The stacking cards fall back to a plain list under 768px and when the visitor prefers reduced motion. Press ⌘K / Ctrl+K anywhere for the command menu.
+The featured slider pins and moves sideways as you scroll; under 768px and when the visitor prefers reduced motion it becomes a swipeable row instead. Press ⌘K / Ctrl+K anywhere for the command menu.
 
 First, run the development server:
 

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FiArrowUp } from "react-icons/fi";
+import { caseStudies } from "@/data/projects";
 import { navItems, profile, socials } from "@/data/site";
 import { scrollToId } from "../../lib/client";
 
@@ -30,17 +31,21 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="container">
-        <div className="footer-top">
-          <div>
-            <Link href="/" className="logo" aria-label="Home">
-              nk<span>.</span>
+        <div className="footer-card">
+          <div className="footer-brand">
+            <Link href="/" className="footer-signature" aria-label="Home">
+              {profile.shortName}
             </Link>
             <p>{profile.tagline}</p>
+            <p className="footer-time">
+              <span className="pulse-dot" aria-hidden />
+              <time suppressHydrationWarning>{time ?? "--:--"}</time> in Karachi right now
+            </p>
           </div>
           <div className="footer-col">
-            <h2>Navigate</h2>
+            <h2>Explore</h2>
             <ul>
-              {navItems.map((item) => (
+              {[...navItems, { label: "Contact", id: "contact" }].map((item) => (
                 <li key={item.id}>
                   <a
                     href={isHome ? `#${item.id}` : `/#${item.id}`}
@@ -53,6 +58,16 @@ export default function Footer() {
                   >
                     {item.label}
                   </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="footer-col">
+            <h2>Case studies</h2>
+            <ul>
+              {caseStudies.map((study) => (
+                <li key={study.slug}>
+                  <Link href={`/work/${study.slug}`}>{study.title}</Link>
                 </li>
               ))}
             </ul>
@@ -79,23 +94,19 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} {profile.name}</span>
           <span>
-            Karachi{" "}
-            <time suppressHydrationWarning>{time ?? "--:--"}</time> · {profile.timezoneLabel}
+            © {new Date().getFullYear()} {profile.name}
           </span>
+          <span>Designed and built in Karachi</span>
           <button
             type="button"
             onClick={() => {
               if (!scrollToId("top")) window.scrollTo({ top: 0 });
             }}
           >
-            Back to top <FiArrowUp aria-hidden style={{ display: "inline", verticalAlign: "-2px" }} />
+            Back to top <FiArrowUp aria-hidden />
           </button>
         </div>
-      </div>
-      <div className="footer-wordmark" aria-hidden>
-        nk.
       </div>
     </footer>
   );

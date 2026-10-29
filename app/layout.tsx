@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Allura, Archivo, Geist_Mono, Instrument_Serif, Outfit } from "next/font/google";
 import "lenis/dist/lenis.css";
 import "./globals.css";
+import "./home.css";
 import { siteDescription, siteUrl } from "./lib/site";
 import Nav from "./components/layout/Nav";
 import Footer from "./components/layout/Footer";
@@ -10,10 +11,27 @@ import SmoothScroll from "./components/layout/SmoothScroll";
 import Toaster from "./components/ui/Toaster";
 import MotionProvider from "./components/ui/MotionProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
   display: "swap",
+});
+
+/** Wide, heavy display face for the name and section titles. */
+const archivo = Archivo({
+  variable: "--font-archivo",
+  subsets: ["latin"],
+  axes: ["wdth"],
+  display: "swap",
+});
+
+/** Signature in the footer. */
+const allura = Allura({
+  variable: "--font-allura",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+  preload: false,
 });
 
 const geistMono = Geist_Mono({
@@ -72,8 +90,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafaf9" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0b" },
+    { media: "(prefers-color-scheme: light)", color: "#f4f4f5" },
+    { media: "(prefers-color-scheme: dark)", color: "#050505" },
   ],
 };
 
@@ -86,7 +104,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
+      className={`${outfit.variable} ${archivo.variable} ${allura.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />

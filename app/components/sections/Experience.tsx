@@ -1,125 +1,90 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
-import { useId, useRef, useState } from "react";
-import { FiChevronDown, FiDownload } from "react-icons/fi";
-import { experience } from "@/data/experience";
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { FiDownload } from "react-icons/fi";
+import { experience, type Experience as Role } from "@/data/experience";
 import { profile } from "@/data/site";
-import { ease } from "../ui/MotionProvider";
 import Reveal from "../ui/Reveal";
-import SectionHeader from "../ui/SectionHeader";
 
-export default function Experience() {
-  const [open, setOpen] = useState<Set<number>>(() => new Set([0]));
-  const timelineRef = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
-  const baseId = useId();
-  const { scrollYProgress } = useScroll({
-    target: timelineRef,
-    offset: ["start 0.7", "end 0.6"],
-  });
-  const fill = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 });
+// The line and the nodes share one threshold, so a role lights up as the line reaches it.
+const LINE = "62%";
 
-  const toggle = (index: number) =>
-    setOpen((current) => {
-      const next = new Set(current);
-      if (next.has(index)) next.delete(index);
-      else next.add(index);
-      return next;
-    });
+function Item({ role, reduced }: { role: Role; reduced: boolean }) {
+  const ref = useRef<HTMLLIElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 66%", "start 58%"] });
+  const lit = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <section className="section" id="experience" aria-labelledby="experience-title">
-      <div className="container">
-        <SectionHeader
-          index="04"
-          label="Experience"
-          id="experience-title"
-          title={
-            <>
-              Professional work, <span className="serif">simplified</span>.
-            </>
-          }
-          lead="Where I've built, what I owned, and the tools I used to ship it."
-        />
-
-        <div className="timeline" ref={timelineRef}>
-          <div className="timeline-track" aria-hidden>
-            <motion.div className="timeline-fill" style={{ scaleY: reduced ? 1 : fill }} />
+    <li ref={ref} className="xp-item">
+      <span className="xp-node" aria-hidden>
+        <motion.span className="xp-node-lit" style={{ opacity: reduced ? 1 : lit }} />
+      </span>
+      <article className="card xp-card">
+        <div className="xp-head">
+          <span className="xp-mark" aria-hidden>
+            {role.mark}
+          </span>
+          <div className="xp-titles">
+            <h3>
+              {role.role} <span className="serif muted">at {role.company}</span>
+            </h3>
+            <p className="xp-dates">
+              {role.start} – {role.end}
+            </p>
           </div>
-          {experience.map((job, index) => {
-            const isOpen = open.has(index);
-            const panelId = `${baseId}-panel-${index}`;
-            const buttonId = `${baseId}-button-${index}`;
-            return (
-              <div key={job.company} className={`exp${isOpen ? " is-open" : ""}`}>
-                <Reveal className="exp-when" delay={index * 0.04}>
-                  <span className="exp-date">
-                    {job.start} — {job.end}
-                  </span>
-                  <span className="exp-mark" aria-hidden>
-                    {job.mark}
-                  </span>
-                </Reveal>
-                <Reveal className="exp-main" delay={index * 0.04 + 0.04}>
-                  <h3 style={{ margin: 0 }}>
-                    <button
-                      type="button"
-                      id={buttonId}
-                      className="exp-toggle"
-                      aria-expanded={isOpen}
-                      aria-controls={panelId}
-                      onClick={() => toggle(index)}
-                    >
-                      <span>
-                        <span className="exp-role" style={{ display: "block" }}>
-                          {job.role} <span>@ {job.company}</span>
-                        </span>
-                        <span className="exp-summary" style={{ display: "block" }}>
-                          {job.summary}
-                        </span>
-                      </span>
-                      <span className="exp-chevron" aria-hidden>
-                        <FiChevronDown />
-                      </span>
-                    </button>
-                  </h3>
-                  <AnimatePresence initial={false}>
-                    {isOpen ? (
-                      <motion.div
-                        id={panelId}
-                        role="region"
-                        aria-labelledby={buttonId}
-                        className="exp-panel"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.4, ease }}
-                      >
-                        <ul>
-                          {job.highlights.map((item) => (
-                            <li key={item}>{item}</li>
-                          ))}
-                        </ul>
-                        <div className="chips">
-                          {job.tech.map((tech) => (
-                            <span key={tech} className="chip">
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </motion.div>
-                    ) : null}
-                  </AnimatePresence>
-                </Reveal>
-              </div>
-            );
-          })}
         </div>
+        <p className="xp-summary">{role.summary}</p>
+        <ul className="xp-highlights">
+          {role.highlights.map((highlight) => (
+            <li key={highlight}>{highlight}</li>
+          ))}
+        </ul>
+        <div className="chips">
+          {role.tech.map((tech) => (
+            <span key={tech} className="chip">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </article>
+    </li>
+  );
+}
 
-        <div className="exp-foot">
+export default function Experience() {
+  const listRef = useRef<HTMLOListElement>(null);
+  const reduced = useReducedMotion() ?? false;
+  const { scrollYProgress } = useScroll({ target: listRef, offset: [`start ${LINE}`, `end ${LINE}`] });
+  const fill = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
+  const tip = useTransform(fill, (v) => `${v * 100}%`);
+
+  return (
+    <section className="section experience" id="experience" aria-labelledby="experience-title">
+      <div className="container">
+        <Reveal className="section-title-block">
+          <p className="kicker">Experience</p>
+          <h2 className="title-xl" id="experience-title">
+            The road <span className="serif grad-text">so far</span>
+          </h2>
+          <p className="lead">
+            From freelance builds to enterprise fintech, with AI work running alongside the whole way.
+          </p>
+        </Reveal>
+
+        <ol ref={listRef} className="xp-list">
+          <li className="xp-rail" aria-hidden>
+            <motion.span className="xp-fill" style={{ scaleY: reduced ? 1 : fill }} />
+            {reduced ? null : <motion.span className="xp-tip" style={{ top: tip }} />}
+          </li>
+          {experience.map((role) => (
+            <Item key={`${role.company}-${role.start}`} role={role} reduced={reduced} />
+          ))}
+        </ol>
+
+        <div className="xp-foot">
           <a href={profile.resume} download className="btn btn-ghost">
-            <FiDownload aria-hidden /> Download résumé (PDF)
+            <FiDownload aria-hidden /> Download résumé
           </a>
         </div>
       </div>
