@@ -4,9 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { FiArrowUpRight, FiCommand, FiMenu, FiX } from "react-icons/fi";
+import { FiArrowUpRight, FiMenu, FiX } from "react-icons/fi";
 import { navItems, profile, socials } from "@/data/site";
-import { openCommandMenu, scrollToId } from "../../lib/client";
+import { scrollToId } from "../../lib/client";
 import ThemeToggle from "./ThemeToggle";
 
 function useActiveSection(enabled: boolean) {
@@ -92,26 +92,22 @@ export default function Nav() {
     <>
       <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
         <div className="site-header-inner">
-          <div className="brand">
-            <Link
-              href="/"
-              className="logo"
-              aria-label={`${profile.name}, home`}
-              onClick={(event) => {
-                if (isHome) {
-                  event.preventDefault();
-                  scrollToId("top");
-                }
-              }}
-            >
-              nk
-            </Link>
-            <span className="brand-status">
-              <span className="pulse-dot" aria-hidden /> Available for work
-            </span>
-          </div>
+          <Link
+            href="/"
+            className="logo"
+            aria-label={`${profile.name}, home`}
+            onClick={(event) => {
+              if (isHome) {
+                event.preventDefault();
+                scrollToId("top");
+              }
+            }}
+          >
+            {profile.shortName}
+            <span>.dev</span>
+          </Link>
 
-          <nav className="nav-pill" aria-label="Primary">
+          <nav className="nav-links" aria-label="Primary">
             {navItems.map((item) => (
               <a
                 key={item.id}
@@ -120,13 +116,6 @@ export default function Nav() {
                 className="nav-link"
                 aria-current={active === item.id ? "location" : undefined}
               >
-                {active === item.id ? (
-                  <motion.span
-                    layoutId="nav-active"
-                    className="nav-link-bg"
-                    transition={{ type: "spring", stiffness: 420, damping: 36 }}
-                  />
-                ) : null}
                 {item.label}
               </a>
             ))}
@@ -134,16 +123,7 @@ export default function Nav() {
 
           <div className="header-actions">
             <ThemeToggle />
-            <button
-              type="button"
-              className="kbd-btn"
-              onClick={openCommandMenu}
-              aria-label="Open command menu"
-              aria-keyshortcuts="Control+K Meta+K"
-            >
-              <FiCommand aria-hidden /> K
-            </button>
-            <a href={href("contact")} onClick={go("contact")} className="btn btn-solid btn-sm header-cta">
+            <a href={href("contact")} onClick={go("contact")} className="header-cta">
               Let&rsquo;s talk
             </a>
             <button

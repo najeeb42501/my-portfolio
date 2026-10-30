@@ -24,29 +24,12 @@ export const socials = [
 ];
 
 export const navItems = [
-  { label: "Work", id: "work", sections: ["work"] },
-  { label: "Projects", id: "gallery", sections: ["gallery"] },
-  { label: "Stack", id: "stack", sections: ["stack"] },
-  { label: "Experience", id: "experience", sections: ["experience"] },
-  { label: "About", id: "about", sections: ["about", "contact"] },
+  { label: "About", id: "about", sections: ["about"] },
+  { label: "Expertise", id: "expertise", sections: ["expertise"] },
+  { label: "Work", id: "work", sections: ["work", "projects"] },
+  { label: "Skills", id: "skills", sections: ["skills"] },
+  { label: "Experience", id: "experience", sections: ["experience", "contact"] },
 ];
-
-export const impact = [
-  { value: 3, suffix: "+", label: "Years shipping production software", short: "Years shipping" },
-  { value: 8, suffix: "", label: "Products shipped", short: "Products shipped" },
-  { value: 5, suffix: "", label: "Live, public deployments", short: "Live in production" },
-  { value: 4, suffix: "", label: "Engineering roles", short: "Roles" },
-];
-
-/** Employers and client platforms. Swap the wordmarks for SVG logos when you have them. */
-export const trustedBy = [
-  { name: "UBL Funds", style: "ubl" },
-  { name: "Jami Partners", style: "jami" },
-  { name: "Sofstica", style: "sofstica" },
-  { name: "Turing", style: "turing" },
-  { name: "fiverr.", style: "fiverr" },
-  { name: "Upwork", style: "upwork" },
-] as const;
 
 export const capabilities = [
   {
@@ -75,7 +58,7 @@ export const capabilities = [
   },
 ] as const;
 
-/** One line per tool for the stack map's detail card. Tools come from `capabilities`. */
+/** One line per node for the skills graph's detail card. Tools come from `capabilities`. */
 export const toolNotes: Record<string, string> = {
   React: "Component systems that stay readable as a product grows.",
   "Next.js": "Server rendering, routing and fast first loads.",
@@ -101,9 +84,13 @@ export const toolNotes: Record<string, string> = {
   AWS: "Cloud hosting for client platforms.",
   Cloudflare: "DNS, caching and edge delivery for websites.",
   Vercel: "A preview link for every branch.",
+  Interfaces: "What people see and touch: accessible, fast interfaces.",
+  Systems: "APIs, auth and data flows that hold up under real money.",
+  Intelligence: "Useful AI, thoughtfully integrated and evaluated.",
+  Delivery: "From a local build to production, cloud or on-prem.",
 };
 
-/** Pairs of tools used together in real projects; drawn as lines on the stack map. */
+/** Pairs of tools used together in real projects; drawn as edges on the skills graph. */
 export const toolPairs: [string, string][] = [
   ["React", "Next.js"],
   ["React", "TypeScript"],
@@ -134,35 +121,88 @@ export const toolPairs: [string, string][] = [
   ["OpenAI API", "LLM evaluation"],
 ];
 
-export const ribbon = ["Accessible", "Fast", "Typed", "Tested", "Responsive", "Secure", "Scalable"];
-
-export const principles = [
-  {
-    title: "Clarity before complexity",
-    body: "Understand the problem, map the experience, and make every layer earn its place.",
-  },
-  {
-    title: "Craft you can build on",
-    body: "Reusable interfaces and clean integrations that hold up as the product grows.",
-  },
-  {
-    title: "The details are the product",
-    body: "The loading state. The keyboard shortcut. The final millisecond. Small things add up.",
-  },
-];
-
-export const process = [
-  { title: "Understand", body: "Get close to the problem and the people." },
-  { title: "Shape", body: "Turn a broad idea into flows and a plan." },
-  { title: "Build", body: "Ship interfaces and integrations that hold up." },
-  { title: "Refine", body: "Test real scenarios, tune, polish, release." },
-];
-
-export const bio = [
-  "I'm Najeeb, a software engineer in Karachi who enjoys turning complicated problems into things people like using.",
-  "Most of my work lives in fintech: investor portals, onboarding flows and operations dashboards that handle real money and real deadlines.",
-  "I bring frontend precision and full-stack thinking to the same table, from the first user flow to the production release. Today I'm building enterprise products at Jami Partners.",
-];
-
 export const projectTypes = ["New product", "Frontend build", "Dashboard", "AI feature", "Something else"];
 export const budgets = ["< $2k", "$2k – $5k", "$5k – $10k", "$10k +"];
+
+/* Home page v2 ------------------------------------------------------------ */
+
+/** Lock screen notifications in the hero. Tapping one reveals its two actions. */
+export const lockNotes = [
+  {
+    app: "Najeeb",
+    when: "now",
+    title: "Open to new work",
+    body: "Tap to say hello. Product teams, startups and fintech welcome.",
+    icon: "avatar",
+    actions: [
+      { label: "Email me", href: "mailto:najeeb08089@gmail.com" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/najeebullah-khan-86b759170/" },
+    ],
+  },
+  {
+    app: "PakLexAI",
+    when: "Live",
+    title: "Ask a legal question, get the source",
+    body: "Answers about Pakistani law, each linked to the section it came from.",
+    icon: "PL",
+    actions: [
+      { label: "Open app", href: "https://paklex.vercel.app/" },
+      { label: "Case study", href: "/work/paklexai" },
+    ],
+  },
+  {
+    app: "Karachi",
+    when: "clock",
+    title: "Replies usually within 24 hours",
+    body: "Working hours overlap with Europe and the Gulf.",
+    icon: "24h",
+    actions: [
+      { label: "Book a call", href: "#contact" },
+      { label: "Résumé", href: "/NajeebullahKhan-resume.pdf" },
+    ],
+  },
+] as const;
+
+/** The About sentence. The hero already covers who, where and the numbers. */
+export const aboutLine =
+  "Good software feels quiet. At Jami Partners I build enterprise dashboards, and I sweat the details most people never notice: the loading state, the empty screen, the error that tells you what to do next.";
+
+export const workPrinciples = [
+  { title: "Clarity first", body: "Every screen answers one question well.", tone: "blue", icon: "M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8z" },
+  { title: "Built to last", body: "Typed, tested and observable from day one.", tone: "green", icon: "M12 3l7 3v6c0 4.5-3 7.5-7 9c-4-1.5-7-4.5-7-9V6zM8.5 12l2.5 2.5l4.5-5" },
+  { title: "Ship, then refine", body: "Small releases, real feedback, steady polish.", tone: "orange", icon: "M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4" },
+] as const;
+
+/** Stars in the expertise galaxy. Positions are percentages of the galaxy card. */
+export const expertise = [
+  { name: "System Design", kind: "Core strength", major: true, x: 34, y: 42, hue: "#64D2FF", body: "Services, data flows and boundaries that hold up under real traffic and real money." },
+  { name: "DevOps", kind: "Core strength", major: true, x: 66, y: 36, hue: "#FF9F0A", body: "Docker, CI/CD and on-prem IIS releases that ship without drama." },
+  { name: "AI Automation", kind: "Core strength", major: true, x: 57, y: 64, hue: "#BF5AF2", body: "LLM features, RAG pipelines and agents that take busywork off people." },
+  { name: "Frontend Architecture", kind: "Strength", x: 17, y: 22, hue: "#0A84FF", body: "Component systems that stay readable at enterprise scale." },
+  { name: "Fintech Platforms", kind: "Domain", x: 80, y: 17, hue: "#30D158", body: "Investor portals, onboarding, pensions and payments for UBL Funds." },
+  { name: "Real-time Dashboards", kind: "Strength", x: 86, y: 56, hue: "#64D2FF", body: "Socket-driven monitoring that shows failures the moment they happen." },
+  { name: "RAG and LLMs", kind: "Strength", x: 74, y: 82, hue: "#BF5AF2", body: "Answers grounded in source documents, each one citable." },
+  { name: "Design Systems", kind: "Strength", x: 24, y: 61, hue: "#FF375F", body: "Tokens, grids and reusable patterns shared across products." },
+  { name: "Microservices", kind: "Strength", x: 11, y: 48, hue: "#30D158", body: "Spring Boot and .NET services behind the interfaces." },
+  { name: "Performance", kind: "Craft", x: 42, y: 86, hue: "#FFD60A", body: "Fast first loads and smooth interactions on real devices." },
+  { name: "Accessibility", kind: "Craft", x: 45, y: 15, hue: "#FF9F0A", body: "Keyboard, screen reader and contrast, done properly." },
+  { name: "Prompt Engineering", kind: "Strength", x: 88, y: 36, hue: "#FF375F", body: "Clear, reliable model output that is evaluated, not guessed." },
+];
+
+/** Teams and tools in the dock. A divider separates teams from tools. */
+export const dock = [
+  { name: "UBL Funds", glyph: "UBL", size: 15, bg: "linear-gradient(160deg, #1E63D6, #0B3E91)", fg: "#FFFFFF" },
+  { name: "Jami Partners, now", glyph: "JP", size: 20, bg: "linear-gradient(160deg, #5E5CE6, #3634A3)", fg: "#FFFFFF", running: true },
+  { name: "Sofstica", glyph: "S", size: 24, bg: "linear-gradient(160deg, #BF5AF2, #7A2BB5)", fg: "#FFFFFF" },
+  { name: "Turing", glyph: "T", size: 24, bg: "linear-gradient(160deg, #3A3A3C, #0B0B0C)", fg: "#FFFFFF" },
+  { name: "Fiverr", glyph: "fi", size: 22, bg: "linear-gradient(160deg, #1DBF73, #0E8A50)", fg: "#FFFFFF" },
+  { name: "Upwork", glyph: "Up", size: 19, bg: "linear-gradient(160deg, #6FDA44, #3C8D1E)", fg: "#FFFFFF" },
+  { name: "Angular", glyph: "Ng", size: 19, bg: "linear-gradient(160deg, #F0306A, #A0103E)", fg: "#FFFFFF", divider: true },
+  { name: "React", glyph: "Re", size: 19, bg: "linear-gradient(160deg, #23272F, #0B0D11)", fg: "#61DAFB" },
+  { name: "Next.js", glyph: "N", size: 24, bg: "linear-gradient(160deg, #FFFFFF, #D9D9DE)", fg: "#000000" },
+  { name: ".NET", glyph: ".N", size: 19, bg: "linear-gradient(160deg, #8A4FE0, #512BD4)", fg: "#FFFFFF" },
+  { name: "Spring Boot", glyph: "Sb", size: 19, bg: "linear-gradient(160deg, #7FC75A, #4E9A2B)", fg: "#FFFFFF" },
+  { name: "Docker", glyph: "Dk", size: 19, bg: "linear-gradient(160deg, #2CA5F0, #1468C2)", fg: "#FFFFFF" },
+  { name: "OpenAI API", glyph: "AI", size: 19, bg: "linear-gradient(160deg, #2C2C2E, #000000)", fg: "#FFFFFF" },
+  { name: "Figma", glyph: "F", size: 24, bg: "linear-gradient(160deg, #FF7262, #A259FF)", fg: "#FFFFFF" },
+];

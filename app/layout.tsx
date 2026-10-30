@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Allura, Archivo, Geist_Mono, Instrument_Serif, Outfit } from "next/font/google";
+import { Geist_Mono, Inter, Instrument_Serif } from "next/font/google";
 import "lenis/dist/lenis.css";
 import "./globals.css";
 import "./home.css";
@@ -11,27 +11,11 @@ import SmoothScroll from "./components/layout/SmoothScroll";
 import Toaster from "./components/ui/Toaster";
 import MotionProvider from "./components/ui/MotionProvider";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+/** Stands in for SF Pro where the system font is not available. */
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
-});
-
-/** Wide, heavy display face for the name and section titles. */
-const archivo = Archivo({
-  variable: "--font-archivo",
-  subsets: ["latin"],
-  axes: ["wdth"],
-  display: "swap",
-});
-
-/** Signature in the footer. */
-const allura = Allura({
-  variable: "--font-allura",
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-  preload: false,
 });
 
 const geistMono = Geist_Mono({
@@ -90,8 +74,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f4f4f5" },
-    { media: "(prefers-color-scheme: dark)", color: "#050505" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
 };
 
@@ -104,7 +88,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${outfit.variable} ${archivo.variable} ${allura.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
+      className={`${inter.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />

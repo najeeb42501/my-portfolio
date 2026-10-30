@@ -1,12 +1,11 @@
 import { profile, socials } from "@/data/site";
 import { siteDescription, siteUrl } from "./lib/site";
-import Hero from "./components/sections/Hero";
-import Glance from "./components/sections/Glance";
-import Featured from "./components/sections/Featured";
-import Gallery from "./components/sections/Gallery";
-import Ribbon from "./components/sections/Ribbon";
-import StackMap from "./components/sections/StackMap";
-import About from "./components/sections/About";
+import Stage from "./components/sections/Stage";
+import Expertise from "./components/sections/Expertise";
+import Work from "./components/sections/Work";
+import Projects from "./components/sections/Projects";
+import Skills from "./components/sections/Skills";
+import Dock from "./components/sections/Dock";
 import Experience from "./components/sections/Experience";
 import Contact from "./components/sections/Contact";
 
@@ -33,13 +32,12 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(person).replace(/</g, "\\u003c") }}
       />
-      <Hero />
-      <Glance />
-      <Featured />
-      <Gallery />
-      <Ribbon />
-      <StackMap />
-      <About />
+      <Stage />
+      <Expertise />
+      <Work />
+      <Projects />
+      <Skills />
+      <Dock />
       <Experience />
       <Contact />
     </>

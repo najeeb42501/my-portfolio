@@ -1,111 +1,43 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { FiArrowUp } from "react-icons/fi";
 import { caseStudies } from "@/data/projects";
-import { navItems, profile, socials } from "@/data/site";
+import { profile, socials } from "@/data/site";
 import { scrollToId } from "../../lib/client";
 
-function useLocalTime(timeZone: string) {
-  const [time, setTime] = useState<string | null>(null);
-  useEffect(() => {
-    const format = new Intl.DateTimeFormat("en-GB", {
-      timeZone,
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    const tick = () => setTime(format.format(new Date()));
-    tick();
-    const id = window.setInterval(tick, 15_000);
-    return () => window.clearInterval(id);
-  }, [timeZone]);
-  return time;
-}
-
 export default function Footer() {
-  const isHome = usePathname() === "/";
-  const time = useLocalTime(profile.timezone);
-
   return (
     <footer className="footer">
-      <div className="container">
-        <div className="footer-card">
-          <div className="footer-brand">
-            <Link href="/" className="footer-signature" aria-label="Home">
-              {profile.shortName}
+      <div className="footer-inner">
+        <nav className="footer-studies" aria-label="Case studies">
+          {caseStudies.map((study) => (
+            <Link key={study.slug} href={`/work/${study.slug}`}>
+              {study.title}
             </Link>
-            <p>{profile.tagline}</p>
-            <p className="footer-time">
-              <span className="pulse-dot" aria-hidden />
-              <time suppressHydrationWarning>{time ?? "--:--"}</time> in Karachi right now
-            </p>
-          </div>
-          <div className="footer-col">
-            <h2>Explore</h2>
-            <ul>
-              {[...navItems, { label: "Contact", id: "contact" }].map((item) => (
-                <li key={item.id}>
-                  <a
-                    href={isHome ? `#${item.id}` : `/#${item.id}`}
-                    onClick={(event) => {
-                      if (isHome) {
-                        event.preventDefault();
-                        scrollToId(item.id);
-                      }
-                    }}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="footer-col">
-            <h2>Case studies</h2>
-            <ul>
-              {caseStudies.map((study) => (
-                <li key={study.slug}>
-                  <Link href={`/work/${study.slug}`}>{study.title}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="footer-col">
-            <h2>Elsewhere</h2>
-            <ul>
-              {socials.map((social) => (
-                <li key={social.label}>
-                  <a href={social.href} target="_blank" rel="noreferrer">
-                    {social.label}
-                  </a>
-                </li>
-              ))}
-              <li>
-                <a href={profile.resume} download>
-                  Résumé (PDF)
-                </a>
-              </li>
-              <li>
-                <a href={`mailto:${profile.email}`}>Email</a>
-              </li>
-            </ul>
-          </div>
-        </div>
+          ))}
+        </nav>
         <div className="footer-bottom">
           <span>
-            © {new Date().getFullYear()} {profile.name}
+            © {new Date().getFullYear()} {profile.name}. Designed and built in Karachi.
           </span>
-          <span>Designed and built in Karachi</span>
-          <button
-            type="button"
-            onClick={() => {
-              if (!scrollToId("top")) window.scrollTo({ top: 0 });
-            }}
-          >
-            Back to top <FiArrowUp aria-hidden />
-          </button>
+          <span className="footer-links">
+            {socials.map((social) => (
+              <a key={social.label} href={social.href} target="_blank" rel="noreferrer">
+                {social.label}
+              </a>
+            ))}
+            <a href={profile.resume} download>
+              Résumé
+            </a>
+            <button
+              type="button"
+              onClick={() => {
+                if (!scrollToId("top")) window.scrollTo({ top: 0 });
+              }}
+            >
+              Back to top
+            </button>
+          </span>
         </div>
       </div>
     </footer>

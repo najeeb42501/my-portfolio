@@ -56,11 +56,12 @@ export default function CommandMenu() {
     const github = socials.find((s) => s.label === "GitHub")!.href;
     const linkedin = socials.find((s) => s.label === "LinkedIn")!.href;
     return [
-      { id: "work", group: "Navigate", label: "Selected work", icon: FiBriefcase, run: section("work") },
-      { id: "gallery", group: "Navigate", label: "All projects", icon: FiFileText, run: section("gallery") },
-      { id: "stack", group: "Navigate", label: "Stack", icon: FiFileText, run: section("stack") },
-      { id: "experience", group: "Navigate", label: "Experience", icon: FiBriefcase, run: section("experience") },
       { id: "about", group: "Navigate", label: "About", icon: FiUser, run: section("about") },
+      { id: "expertise", group: "Navigate", label: "Expertise", icon: FiFileText, run: section("expertise") },
+      { id: "work", group: "Navigate", label: "Selected work", icon: FiBriefcase, run: section("work") },
+      { id: "projects", group: "Navigate", label: "All projects", icon: FiFileText, run: section("projects") },
+      { id: "skills", group: "Navigate", label: "Skills", icon: FiFileText, run: section("skills") },
+      { id: "experience", group: "Navigate", label: "Experience", icon: FiBriefcase, run: section("experience") },
       { id: "contact", group: "Navigate", label: "Contact", icon: FiMail, run: section("contact") },
       ...caseStudies.map((study) => ({
         id: `cs-${study.slug}`,

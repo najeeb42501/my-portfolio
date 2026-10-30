@@ -114,12 +114,12 @@ try {
   });
   await send("Page.navigate", { url: origin });
   await waitFor(
-    `document.querySelectorAll('.gallery-card').length===8 && document.querySelector('.portrait-image img')?.complete`,
+    `document.querySelectorAll('.project-card').length===8 && document.querySelector('.lock-portrait img')?.complete`,
   );
   await delay(1000);
   assert.equal(await evaluate(`document.querySelectorAll('h1').length`), 1);
   assert.equal(
-    await evaluate(`document.querySelectorAll('.featured-card').length`),
+    await evaluate(`document.querySelectorAll('.work-tile').length`),
     3,
   );
   assert.equal(
@@ -151,15 +151,10 @@ try {
     if (width === 375) {
       assert.equal(
         await evaluate(
-          `getComputedStyle(document.querySelector('.featured-card')).position`,
+          `getComputedStyle(document.querySelector('.lock-portrait')).position`,
         ),
         "relative",
-      );
-      assert.equal(
-        await evaluate(
-          `document.querySelectorAll('.featured-card[inert]').length`,
-        ),
-        0,
+        "Lock screen stacks into one column",
       );
       await evaluate(`document.querySelector('.mobile-menu-button').click()`);
       assert.equal(
@@ -169,7 +164,7 @@ try {
         "true",
       );
       await evaluate(
-        `document.querySelector('#mobile-navigation a[href="#gallery"]').click()`,
+        `document.querySelector('#mobile-navigation a[href="#work"]').click()`,
       );
       assert.equal(
         await evaluate(
@@ -179,13 +174,13 @@ try {
       );
     }
     await evaluate(
-      `document.querySelector('#gallery').scrollIntoView({behavior:'instant'})`,
+      `document.querySelector('#projects').scrollIntoView({behavior:'instant'})`,
     );
     await delay(500);
     await waitFor(
-      `Array.from(document.querySelectorAll('.gallery-preview img')).slice(0,2).every(img=>img.complete && img.naturalWidth>0)`,
+      `Array.from(document.querySelectorAll('.project-preview img')).slice(0,2).every(img=>img.complete && img.naturalWidth>0)`,
     );
-    await screenshot(`gallery-${width}`);
+    await screenshot(`projects-${width}`);
   }
   await send("Emulation.setDeviceMetricsOverride", {
     width: 1440,
@@ -197,17 +192,17 @@ try {
     ["Platforms", 5],
     ["AI", 1],
     ["Websites", 2],
-    ["All work", 8],
+    ["All", 8],
   ]) {
     await evaluate(
-      `Array.from(document.querySelectorAll('.gallery-filters button')).find(b=>b.textContent.startsWith('${filter}')).click()`,
+      `Array.from(document.querySelectorAll('#projects .segmented button')).find(b=>b.textContent==='${filter}').click()`,
     );
     await waitFor(
-      `document.querySelectorAll('.gallery-card').length===${expected}`,
+      `document.querySelectorAll('.project-card').length===${expected}`,
     );
   }
   await evaluate(
-    `document.querySelector('.gallery-preview').focus(); document.querySelector('.gallery-preview').click()`,
+    `document.querySelector('.project-preview').focus(); document.querySelector('.project-preview').click()`,
   );
   await waitFor(`document.querySelector('dialog')?.open`);
   assert.equal(await evaluate("document.body.style.overflow"), "hidden");
@@ -230,7 +225,7 @@ try {
   await waitFor(`!document.querySelector('dialog')`);
   assert.equal(
     await evaluate(
-      `document.activeElement.classList.contains('gallery-preview')`,
+      `document.activeElement.classList.contains('project-preview')`,
     ),
     true,
     "Focus restored",
@@ -247,45 +242,65 @@ try {
   );
   await screenshot("hero-dark");
   await evaluate(
-    `document.querySelector('#gallery').scrollIntoView({behavior:'instant'})`,
+    `document.querySelector('#projects').scrollIntoView({behavior:'instant'})`,
   );
   await delay(300);
-  await screenshot("gallery-dark");
+  await screenshot("projects-dark");
   await evaluate(`document.querySelector('.header-actions button').click()`);
 
   for (let index = 0; index < 3; index++) {
     await evaluate(
-      `document.querySelectorAll('.featured-controls button')[${index}].click()`,
+      `document.querySelectorAll('.work-dots button')[${index}].click()`,
     );
-    await delay(1500);
+    await delay(1200);
     assert.equal(
       await evaluate(
-        `document.querySelectorAll('.featured-controls button')[${index}].getAttribute('aria-pressed')`,
+        `document.querySelectorAll('.work-dots button')[${index}].getAttribute('aria-pressed')`,
       ),
       "true",
     );
     await waitFor(
-      `document.querySelectorAll('.featured-card img')[${index}].naturalWidth>0`,
+      `document.querySelectorAll('.work-tile img')[${index}].naturalWidth>0`,
     );
-    await screenshot(`featured-${index + 1}`);
+    await screenshot(`work-${index + 1}`);
   }
+
+  // Lock screen: a notification opens to reveal its actions, and the portrait travels on scroll.
+  await evaluate('window.scrollTo({top:0,behavior:"instant"})');
+  await delay(300);
+  await evaluate(`document.querySelector('.lock-note-head').click()`);
+  await waitFor(
+    `document.querySelector('.lock-note-head').getAttribute('aria-expanded')==='true' && !document.querySelector('.lock-note-actions').inert`,
+  );
+  await evaluate('window.scrollTo({top:400,behavior:"instant"})');
+  await delay(400);
+  assert.notEqual(
+    await evaluate(`document.querySelector('.lock-portrait').style.transform`),
+    "",
+    "Portrait moves toward About on scroll",
+  );
+
   await send("Emulation.setEmulatedMedia", {
     features: [{ name: "prefers-reduced-motion", value: "reduce" }],
   });
-  await delay(300);
+  await delay(400);
   assert.equal(
-    await evaluate(
-      `getComputedStyle(document.querySelector('.featured-card')).position`,
-    ),
-    "relative",
+    await evaluate(`document.querySelector('.lock-portrait').style.transform`),
+    "",
+    "Reduced motion keeps the portrait still",
   );
   assert.equal(
-    await evaluate(`document.querySelectorAll('.featured-card[inert]').length`),
-    0,
+    await evaluate(`getComputedStyle(document.querySelector('.about-still')).display`),
+    "block",
+    "Reduced motion shows the About photo in place",
   );
+
+  // Contact: an incomplete message is held back with a hint, and nothing is sent.
   await evaluate(
-    `document.querySelector('#contact').scrollIntoView({behavior:'instant'})`,
+    `document.querySelector('#contact').scrollIntoView({behavior:'instant'}); document.querySelector('.chat-send').click()`,
   );
+  await waitFor(`!!document.querySelector('.chat-hint[data-warn]')`);
+  assert.equal(await evaluate(`document.querySelectorAll('.bubble.is-out').length`), 0);
   await delay(300);
   await screenshot("contact");
 
@@ -309,7 +324,7 @@ try {
     assert.equal((await fetch(origin + path)).status, 200, path);
   assert.deepEqual(errors, [], "No browser runtime exceptions");
   console.log(
-    "PASS: responsive layouts, gallery filters, modal/keyboard/focus, theme, featured navigation, reduced motion, metadata routes, contact validation.",
+    "PASS: responsive layouts, lock screen, project filters, modal/keyboard/focus, theme, work carousel, reduced motion, metadata routes, contact validation.",
   );
   console.log(`Screenshots: ${directory}`);
   socket.send(JSON.stringify({ id: ++id, method: "Browser.close" }));
