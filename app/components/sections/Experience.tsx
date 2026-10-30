@@ -1,91 +1,76 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { FiDownload } from "react-icons/fi";
-import { experience, type Experience as Role } from "@/data/experience";
-import { profile } from "@/data/site";
-import Reveal from "../ui/Reveal";
+import { useState } from "react";
+import { experience } from "@/data/experience";
 
-// The line and the nodes share one threshold, so a role lights up as the line reaches it.
-const LINE = "62%";
+const marks = [
+  "linear-gradient(160deg, #5E5CE6, #3634A3)",
+  "linear-gradient(160deg, #BF5AF2, #7A2BB5)",
+  "linear-gradient(160deg, #3A3A3C, #0B0B0C)",
+  "linear-gradient(160deg, #1DBF73, #0E8A50)",
+];
 
-function Item({ role, reduced }: { role: Role; reduced: boolean }) {
-  const ref = useRef<HTMLLIElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 66%", "start 58%"] });
-  const lit = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
-  return (
-    <li ref={ref} className="xp-item">
-      <span className="xp-node" aria-hidden>
-        <motion.span className="xp-node-lit" style={{ opacity: reduced ? 1 : lit }} />
-      </span>
-      <article className="card xp-card">
-        <div className="xp-head">
-          <span className="xp-mark" aria-hidden>
-            {role.mark}
-          </span>
-          <div className="xp-titles">
-            <h3>
-              {role.role} <span className="serif muted">at {role.company}</span>
-            </h3>
-            <p className="xp-dates">
-              {role.start} – {role.end}
-            </p>
-          </div>
-        </div>
-        <p className="xp-summary">{role.summary}</p>
-        <ul className="xp-highlights">
-          {role.highlights.map((highlight) => (
-            <li key={highlight}>{highlight}</li>
-          ))}
-        </ul>
-        <div className="chips">
-          {role.tech.map((tech) => (
-            <span key={tech} className="chip">
-              {tech}
-            </span>
-          ))}
-        </div>
-      </article>
-    </li>
-  );
-}
-
+/** Roles as an inset grouped list. Each row opens to show the summary, highlights and stack. */
 export default function Experience() {
-  const listRef = useRef<HTMLOListElement>(null);
-  const reduced = useReducedMotion() ?? false;
-  const { scrollYProgress } = useScroll({ target: listRef, offset: [`start ${LINE}`, `end ${LINE}`] });
-  const fill = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
-  const tip = useTransform(fill, (v) => `${v * 100}%`);
+  const [open, setOpen] = useState(0);
 
   return (
     <section className="section experience" id="experience" aria-labelledby="experience-title">
-      <div className="container">
-        <Reveal className="section-title-block">
-          <p className="kicker">Experience</p>
-          <h2 className="title-xl" id="experience-title">
-            The road <span className="serif grad-text">so far</span>
-          </h2>
-          <p className="lead">
-            From freelance builds to enterprise fintech, with AI work running alongside the whole way.
-          </p>
-        </Reveal>
-
-        <ol ref={listRef} className="xp-list">
-          <li className="xp-rail" aria-hidden>
-            <motion.span className="xp-fill" style={{ scaleY: reduced ? 1 : fill }} />
-            {reduced ? null : <motion.span className="xp-tip" style={{ top: tip }} />}
-          </li>
-          {experience.map((role) => (
-            <Item key={`${role.company}-${role.start}`} role={role} reduced={reduced} />
-          ))}
-        </ol>
-
-        <div className="xp-foot">
-          <a href={profile.resume} download className="btn btn-ghost">
-            <FiDownload aria-hidden /> Download résumé
-          </a>
+      <div className="container-narrow">
+        <p className="kicker">Experience</p>
+        <h2 className="title" id="experience-title">
+          Where I&rsquo;ve worked.
+        </h2>
+        <div className="xp-list">
+          {experience.map((role, i) => {
+            const expanded = open === i;
+            return (
+              <article key={`${role.company}-${role.start}`} className="xp-row" data-open={expanded || undefined}>
+                <h3>
+                  <button
+                    type="button"
+                    aria-expanded={expanded}
+                    aria-controls={`xp-${i}`}
+                    onClick={() => setOpen(expanded ? -1 : i)}
+                  >
+                    <span className="xp-mark" style={{ background: marks[i % marks.length] }} aria-hidden>
+                      {role.mark}
+                    </span>
+                    <span className="xp-titles">
+                      <span className="xp-role">
+                        {role.role}
+                        {role.end === "Present" ? <span className="xp-now">Now</span> : null}
+                      </span>
+                      <span className="xp-company">{role.company.replace(" · ", ", ")}</span>
+                    </span>
+                    <span className="xp-dates">
+                      {role.start} – {role.end}
+                    </span>
+                    <span className="xp-chev" aria-hidden>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M9 6l6 6-6 6" />
+                      </svg>
+                    </span>
+                  </button>
+                </h3>
+                <div className="xp-body" id={`xp-${i}`} inert={!expanded}>
+                  <div>
+                    <p>{role.summary}</p>
+                    <ul className="xp-highlights">
+                      {role.highlights.map((h) => (
+                        <li key={h}>{h}</li>
+                      ))}
+                    </ul>
+                    <ul className="xp-tech" aria-label="Stack">
+                      {role.tech.map((t) => (
+                        <li key={t}>{t}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

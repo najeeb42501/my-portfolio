@@ -23,11 +23,11 @@ Set `SITE_URL` to the production origin before deployment. It controls the canon
 
 All content lives in `data/`, so copy can change without touching components:
 
-- `data/projects.ts`: every project in the gallery, plus the three flagship case studies (`caseStudies`) that drive the featured slider on the home page and the `/work/[slug]` pages. Add `year` to a project to show it on its gallery card. Give a project the `Lab` filter (with a GitHub or live link) and a Lab tab appears automatically.
+- `data/projects.ts`: every project in the All projects grid, plus the three flagship case studies (`caseStudies`) that drive the Selected work carousel and the `/work/[slug]` pages. Give a project the `Lab` filter (with a GitHub or live link) and a Lab tab appears automatically.
 - `data/experience.ts`: the experience timeline.
-- `data/site.ts`: profile details, the companies on the ribbon, capabilities (the four groups on the stack map), `toolNotes` and `toolPairs` (the stack map's descriptions and connecting lines), principles, and the contact form's project-type and budget options.
+- `data/site.ts`: profile details, the lock screen notifications (`lockNotes`), the About sentence and "How I work" list, the expertise galaxy stars, the dock, capabilities and `toolNotes` / `toolPairs` (the skills graph's groups, descriptions and edges), and the contact form's project types.
 
-The featured slider pins and moves sideways as you scroll; under 768px and when the visitor prefers reduced motion it becomes a swipeable row instead. Press ⌘K / Ctrl+K anywhere for the command menu.
+The hero is a lock screen: scrolling lifts it away while the portrait glides into the About card. When the visitor prefers reduced motion the portrait stays put and About shows its own copy. Press ⌘K / Ctrl+K anywhere for the command menu.
 
 First, run the development server:
 
